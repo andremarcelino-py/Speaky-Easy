@@ -1,79 +1,96 @@
 const questions = [
     {
-        question: "Como se diz 'Olá' em inglês?",
-        options: ["Hello", "Bye", "Thanks", "Sorry"],
-        answer: "Hello"
+      question: "What is the correct way to say 'eu sou estudante' in English?",
+      options: ["I am a student", "I am student", "I student am", "A student I am"],
+      answer: 0
     },
     {
-        question: "Como se diz 'Obrigado' em francês?",
-        options: ["Merci", "Bonjour", "Au revoir", "Pardon"],
-        answer: "Merci"
+      question: "Which one is the correct question form?",
+      options: ["Do you like pizza?", "Like pizza you?", "Pizza do you like?", "You pizza like?"],
+      answer: 0
     },
     {
-        question: "Como se diz 'Desculpa' em espanhol?",
-        options: ["Perdón", "Gracias", "Hola", "Adiós"],
-        answer: "Perdón"
+      question: "What is the meaning of 'I am learning English'?",
+      options: ["Eu estou aprendendo inglês", "Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês"],
+      answer: 0
+    },
+    {
+      question: "How do you say 'Onde você mora?' in English?",
+      options: ["Where are you living?", "Where do you live?", "Where is you live?", "Where you live?"],
+      answer: 1
+    },
+    {
+      question: "Which sentence is in the past tense?",
+      options: ["I will go to the store", "I went to the store", "I am going to the store", "I go to the store"],
+      answer: 1
+    },
+    {
+      question: "What is the plural of 'child'?",
+      options: ["Childs", "Children", "Childes", "Childern"],
+      answer: 1
+    },
+    {
+      question: "Which one is the correct sentence in the future tense?",
+      options: ["I am eat lunch", "I will eat lunch", "I ate lunch", "I eating lunch"],
+      answer: 1
+    },
+    {
+      question: "What does 'Can you help me?' mean?",
+      options: ["Você pode me ajudar?", "Você me ajuda?", "Você pode ajudar eu?", "Você me ajudou?"],
+      answer: 0
+    },
+    {
+      question: "What is the correct way to say 'Eu gosto de estudar' in English?",
+      options: ["I like study", "I like to study", "Study I like", "I like studying"],
+      answer: 1
+    },
+    {
+      question: "Which word is a verb?",
+      options: ["Quickly", "Table", "Run", "Beautiful"],
+      answer: 2
     }
-];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-function loadQuestion() {
-    const questionElement = document.getElementById("question");
-    const optionsContainer = document.getElementById("options");
-    const feedbackElement = document.getElementById("feedback");
-    const nextButton = document.getElementById("next-btn");
-
-    // Limpar a área de resposta
-    optionsContainer.innerHTML = "";
-    feedbackElement.innerText = "";
-    nextButton.style.display = "none";
-
-    // Carregar pergunta
-    const currentQuestion = questions[currentQuestionIndex];
-    questionElement.innerText = currentQuestion.question;
-
-    // Criar botões de resposta
-    currentQuestion.options.forEach(option => {
-        const button = document.createElement("button");
-        button.innerText = option;
-        button.classList.add("option");
-        button.onclick = () => checkAnswer(button, currentQuestion.answer);
-        optionsContainer.appendChild(button);
+  ];
+  
+  let currentQuestion = 0;
+  let score = 0;
+  
+  const questionElement = document.getElementById("question");
+  const optionsElement = document.getElementById("options");
+  const nextButton = document.getElementById("next");
+  const scoreElement = document.getElementById("score");
+  
+  function loadQuestion() {
+    const current = questions[currentQuestion];
+    questionElement.textContent = current.question;
+    optionsElement.innerHTML = '';
+    
+    current.options.forEach((option, index) => {
+      const li = document.createElement("li");
+      li.textContent = option;
+      li.onclick = () => checkAnswer(index);
+      optionsElement.appendChild(li);
     });
-}
-
-function checkAnswer(button, correctAnswer) {
-    const feedbackElement = document.getElementById("feedback");
-    const nextButton = document.getElementById("next-btn");
-
-    if (button.innerText === correctAnswer) {
-        button.classList.add("correct");
-        feedbackElement.innerText = "Correto!";
-        score++;
-        document.getElementById("score").innerText = score;
-    } else {
-        button.classList.add("wrong");
-        feedbackElement.innerText = "Errado! A resposta correta é: " + correctAnswer;
+  }
+  
+  function checkAnswer(selectedIndex) {
+    const correctAnswer = questions[currentQuestion].answer;
+    if (selectedIndex === correctAnswer) {
+      score++;
+      scoreElement.textContent = score;
     }
-
-    // Desativar botões após resposta
-    document.querySelectorAll(".option").forEach(btn => btn.disabled = true);
-
-    nextButton.style.display = "block";
-}
-
-function nextQuestion() {
-    currentQuestionIndex++;
-
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion();
     } else {
-        document.querySelector(".container").innerHTML = `<h1>Fim do Jogo!</h1>
-            <p>Você acertou ${score} de ${questions.length} perguntas.</p>`;
+      nextButton.textContent = "End of Quiz!";
+      nextButton.disabled = true;
     }
-}
-
-// Carregar primeira pergunta ao iniciar
-loadQuestion();
+  }
+  
+  nextButton.addEventListener("click", () => {
+    loadQuestion();
+    nextButton.disabled = true; // Disable the button until an answer is selected
+  });
+  
+  loadQuestion(); // Load the first question
+  

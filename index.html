@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprenda Idiomas</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Moderno</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Aprenda Idiomas</h1>
+  <div class="container">
+    <h1 class="title">Quiz de Inglês</h1>
+    <div class="quiz-container">
+      <div id="quiz">
         <p id="question"></p>
-        <div id="options"></div>
-        <p id="feedback"></p>
-        <button id="next-btn" onclick="nextQuestion()">Próxima Pergunta</button>
-        <p>Pontuação: <span id="score">0</span></p>
+        <ul id="options"></ul>
+      </div>
+      <button id="next" class="next-button">Próxima Pergunta</button>
+      <div id="score-container" class="score-container">
+        <p class="score-text">Pontuação: <span id="score">0</span></p>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
