@@ -1,15 +1,19 @@
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+<script src="script.js"></script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Moderno</title>
+  <title>Speaky Easy - Quiz de Inglês</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">Quiz de Inglês</h1>
-    <div class="quiz-container">
+    <h1 class="title">Speaky Easy</h1>
+    <div id="quiz-container" class="quiz-container">
       <div id="quiz">
         <p id="question"></p>
         <ul id="options"></ul>
@@ -19,8 +23,71 @@
         <p class="score-text">Pontuação: <span id="score">0</span></p>
       </div>
     </div>
+    
+    <div id="register-container" class="register-container" style="display: none;">
+      <h2>Cadastro</h2>
+      <form id="register-form">
+        <input type="text" id="name" placeholder="Digite seu nome" required><br><br>
+        <input type="text" id="phone" placeholder="Digite seu número de telefone" required><br><br>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+  
+  <!-- Agora, usando a importação do módulo -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+ // notas
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firestore Data</title>
+</head>
+<body>
+  <h1>Firestore Data</h1>
+  <ul id="data-list"></ul>
+
+  <script type="module">
+    // Importe os módulos do Firebase que você precisa
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    // Sua configuração do Firebase (cole aqui, ou importe de um arquivo)
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_PROJETO_ID.firebaseapp.com",
+      projectId: "SEU_PROJETO_ID",
+      storageBucket: "SEU_PROJETO_ID.appspot.com",
+      messagingSenderId: "SEU_ID_DE_REMETENTE",
+      appId: "SEU_APP_ID"
+    };
+
+    // Inicialize o Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Inicialize o Firestore
+    const db = getFirestore(app);
+
+    async function getData() {
+      const querySnapshot = await getDocs(collection(db, "nomeDaSuaColecao"));
+      const dataList = document.getElementById("data-list");
+
+      querySnapshot.forEach((doc) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${doc.id}: ${JSON.stringify(doc.data())}`;
+
+        dataList.appendChild(listItem);
+      });
+    }
+
+    getData();
+  </script>
 </body>
 </html>

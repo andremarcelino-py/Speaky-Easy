@@ -90,3 +90,35 @@ body {
   font-size: 1.2em;
   margin-top: 10px;
 }
+
+/* Tela de cadastro */
+.register-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  margin-top: 30px;
+}
+
+.register-container input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.register-container button {
+  background-color: #8E44AD;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.register-container button:hover {
+  background-color: #9B59B6;
+}
