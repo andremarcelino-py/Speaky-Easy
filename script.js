@@ -1,6 +1,4 @@
 // Firebase configuration
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -172,7 +170,13 @@ document.getElementById("register-form").addEventListener("submit", (e) => {
 
 loadQuestion(); // Load the first question
 
- // notas 
+
+
+
+
+
+
+
 async function getData() {
   const querySnapshot = await getDocs(collection(db, "numero"));
   querySnapshot.forEach((doc) => {
