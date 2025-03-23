@@ -1,20 +1,19 @@
-/* Reset básico para garantir consistência entre os navegadores */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Fonte e fundo */
+/* Corpo e layout */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #2E0854;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  min-height: 100vh;
   flex-direction: column;
 }
 
@@ -23,10 +22,33 @@ body {
   text-align: center;
 }
 
+/* Título */
 .title {
   font-size: 2.5em;
   margin-bottom: 20px;
-  color: #9B59B6; /* Roxo claro */
+  color: #9B59B6;
+}
+
+/* Abas */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background-color: #8E44AD;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tab-button:hover {
+  background-color: #9B59B6;
 }
 
 /* Quiz */
@@ -36,6 +58,7 @@ body {
   border-radius: 15px;
   width: 90%;
   max-width: 600px;
+  margin-bottom: 20px;
 }
 
 #quiz {
@@ -48,13 +71,12 @@ body {
 }
 
 #options {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 #options li {
   background-color: #9B59B6;
-  color: white;
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
@@ -75,18 +97,54 @@ body {
   font-size: 1.2em;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .next-button:hover {
   background-color: #9B59B6;
 }
 
-/* Score */
-.score-container {
+/* Biblioteca de textos */
+.library-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.text-entry {
+  margin-bottom: 20px;
+}
+
+.text-entry p {
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+/* Tela final do quiz */
+.end-screen {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.restart-button {
+  background-color: #8E44AD;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
   margin-top: 20px;
 }
 
-.score-text {
-  font-size: 1.2em;
-  margin-top: 10px;
+.restart-button:hover {
+  background-color: #9B59B6;
 }

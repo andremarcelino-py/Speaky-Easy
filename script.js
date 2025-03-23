@@ -1,3 +1,4 @@
+// Array com 10 perguntas de inglês
 const questions = [
   {
     question: "What is the correct way to say 'eu sou estudante' in English?",
@@ -53,44 +54,104 @@ const questions = [
 
 let currentQuestion = 0;
 let score = 0;
+let selectedAnswer = null;
 
+// Elementos da interface
 const questionElement = document.getElementById("question");
 const optionsElement = document.getElementById("options");
 const nextButton = document.getElementById("next");
 const scoreElement = document.getElementById("score");
+const quizContainer = document.getElementById("quiz-container");
+const endScreen = document.getElementById("end-screen");
+const finalMessageElement = document.getElementById("final-message");
+const restartButton = document.getElementById("restart-button");
 
+const quizTab = document.getElementById("quizTab");
+const libraryTab = document.getElementById("libraryTab");
+const libraryContainer = document.getElementById("library-container");
+
+// Inicializa o botão "Próxima Pergunta" como desabilitado
+nextButton.disabled = true;
+
+// Carrega a pergunta atual
 function loadQuestion() {
-  const current = questions[currentQuestion];
-  questionElement.textContent = current.question;
-  optionsElement.innerHTML = '';
-  
-  current.options.forEach((option, index) => {
+  selectedAnswer = null;
+  nextButton.disabled = true;
+  const currentQ = questions[currentQuestion];
+  questionElement.textContent = currentQ.question;
+  optionsElement.innerHTML = "";
+  currentQ.options.forEach((option, index) => {
     const li = document.createElement("li");
     li.textContent = option;
-    li.onclick = () => checkAnswer(index);
+    li.onclick = () => {
+      if (nextButton.disabled) {
+        checkAnswer(index);
+      }
+    };
     optionsElement.appendChild(li);
   });
 }
 
-function checkAnswer(selectedIndex) {
-  const correctAnswer = questions[currentQuestion].answer;
-  if (selectedIndex === correctAnswer) {
+// Verifica a resposta selecionada
+function checkAnswer(selected) {
+  const currentQ = questions[currentQuestion];
+  if (selected === currentQ.answer) {
     score++;
-    scoreElement.textContent = score;
   }
+  scoreElement.textContent = score;
+  selectedAnswer = selected;
+  nextButton.disabled = false;
+}
+
+// Ação do botão "Próxima Pergunta"
+nextButton.onclick = () => {
   currentQuestion++;
   if (currentQuestion < questions.length) {
     loadQuestion();
   } else {
-    nextButton.textContent = "End of Quiz!";
-    nextButton.disabled = true;
+    endQuiz();
   }
+};
+
+// Finaliza o quiz e mostra a pontuação final com mensagem
+function endQuiz() {
+  quizContainer.style.display = "none";
+  endScreen.style.display = "block";
+  finalMessageElement.textContent = `Você terminou o quiz! Sua pontuação foi: ${score}/${questions.length}`;
 }
 
-nextButton.addEventListener("click", () => {
+// Reinicia o quiz
+function restartQuiz() {
+  score = 0;
+  currentQuestion = 0;
+  scoreElement.textContent = score;
+  endScreen.style.display = "none";
+  quizContainer.style.display = "block";
   loadQuestion();
-  nextButton.disabled = true; // Disable the button until an answer is selected
-});
+}
 
-loadQuestion(); // Load the first question
+// Função para iniciar o quiz
+function startQuiz() {
+  quizContainer.style.display = "block";
+  libraryContainer.style.display = "none";
+  endScreen.style.display = "none";
+  loadQuestion();
+}
 
+// Eventos das abas
+quizTab.onclick = () => {
+  quizContainer.style.display = "block";
+  libraryContainer.style.display = "none";
+  endScreen.style.display = "none";
+};
+libraryTab.onclick = () => {
+  libraryContainer.style.display = "block";
+  quizContainer.style.display = "none";
+  endScreen.style.display = "none";
+};
+
+// Evento do botão de reiniciar
+restartButton.onclick = restartQuiz;
+
+// Exibe o quiz inicialmente
+startQuiz();
