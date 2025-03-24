@@ -1,11 +1,9 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Corpo e layout */
 body {
   font-family: Arial, sans-serif;
   background-color: #2E0854;
@@ -17,19 +15,16 @@ body {
   flex-direction: column;
 }
 
-/* Container principal */
 .container {
   text-align: center;
 }
 
-/* Título */
 .title {
   font-size: 2.5em;
   margin-bottom: 20px;
   color: #9B59B6;
 }
 
-/* Abas */
 .tabs {
   display: flex;
   justify-content: center;
@@ -44,25 +39,18 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .tab-button:hover {
   background-color: #9B59B6;
 }
 
-/* Quiz */
 .quiz-container {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 15px;
   width: 90%;
   max-width: 600px;
-  margin-bottom: 20px;
-}
-
-#quiz {
-  margin-bottom: 20px;
 }
 
 #question {
@@ -81,50 +69,12 @@ body {
   margin: 10px 0;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 #options li:hover {
   background-color: #8E44AD;
 }
 
-.next-button {
-  background-color: #8E44AD;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 10px;
-}
-
-.next-button:hover {
-  background-color: #9B59B6;
-}
-
-/* Biblioteca de textos */
-.library-container {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 600px;
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.text-entry {
-  margin-bottom: 20px;
-}
-
-.text-entry p {
-  font-size: 1.2em;
-  margin: 5px 0;
-}
-
-/* Tela final do quiz */
 .end-screen {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
@@ -141,10 +91,41 @@ body {
   border-radius: 5px;
   font-size: 1.2em;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 20px;
 }
 
 .restart-button:hover {
   background-color: #9B59B6;
+}
+
+.error-item {
+  color: #cd3232; 
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+#options li {
+  background-color: #9B59B6;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#options li:hover {
+  background-color: #8E44AD;
+}
+
+#options li.correct {
+  background-color: green !important;
+}
+
+#options li.incorrect {
+  background-color: red !important;
+}
+.score-container {
+  margin: 20px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #9B59B6;
 }

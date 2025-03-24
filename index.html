@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speaky Easy - Quiz de Inglês</title>
+  <title>Speak Easy - Quiz de Inglês</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">Speaky Easy</h1>
+    <h1 class="title">Speak Easy</h1>
 
     <!-- Menu de navegação -->
     <div class="tabs">
@@ -22,32 +22,32 @@
         <p id="question"></p>
         <ul id="options"></ul>
       </div>
-      <button id="next" class="next-button">Próxima Pergunta</button>
-      <div id="score-container" class="score-container">
-        <p class="score-text">Pontuação: <span id="score">0</span></p>
-      </div>
     </div>
 
     <!-- Biblioteca de textos -->
     <div id="library-container" class="library-container" style="display: none;">
       <h2>Biblioteca de Textos</h2>
       <div class="text-entry">
-        <p><strong>Texto em Português:</strong> Eu gosto de estudar inglês.</p>
-        <p><strong>Texto em Inglês:</strong> I like to study English.</p>
+        <p><strong>Inglês:</strong> I like to study English.</p>
+        <p><strong>Português:</strong> Eu gosto de estudar inglês.</p>
       </div>
       <div class="text-entry">
-        <p><strong>Texto em Português:</strong> Meu nome é João.</p>
-        <p><strong>Texto em Inglês:</strong> My name is João.</p>
+        <p><strong>Inglês:</strong> My name is John.</p>
+        <p><strong>Português:</strong> Meu nome é João.</p>
       </div>
-      <!-- Você pode adicionar mais entradas de texto aqui -->
     </div>
 
     <!-- Tela final do Quiz -->
     <div id="end-screen" class="end-screen" style="display: none;">
       <p id="final-message"></p>
+      <ul id="error-list"></ul>
       <button id="restart-button" class="restart-button">Reiniciar Quiz</button>
     </div>
   </div>
+<!-- Contador de acertos -->
+<div id="score-container" class="score-container">
+  <p>Pontuação: <span id="score">0</span>/10</p>
+</div>
 
   <script src="script.js"></script>
 </body>
