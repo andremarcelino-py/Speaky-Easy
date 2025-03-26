@@ -15,6 +15,31 @@ body {
   flex-direction: column;
 }
 
+.register-container {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.register-container input {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: none;
+}
+
+.register-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #9B59B6;
+  color: white;
+}
+
 .container {
   text-align: center;
 }
@@ -45,62 +70,12 @@ body {
   background-color: #9B59B6;
 }
 
-.quiz-container {
+.quiz-container, .end-screen, .library-container {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 15px;
   width: 90%;
   max-width: 600px;
-}
-
-#question {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-}
-
-#options {
-  list-style: none;
-  padding: 0;
-}
-
-#options li {
-  background-color: #9B59B6;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#options li:hover {
-  background-color: #8E44AD;
-}
-
-.end-screen {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 600px;
-}
-
-.restart-button {
-  background-color: #8E44AD;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.restart-button:hover {
-  background-color: #9B59B6;
-}
-
-.error-item {
-  color: #cd3232; 
-  font-weight: bold;
-  margin-top: 5px;
 }
 
 #options li {
@@ -116,13 +91,6 @@ body {
   background-color: #8E44AD;
 }
 
-#options li.correct {
-  background-color: green !important;
-}
-
-#options li.incorrect {
-  background-color: red !important;
-}
 .score-container {
   margin: 20px 0;
   font-size: 1.2em;
