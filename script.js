@@ -21,6 +21,7 @@ const allQuestions = [
   { question: "What does 'tired' mean?", options: ["Feliz", "Cansado", "Bravo", "Triste"], answer: 1 }
 ];
 
+
 // Função para embaralhar as perguntas e selecionar 5 aleatórias
 function getRandomQuestions() {
   const shuffled = allQuestions.sort(() => Math.random() - 0.5);
@@ -59,13 +60,28 @@ function loadQuestion() {
 
 function checkAnswer(selected) {
   const q = questions[currentQuestion];
+  const options = optionsElement.getElementsByTagName("li");
+
+  for (let i = 0; i < options.length; i++) {
+    options[i].style.backgroundColor = i === q.answer ? "green" : (i === selected ? "red" : "#9B59B6");
+    options[i].style.pointerEvents = "none";
+  }
+
   if (selected === q.answer) {
     score++;
+    updateScore();
   } else {
     errors.push(`Q: ${q.question} - R: ${q.options[q.answer]}`);
   }
-  currentQuestion++;
-  loadQuestion();
+
+  setTimeout(() => {
+    currentQuestion++;
+    loadQuestion();
+  }, 1000);
+}
+
+function updateScore() {
+  document.getElementById("score").textContent = score;
 }
 
 function endQuiz() {
@@ -82,7 +98,7 @@ restartButton.onclick = () => {
   score = 0;
   currentQuestion = 0;
   errors = [];
-  questions = getRandomQuestions(); // Nova seleção aleatória de perguntas
+  questions = getRandomQuestions();
   quizContainer.style.display = "block";
   endScreen.style.display = "none";
   loadQuestion();
@@ -92,7 +108,7 @@ document.getElementById("quizTab").onclick = () => {
   quizContainer.style.display = "block";
   document.getElementById("library-container").style.display = "none";
   endScreen.style.display = "none";
-  questions = getRandomQuestions(); // Garante novas perguntas ao acessar
+  questions = getRandomQuestions();
   loadQuestion();
 };
 
@@ -103,62 +119,3 @@ document.getElementById("libraryTab").onclick = () => {
 };
 
 loadQuestion();
-
-function checkAnswer(selected) {
-  const q = questions[currentQuestion];
-  
-  // Obter todas as opções para atualizá-las visualmente
-  const options = optionsElement.getElementsByTagName('li');
-  
-  // Marcar a opção correta em verde e a errada em vermelho
-  for (let i = 0; i < options.length; i++) {
-    options[i].style.backgroundColor = i === q.answer ? 'green' : (i === selected ? 'red' : '#9B59B6');
-    options[i].style.pointerEvents = 'none'; // Desabilitar o clique nas opções após a seleção
-  }
-
-  // Se a resposta selecionada estiver correta, incrementa o score
-  if (selected === q.answer) {
-    score++;
-  } else {
-    errors.push(`Q: ${q.question} - R: ${q.options[q.answer]}`);
-  }
-
-  // Atraso antes de carregar a próxima pergunta
-  setTimeout(() => {
-    currentQuestion++;
-    loadQuestion();
-  }, 1000); // 1 segundo de delay para visualização do feedback
-}
-
-// Função para atualizar o contador de acertos
-function updateScore() {
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = score; // Atualiza a pontuação exibida
-}
-
-function checkAnswer(selected) {
-  const q = questions[currentQuestion];
-  
-  // Obter todas as opções para atualizá-las visualmente
-  const options = optionsElement.getElementsByTagName('li');
-  
-  // Marcar a opção correta em verde e a errada em vermelho
-  for (let i = 0; i < options.length; i++) {
-    options[i].style.backgroundColor = i === q.answer ? 'green' : (i === selected ? 'red' : '#9B59B6');
-    options[i].style.pointerEvents = 'none'; // Desabilitar o clique nas opções após a seleção
-  }
-
-  // Se a resposta selecionada estiver correta, incrementa o score
-  if (selected === q.answer) {
-    score++;
-    updateScore(); // Atualiza o contador de acertos
-  } else {
-    errors.push(`Q: ${q.question} - R: ${q.options[q.answer]}`);
-  }
-
-  // Atraso antes de carregar a próxima pergunta
-  setTimeout(() => {
-    currentQuestion++;
-    loadQuestion();
-  }, 1000); // 1 segundo de delay para visualização do feedback
-}
