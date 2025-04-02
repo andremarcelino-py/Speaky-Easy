@@ -4,26 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Speak Easy - Quiz de Inglês</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Tela de Cadastro -->
-  <div id="register-container" class="register-container">
+  <div id="register-container" class="register-container animate-in">
     <h2>Cadastro</h2>
     <input type="text" id="name" placeholder="Digite seu nome">
     <input type="number" id="number" placeholder="Digite seu número">
-    <button id="start-button">Iniciar</button>
+    <button id="start-button">Iniciar <i class="fas fa-arrow-right"></i></button>
   </div>
 
   <!-- Conteúdo principal oculto inicialmente -->
-  <div id="main-container" class="container" style="display: none;">
+  <div id="main-container" class="container">
     <h1 class="title">Speak Easy</h1>
 
     <!-- Menu de navegação -->
     <div class="tabs">
-      <button id="quizTab" class="tab-button">Quiz de Inglês</button>
-      <button id="libraryTab" class="tab-button">Biblioteca de Textos</button>
-      <button id="rankingTab" class="tab-button">Ranking</button>
+      <button id="quizTab" class="tab-button animate-in">
+        <i class="fas fa-question-circle"></i>
+        Quiz
+      </button>
+      <button id="libraryTab" class="tab-button animate-in">
+        <i class="fas fa-book-open"></i>
+        Biblioteca
+      </button>
+      <button id="rankingTab" class="tab-button animate-in">
+        <i class="fas fa-trophy"></i>
+        Ranking
+      </button>
+    </div>
+
+    <!-- Barra de progresso -->
+    <div class="progress-bar">
+      <div class="progress"></div>
     </div>
 
     <!-- Quiz -->
@@ -35,29 +51,43 @@
     </div>
 
     <!-- Biblioteca de textos -->
-    <div id="library-container" class="library-container" style="display: none;">
-      <h2>Biblioteca de Textos</h2>
-      <div class="text-entry">
-        <p><strong>Inglês:</strong> I like to study English.</p>
-        <p><strong>Português:</strong> Eu gosto de estudar inglês.</p>
+    <div id="library-container" class="library-container">
+      <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
+      <div class="text-card animate-in">
+        <div class="text-header">
+          <i class="fas fa-star"></i>
+          <h3>Frases Básicas</h3>
+        </div>
+        <div class="text-content">
+          <p class="english">I like to study English</p>
+          <p class="portuguese">Eu gosto de estudar inglês</p>
+        </div>
       </div>
-      <div class="text-entry">
-        <p><strong>Inglês:</strong> My name is John.</p>
-        <p><strong>Português:</strong> Meu nome é João.</p>
+      <div class="text-card animate-in">
+        <div class="text-header">
+          <i class="fas fa-star"></i>
+          <h3>Apresentações</h3>
+        </div>
+        <div class="text-content">
+          <p class="english">My name is John</p>
+          <p class="portuguese">Meu nome é João</p>
+        </div>
       </div>
     </div>
 
     <!-- Tela de Ranking -->
-    <div id="ranking-container" class="ranking-container" style="display: none;">
-      <h2>Ranking</h2>
+    <div id="ranking-container" class="ranking-container">
+      <h2><i class="fas fa-trophy"></i> Ranking</h2>
       <ul id="ranking-list"></ul>
     </div>
 
     <!-- Tela final do Quiz -->
-    <div id="end-screen" class="end-screen" style="display: none;">
+    <div id="end-screen" class="end-screen">
       <p id="final-message"></p>
       <ul id="error-list"></ul>
-      <button id="restart-button" class="restart-button">Reiniciar Quiz</button>
+      <button id="restart-button" class="restart-button">
+        <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+      </button>
     </div>
 
     <!-- Contador de acertos -->
@@ -66,7 +96,6 @@
     </div>
   </div>
 
-  <script type="module" src="firebase-config.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
