@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";  
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";  
+import { getFirestore, collection, addDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";  
 
 const firebaseConfig = {  
   apiKey: "AIzaSyBCVGQk1Ctp1IZJrHQdM6YUSItaD3pypjg",  
@@ -12,219 +12,459 @@ const firebaseConfig = {
 };  
 
 const app = initializeApp(firebaseConfig);  
-const db = getFirestore(app);  
+const db = getFirestore(app);
 
-document.getElementById("start-button").addEventListener("click", async () => {  
-  const name = document.getElementById("name").value;  
-  const number = document.getElementById("number").value;  
+// Elementos da interface
+const registerContainer = document.getElementById("register-container");
+const menuContainer = document.getElementById("menu-container");
+const quizContainer = document.getElementById("quiz-container");
+const perguntasContainer = document.getElementById("perguntas-container");
+const perguntasQuizContainer = document.getElementById("perguntas-quiz-container");
+const libraryContainer = document.getElementById("library-container");
+const rankingContainer = document.getElementById("ranking-container");
+const endScreen = document.getElementById("end-screen");
+const perguntasEndScreen = document.getElementById("perguntas-end-screen");
 
-  if (name && number) {  
-    try {  
-      await addDoc(collection(db, "users"), { name, number });  
-      document.getElementById("register-container").style.display = "none";  
-      document.getElementById("main-container").style.display = "block";  
-      document.getElementById("quiz-container").style.display = "block";  
-    } catch (error) {  
-      console.error("Erro ao salvar no Firestore: ", error);  
-    }  
-  } else {  
-    alert("Preencha todos os campos!");  
-  }  
-});  
+// Botões
+const startButton = document.getElementById("start-button");
+const btnQuiz = document.getElementById("btnQuiz");
+const btnPerguntas = document.getElementById("btnPerguntas");
+const btnLibrary = document.getElementById("btnLibrary");
+const btnRanking = document.getElementById("btnRanking");
+const btnFacil = document.getElementById("btnFacil");
+const btnMedio = document.getElementById("btnMedio");
+const btnDificil = document.getElementById("btnDificil");
+const restartButton = document.getElementById("restart-button");
+const perguntasRestartButton = document.getElementById("perguntas-restart-button");
+const perguntasMenuButton = document.getElementById("perguntas-menu-button");
 
-// Alternar entre abas  
-document.getElementById("quizTab").onclick = () => {  
-  document.getElementById("quiz-container").style.display = "block";  
-  document.getElementById("library-container").style.display = "none";  
-  document.getElementById("ranking-container").style.display = "none";  
-  document.getElementById("end-screen").style.display = "none";  
-};  
+// Elementos do quiz
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const scoreElement = document.getElementById("score");
+const timerElement = document.getElementById("timer");
+const finalMessageElement = document.getElementById("final-message");
+const errorListElement = document.getElementById("error-list");
+const rankingList = document.getElementById("ranking-list");
 
-document.getElementById("libraryTab").onclick = () => {  
-  document.getElementById("library-container").style.display = "block";  
-  document.getElementById("quiz-container").style.display = "none";  
-  document.getElementById("ranking-container").style.display = "none";  
-  document.getElementById("end-screen").style.display = "none";  
-};  
+// Elementos do quiz de perguntas
+const perguntasQuestionElement = document.getElementById("perguntas-question");
+const perguntasOptionsElement = document.getElementById("perguntas-options");
+const perguntasScoreElement = document.getElementById("perguntas-score");
+const perguntasTimerElement = document.getElementById("perguntas-timer");
+const perguntasFinalMessageElement = document.getElementById("perguntas-final-message");
+const perguntasErrorListElement = document.getElementById("perguntas-error-list");
 
-document.getElementById("rankingTab").onclick = async () => {  
-  document.getElementById("ranking-container").style.display = "block";  
-  document.getElementById("quiz-container").style.display = "none";  
-  document.getElementById("library-container").style.display = "none";  
-  document.getElementById("end-screen").style.display = "none";  
+// Botões de voltar
+const backButtons = {
+  quiz: document.getElementById("backButtonQuiz"),
+  perguntas: document.getElementById("backButtonPerguntas"),
+  perguntasQuiz: document.getElementById("backButtonPerguntasQuiz"),
+  library: document.getElementById("backButtonLibrary"),
+  ranking: document.getElementById("backButtonRanking"),
+  endScreen: document.getElementById("backButtonEndScreen"),
+  perguntasEndScreen: document.getElementById("backButtonPerguntasEndScreen")
+};
 
-  const rankingList = document.getElementById("ranking-list");  
-  rankingList.innerHTML = "";  
+// Configuração dos eventos dos botões de voltar
+Object.values(backButtons).forEach(button => {
+  if (button) {
+    button.addEventListener('click', backToMenu);
+  }
+});
 
-  const querySnapshot = await getDocs(collection(db, "users"));  
-  const users = [];  
+// Função atualizada para voltar ao menu (para garantir que os timers sejam parados)
+function backToMenu() {
+  stopTimer();
+  stopPerguntasTimer();
+  hideAllSections();
+  menuContainer.style.display = "block";
+}
 
-  querySnapshot.forEach(doc => {  
-    let userData = doc.data();  
-    users.push({  
-      name: userData.name,  
-      score: userData.score || 0 // Se não existir, assume 0  
-    });  
-  });  
+function hideAllSections() {
+  const sections = [
+    registerContainer,
+    quizContainer,
+    perguntasContainer,
+    perguntasQuizContainer,
+    libraryContainer,
+    rankingContainer,
+    endScreen,
+    perguntasEndScreen
+  ];
+  
+  sections.forEach(section => {
+    if (section) section.style.display = "none";
+  });
+}
 
-  users.sort((a, b) => b.score - a.score);  
+// Perguntas do quiz (mais perguntas adicionadas)
+let allQuestions = [
+  { 
+    question: "What is 'eu sou estudante' in English?", 
+    options: ["I am a student", "I am student", "I student am", "A student I am"], 
+    answer: 0,
+    difficulty: "easy",
+    libraryRef: "frases-basicas"
+  },
+  { 
+    question: "Which one is correct?", 
+    options: ["Do you like pizza?", "Like pizza you?", "Pizza do you like?", "You pizza like?"], 
+    answer: 0,
+    difficulty: "easy",
+    libraryRef: "frases-basicas"
+  },
+  { 
+    question: "What does 'I am learning English' mean?", 
+    options: ["Eu estou aprendendo inglês", "Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês"], 
+    answer: 0,
+    difficulty: "medium",
+    libraryRef: "frases-basicas"
+  },
+  { 
+    question: "How do you say 'Onde você mora?' in English?", 
+    options: ["Where are you living?", "Where do you live?", "Where is you live?", "Where you live?"], 
+    answer: 1,
+    difficulty: "medium",
+    libraryRef: "frases-basicas"
+  },
+  { 
+    question: "What is the plural of 'child'?", 
+    options: ["Childs", "Children", "Childes", "Childern"], 
+    answer: 1,
+    difficulty: "hard",
+    libraryRef: "verbos"
+  },
+  // Novas perguntas adicionadas:
+  { 
+    question: "How do you say 'bom dia' in English?", 
+    options: ["Good morning", "Good evening", "Good night", "Hello"], 
+    answer: 0,
+    difficulty: "easy",
+    libraryRef: "greetings"
+  },
+  {
+    question: "What is the past tense of 'go'?",
+    options: ["Go", "Went", "Gone", "Going"],
+    answer: 1,
+    difficulty: "easy",
+    libraryRef: "verbos"
+  },
+  {
+    question: "Which sentence is correct?",
+    options: ["He don't like apples", "He doesn't like apples", "He like apples", "He doesn't likes apples"],
+    answer: 1,
+    difficulty: "medium",
+    libraryRef: "grammar"
+  },
+  {
+    question: "What does 'break a leg' mean?",
+    options: ["Good luck", "Break your leg", "Run fast", "Don't trip"],
+    answer: 0,
+    difficulty: "medium",
+    libraryRef: "idioms"
+  }
+];
 
-  users.forEach((user, index) => {  
-    const li = document.createElement("li");  
+let questions = [];
+let perguntasQuestions = [];
+let score = 0;
+let perguntasScore = 0;
+let currentQuestion = 0;
+let currentPerguntaQuestion = 0;
+let errors = [];
+let perguntasErrors = [];
+let quizTimer = 0;
+let perguntasTimer = 0;
+let timerInterval;
+let perguntasTimerInterval;
+
+// Funções do Quiz Principal
+function getRandomQuestions() {
+  const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 15);
+}
+
+function startTimer() {
+  quizTimer = 0;
+  timerElement.textContent = quizTimer;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    quizTimer++;
+    timerElement.textContent = quizTimer;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+function loadQuestion() {
+  if (currentQuestion < questions.length) {
+    const q = questions[currentQuestion];
+    questionElement.textContent = q.question;
+    optionsElement.innerHTML = "";
+    q.options.forEach((option, index) => {
+      const li = document.createElement("li");
+      li.textContent = option;
+      li.addEventListener('click', () => checkAnswer(index));
+      optionsElement.appendChild(li);
+    });
+  } else {
+    endQuiz();
+  }
+}
+
+function checkAnswer(selected) {
+  const q = questions[currentQuestion];
+  const options = optionsElement.querySelectorAll('li');
+  
+  options.forEach((option, index) => {
+    option.classList.remove("correct", "wrong");
+    if (index === q.answer) {
+      option.classList.add("correct");
+    } else if (index === selected) {
+      option.classList.add("wrong");
+    }
+    option.style.pointerEvents = "none";
+  });
+  
+  if (selected === q.answer) {
+    score++;
+    updateScore();
+  } else {
+    errors.push(`Pergunta: ${q.question} - Resposta correta: ${q.options[q.answer]}`);
+  }
+  
+  setTimeout(() => {
+    currentQuestion++;
+    loadQuestion();
+  }, 1500);
+}
+
+function updateScore() {
+  scoreElement.textContent = score;
+}
+
+function endQuiz() {
+  stopTimer();
+  quizContainer.style.display = "none";
+  endScreen.style.display = "block";
+  finalMessageElement.textContent = `Pontuação Final: ${score}/15 | Tempo: ${quizTimer}s`;
+  errorListElement.innerHTML = errors.map(err => `<li class="error-item">${err}</li>`).join("");
+  const userName = document.getElementById("name").value;
+  saveScore(userName, score, quizTimer);
+}
+
+// Funções do Quiz de Perguntas
+function startPerguntasTimer() {
+  perguntasTimer = 0;
+  perguntasTimerElement.textContent = perguntasTimer;
+  clearInterval(perguntasTimerInterval);
+  perguntasTimerInterval = setInterval(() => {
+    perguntasTimer++;
+    perguntasTimerElement.textContent = perguntasTimer;
+  }, 1000);
+}
+
+function stopPerguntasTimer() {
+  clearInterval(perguntasTimerInterval);
+}
+
+function loadPerguntasQuestion() {
+  if (currentPerguntaQuestion < perguntasQuestions.length) {
+    const q = perguntasQuestions[currentPerguntaQuestion];
+    perguntasQuestionElement.textContent = q.question;
+    perguntasOptionsElement.innerHTML = "";
+    q.options.forEach((option, index) => {
+      const li = document.createElement("li");
+      li.textContent = option;
+      li.addEventListener('click', () => checkPerguntasAnswer(index));
+      perguntasOptionsElement.appendChild(li);
+    });
+  } else {
+    endPerguntasQuiz();
+  }
+}
+
+function checkPerguntasAnswer(selected) {
+  const q = perguntasQuestions[currentPerguntaQuestion];
+  const options = perguntasOptionsElement.querySelectorAll('li');
+  
+  options.forEach((option, index) => {
+    option.classList.remove("correct", "wrong");
+    if (index === q.answer) {
+      option.classList.add("correct");
+    } else if (index === selected) {
+      option.classList.add("wrong");
+    }
+    option.style.pointerEvents = "none";
+  });
+  
+  if (selected === q.answer) {
+    perguntasScore++;
+    updatePerguntasScore();
+  } else {
+    perguntasErrors.push({
+      question: q.question,
+      correct: q.options[q.answer],
+      libraryRef: q.libraryRef
+    });
+  }
+  
+  setTimeout(() => {
+    currentPerguntaQuestion++;
+    loadPerguntasQuestion();
+  }, 1500);
+}
+
+function updatePerguntasScore() {
+  perguntasScoreElement.textContent = perguntasScore;
+}
+
+function endPerguntasQuiz() {
+  stopPerguntasTimer();
+  perguntasQuizContainer.style.display = "none";
+  perguntasEndScreen.style.display = "block";
+  perguntasFinalMessageElement.textContent = `Pontuação Final: ${perguntasScore}/10 | Tempo: ${perguntasTimer}s`;
+  
+  perguntasErrorListElement.innerHTML = perguntasErrors.map(err => `
+    <li class="error-item">
+      ${err.question}<br>
+      Resposta correta: ${err.correct}
+      <button onclick="showLibrarySection('${err.libraryRef}')">Aprenda Mais</button>
+    </li>
+  `).join("");
+}
+
+window.showLibrarySection = function(sectionId) {
+  hideAllSections();
+  libraryContainer.style.display = "block";
+  document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+// Inicia o Quiz de Perguntas por nível
+function startPerguntasQuiz(difficulty) {
+  perguntasQuestions = allQuestions
+    .filter(q => q.difficulty === difficulty)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 10);
+  
+  perguntasScore = 0;
+  currentPerguntaQuestion = 0;
+  perguntasErrors = [];
+  updatePerguntasScore();
+  
+  hideAllSections();
+  perguntasQuizContainer.style.display = "block";
+  startPerguntasTimer();
+  loadPerguntasQuestion();
+}
+
+// Event Listeners
+restartButton.addEventListener('click', () => {
+  score = 0;
+  currentQuestion = 0;
+  errors = [];
+  questions = getRandomQuestions();
+  endScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  updateScore();
+  startTimer();
+  loadQuestion();
+});
+
+perguntasRestartButton.addEventListener('click', () => {
+  const currentDifficulty = perguntasQuestions[0]?.difficulty || 'easy';
+  startPerguntasQuiz(currentDifficulty);
+});
+
+perguntasMenuButton.addEventListener('click', backToMenu);
+
+btnQuiz.addEventListener('click', () => {
+  hideAllSections();
+  quizContainer.style.display = "block";
+  questions = getRandomQuestions();
+  score = 0;
+  currentQuestion = 0;
+  errors = [];
+  updateScore();
+  startTimer();
+  loadQuestion();
+});
+
+btnPerguntas.addEventListener('click', () => {
+  hideAllSections();
+  perguntasContainer.style.display = "block";
+});
+
+btnFacil.addEventListener('click', () => startPerguntasQuiz('easy'));
+btnMedio.addEventListener('click', () => startPerguntasQuiz('medium'));
+btnDificil.addEventListener('click', () => startPerguntasQuiz('hard'));
+
+btnLibrary.addEventListener('click', () => {
+  hideAllSections();
+  libraryContainer.style.display = "block";
+});
+
+btnRanking.addEventListener('click', async () => {
+  hideAllSections();
+  rankingContainer.style.display = "block";
+  rankingList.innerHTML = "";
+  const querySnapshot = await getDocs(collection(db, "users"));
+  let users = [];
+  querySnapshot.forEach(doc => {
+    let userData = doc.data();
+    users.push({ name: userData.name, score: userData.score || 0, time: userData.time || 9999 });
+  });
+
+
+
+users = users.filter(user => user.time !== 9999);
+
+
+  users.sort((a, b) => {
+    if(a.score === b.score) {
+      return a.time - b.time;
+    }
+    return b.score - a.score;
+  });
+  users.forEach((user, index) => {
+    const li = document.createElement("li");
     li.className = "animate-in";
     li.style.animationDelay = `${index * 0.1}s`;
-    li.innerHTML = `
-      <span>${index + 1}. ${user.name}</span>
-      <span>Pontos: ${user.score}</span>
-    `;  
-    rankingList.appendChild(li);  
-  });  
-};  
-
-async function saveScore(userName, score) {  
-  const querySnapshot = await getDocs(collection(db, "users"));  
-  let userDoc;  
-
-  querySnapshot.forEach((doc) => {  
-    if (doc.data().name === userName) {  
-      userDoc = doc.ref;  
-    }  
-  });  
-
-  if (userDoc) {  
-    await updateDoc(userDoc, { score: score });  
-  }  
-}  
-
-const allQuestions = [  
-  { question: "What is 'eu sou estudante' in English?", options: ["I am a student", "I am student", "I student am", "A student I am"], answer: 0 },  
-  { question: "Which one is correct?", options: ["Do you like pizza?", "Like pizza you?", "Pizza do you like?", "You pizza like?"], answer: 0 },  
-  { question: "What does 'I am learning English' mean?", options: ["Eu estou aprendendo inglês", "Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês"], answer: 0 },  
-  { question: "How do you say 'Onde você mora?' in English?", options: ["Where are you living?", "Where do you live?", "Where is you live?", "Where you live?"], answer: 1 },  
-  { question: "What is the plural of 'child'?", options: ["Childs", "Children", "Childes", "Childern"], answer: 1 },  
-  { question: "What does 'She is my sister' mean?", options: ["Ela é minha irmã", "Ela é minha prima", "Ela é minha mãe", "Ela é minha amiga"], answer: 0 },  
-  { question: "Which sentence is correct?", options: ["He have a car", "He has a car", "He are a car", "He do have car"], answer: 1 },  
-  { question: "How do you say 'Eu gosto de ler livros' in English?", options: ["I like to read books", "I likes to read books", "I am like to read books", "I reading books"], answer: 0 },  
-  { question: "What is 'yesterday' in Portuguese?", options: ["Amanhã", "Ontem", "Hoje", "Depois"], answer: 1 },  
-  { question: "Which one is correct?", options: ["She don't like coffee", "She doesn't like coffee", "She not like coffee", "She no like coffee"], answer: 1 },  
-  { question: "Translate: 'They are my friends'", options: ["Eles são meus amigos", "Eles foram meus amigos", "Eles estavam meus amigos", "Eles é meus amigos"], answer: 0 },  
-  { question: "What does 'goodbye' mean?", options: ["Olá", "Obrigado", "Adeus", "Por favor"], answer: 2 },  
-  { question: "What is the opposite of 'cold'?", options: ["Hot", "Warm", "Cool", "Frozen"], answer: 0 },  
-  { question: "Choose the correct sentence", options: ["She go to school", "She goes to school", "She going to school", "She is go to school"], answer: 1 },  
-  { question: "How do you say 'Nós estamos felizes' in English?", options: ["We is happy", "We are happy", "We am happy", "We do happy"], answer: 1 },  
-  { question: "What is the past of 'eat'?", options: ["Ate", "Eaten", "Eating", "Eats"], answer: 0 },  
-  { question: "What is 'verde' in English?", options: ["Red", "Blue", "Green", "Yellow"], answer: 2 },  
-  { question: "Which is correct?", options: ["She have a dog", "She has a dog", "She do has a dog", "She has dog"], answer: 1 },  
-  { question: "How do you say 'Me ajuda, por favor' in English?", options: ["Help me, please", "Please me help", "Me help please", "Please, I need help"], answer: 0 },  
-  { question: "What does 'tired' mean?", options: ["Feliz", "Cansado", "Bravo", "Triste"], answer: 1 }  
-];  
-
-function getRandomQuestions() {  
-  const shuffled = allQuestions.sort(() => Math.random() - 0.5);  
-  return shuffled.slice(0, 10);  
-}  
-
-let questions = getRandomQuestions();  
-let score = 0;  
-let currentQuestion = 0;  
-let errors = [];  
-
-const questionElement = document.getElementById("question");  
-const optionsElement = document.getElementById("options");  
-const quizContainer = document.getElementById("quiz-container");  
-const endScreen = document.getElementById("end-screen");  
-const finalMessageElement = document.getElementById("final-message");  
-const errorListElement = document.getElementById("error-list");  
-const restartButton = document.getElementById("restart-button");  
-const progressBar = document.querySelector(".progress");  
-
-function loadQuestion() {  
-  // Atualizar barra de progresso
-  const progress = (currentQuestion / questions.length) * 100;
-  progressBar.style.width = `${progress}%`;
-  
-  if (currentQuestion < questions.length) {  
-    const q = questions[currentQuestion];  
-    questionElement.textContent = q.question;  
-    optionsElement.innerHTML = "";  
-    
-    q.options.forEach((option, index) => {  
-      const li = document.createElement("li");  
-      li.textContent = option;  
-      li.onclick = () => checkAnswer(index);  
-      optionsElement.appendChild(li);  
-    });  
-  } else {  
-    endQuiz();  
-  }  
-}  
-
-function checkAnswer(selected) {  
-  const q = questions[currentQuestion];  
-  const options = optionsElement.getElementsByTagName("li");  
-
-  for (let i = 0; i < options.length; i++) {  
-    options[i].classList.remove("correct", "wrong");
-    if (i === q.answer) {
-      options[i].classList.add("correct");
-    } else if (i === selected) {
-      options[i].classList.add("wrong");
-    }
-    options[i].style.pointerEvents = "none";  
-  }  
-
-  if (selected === q.answer) {  
-    score++;  
-    updateScore();  
-  } else {  
-    errors.push(`Pergunta: ${q.question} - Resposta correta: ${q.options[q.answer]}`);  
-  }  
-
-  setTimeout(() => {  
-    currentQuestion++;  
-    loadQuestion();  
-  }, 1500);  
-}  
-
-function updateScore() {  
-  document.getElementById("score").textContent = score;  
-}  
-
-function endQuiz() {  
-  quizContainer.style.display = "none";  
-  endScreen.style.display = "block";  
-  finalMessageElement.textContent = `Pontuação Final: ${score}/10`;  
-
-  errorListElement.innerHTML = errors  
-    .map(err => `<li class="error-item">${err}</li>`)  
-    .join("");  
-    
-  // Salvar pontuação
-  const userName = document.getElementById("name").value;
-  saveScore(userName, score);
-}  
-
-restartButton.onclick = () => {  
-  score = 0;  
-  currentQuestion = 0;  
-  errors = [];  
-  questions = getRandomQuestions();  
-  quizContainer.style.display = "block";  
-  endScreen.style.display = "none";  
-  updateScore();
-  progressBar.style.width = "0%";
-  loadQuestion();  
-};  
-
-// Efeitos de hover dinâmicos para os botões
-document.querySelectorAll('.tab-button, .restart-button').forEach(button => {
-  button.addEventListener('mousemove', (e) => {
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    button.style.setProperty('--x', `${x}px`);
-    button.style.setProperty('--y', `${y}px`);
+    li.innerHTML = `<span>${index + 1}. ${user.name}</span><span>Pontos: ${user.score} | Tempo: ${user.time}s</span>`;
+    rankingList.appendChild(li);
   });
 });
 
-loadQuestion();
+// Lógica de cadastro
+startButton.addEventListener("click", async () => {
+  const name = document.getElementById("name").value;
+  const number = document.getElementById("number").value;
+  if (name && number) {
+    try {
+      await addDoc(collection(db, "users"), { name, number });
+      registerContainer.style.display = "none";
+      menuContainer.style.display = "block";
+    } catch (error) {
+      console.error("Erro ao salvar no Firestore: ", error);
+    }
+  } else {
+    alert("Preencha todos os campos!");
+  }
+});
+
+// Salva pontuação e tempo no Firestore
+async function saveScore(userName, score, time) {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  let userDoc;
+  querySnapshot.forEach((doc) => {
+    if (doc.data().name === userName) {
+      userDoc = doc.ref;
+    }
+  });
+  if (userDoc) {
+    await updateDoc(userDoc, { score, time });
+  }
+}
