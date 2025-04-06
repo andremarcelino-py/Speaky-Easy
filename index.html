@@ -6,7 +6,7 @@
   <title>Speak Easy - Quiz de Inglês</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Tela de Cadastro -->
@@ -17,83 +17,183 @@
     <button id="start-button">Iniciar <i class="fas fa-arrow-right"></i></button>
   </div>
 
-  <!-- Conteúdo principal oculto inicialmente -->
-  <div id="main-container" class="container">
+  <!-- Tela de Menu Principal -->
+  <div id="menu-container" class="menu-container" style="display:none;">
     <h1 class="title">Speak Easy</h1>
-
-    <!-- Menu de navegação -->
     <div class="tabs">
-      <button id="quizTab" class="tab-button animate-in">
-        <i class="fas fa-question-circle"></i>
-        Quiz
+      <button id="btnQuiz" class="tab-button animate-in">
+        <i class="fas fa-question-circle"></i> Quiz
       </button>
-      <button id="libraryTab" class="tab-button animate-in">
-        <i class="fas fa-book-open"></i>
-        Biblioteca
+      <button id="btnPerguntas" class="tab-button animate-in">
+        <i class="fas fa-edit"></i> Perguntas
       </button>
-      <button id="rankingTab" class="tab-button animate-in">
-        <i class="fas fa-trophy"></i>
-        Ranking
+      <button id="btnLibrary" class="tab-button animate-in">
+        <i class="fas fa-book-open"></i> Biblioteca
+      </button>
+      <button id="btnRanking" class="tab-button animate-in">
+        <i class="fas fa-trophy"></i> Ranking
       </button>
     </div>
+  </div>
 
-    <!-- Barra de progresso -->
-    <div class="progress-bar">
-      <div class="progress"></div>
+  <!-- Quiz Principal -->
+  <div id="quiz-container" class="quiz-container" style="display:none;">
+    <button class="back-button" id="backButtonQuiz">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <div id="quiz">
+      <p id="question"></p>
+      <ul id="options"></ul>
     </div>
+    <div class="score-container">
+      <p>Pontuação: <span id="score">0</span>/15</p>
+      <p>Tempo: <span id="timer">0</span> s</p>
+    </div>
+  </div>
 
-    <!-- Quiz -->
-    <div id="quiz-container" class="quiz-container">
-      <div id="quiz">
-        <p id="question"></p>
-        <ul id="options"></ul>
+  <!-- Seleção de Nível para Perguntas -->
+  <div id="perguntas-container" class="perguntas-container" style="display:none;">
+    <button class="back-button" id="backButtonPerguntas">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <h2><i class="fas fa-edit"></i> Escolha o Nível</h2>
+    <div class="level-buttons">
+      <button id="btnFacil" class="level-button">Fácil</button>
+      <button id="btnMedio" class="level-button">Médio</button>
+      <button id="btnDificil" class="level-button">Difícil</button>
+    </div>
+  </div>
+
+  <!-- Quiz de Perguntas -->
+  <div id="perguntas-quiz-container" class="quiz-container" style="display:none;">
+    <button class="back-button" id="backButtonPerguntasQuiz">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <div id="perguntas-quiz">
+      <p id="perguntas-question"></p>
+      <ul id="perguntas-options"></ul>
+    </div>
+    <div class="score-container">
+      <p>Pontuação: <span id="perguntas-score">0</span>/10</p>
+      <p>Tempo: <span id="perguntas-timer">0</span> s</p>
+    </div>
+  </div>
+
+  <!-- Biblioteca -->
+  <div id="library-container" class="library-container" style="display:none;">
+    <button class="back-button" id="backButtonLibrary">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
+    <!-- Seção de Frases Básicas -->
+    <div id="frases-basicas" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Frases Básicas</h3>
+      </div>
+      <div class="text-content">
+        <p class="english">I like to study English</p>
+        <p class="portuguese">Eu gosto de estudar inglês</p>
+        <p class="english">I am a student</p>
+        <p class="portuguese">Eu sou estudante</p>
       </div>
     </div>
-
-    <!-- Biblioteca de textos -->
-    <div id="library-container" class="library-container">
-      <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
-      <div class="text-card animate-in">
-        <div class="text-header">
-          <i class="fas fa-star"></i>
-          <h3>Frases Básicas</h3>
-        </div>
-        <div class="text-content">
-          <p class="english">I like to study English</p>
-          <p class="portuguese">Eu gosto de estudar inglês</p>
-        </div>
+    <!-- Seção de Verbos -->
+    <div id="verbos" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Verbos</h3>
       </div>
-      <div class="text-card animate-in">
-        <div class="text-header">
-          <i class="fas fa-star"></i>
-          <h3>Apresentações</h3>
-        </div>
-        <div class="text-content">
-          <p class="english">My name is John</p>
-          <p class="portuguese">Meu nome é João</p>
-        </div>
+      <div class="text-content">
+        <p>Verbos são palavras de ação. Por exemplo, ler "read", escrever "write", e falar "speak" ajudam a descrever as atividades.</p>
+        <p>Exemplos:</p>
+        <p class="english">I like to read books</p>
+        <p class="portuguese">Eu gosto de ler livros</p>
+        <p class="english">She doesn't like coffee</p>
+        <p class="portuguese">Ela não gosta de café</p>
       </div>
     </div>
-
-    <!-- Tela de Ranking -->
-    <div id="ranking-container" class="ranking-container">
-      <h2><i class="fas fa-trophy"></i> Ranking</h2>
-      <ul id="ranking-list"></ul>
+    <!-- Seção de Idioms -->
+    <div id="idioms" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Idioms</h3>
+      </div>
+      <div class="text-content">
+        <p>"Idioms" também chamada de expressões idiomáticas, são expressões cujo significado não pode ser deduzido literalmente pelas palavras. Por exemplo, "break a leg" significa "boa sorte", não quebrar a perna.</p>
+        <p>Exemplos:</p>
+        <p class="english">A piece of cake</p>
+        <p class="portuguese">Algo muito fácil</p>
+        <p class="english">Help yourself</p>
+        <p class="portuguese">Sirva-se</p>
+      </div>
     </div>
-
-    <!-- Tela final do Quiz -->
-    <div id="end-screen" class="end-screen">
-      <p id="final-message"></p>
-      <ul id="error-list"></ul>
-      <button id="restart-button" class="restart-button">
-        <i class="fas fa-sync-alt"></i> Reiniciar Quiz
-      </button>
+    <!-- Seção de Gramática -->
+    <div id="grammar" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Lição de Gramática</h3>
+      </div>
+      <div class="text-content">
+        <p>Uma boa compreensão da gramática inglesa é essencial para formar frases corretas.</p>
+        <p>Dicas importantes: preste atenção aos tempos verbais, concordância entre sujeito e verbo e à estrutura da frase.</p>
+        <p>Exemplo: use "doesn't" com sujeitos singulares (He doesn't like apples).</p>
+      </div>
     </div>
+    <!-- Seção de Cumprimentos -->
+    <div id="greetings" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Cumprimentos e Apresentações</h3>
+      </div>
+      <div class="text-content">
+        <p>Aprenda expressões comuns para saudações e apresentações, como "Good morning", "How are you?" e "Nice to meet you".</p>
+        <p>Exemplos:</p>
+        <p class="english">It's good to see you</p>
+        <p class="portuguese">Que bom ver você</p>
+        <p class="english">How are you doing?</p>
+        <p class="portuguese">Como vai você?</p>
+        <p class="english">Have a good night</p>
+        <p class="portuguese">Tenha uma boa noite</p>
 
-    <!-- Contador de acertos -->
-    <div id="score-container" class="score-container">
-      <p>Pontuação: <span id="score">0</span>/10</p>
+      </div>
     </div>
+  </div>
+
+  <!-- Ranking -->
+  <div id="ranking-container" class="ranking-container" style="display:none;">
+    <button class="back-button" id="backButtonRanking">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <h2><i class="fas fa-trophy"></i> Ranking</h2>
+    <ul id="ranking-list"></ul>
+  </div>
+
+  <!-- Tela Final do Quiz Principal -->
+  <div id="end-screen" class="end-screen" style="display:none;">
+    <button class="back-button" id="backButtonEndScreen">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <p id="final-message"></p>
+    <ul id="error-list"></ul>
+    <button id="restart-button" class="restart-button">
+      <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+    </button>
+  </div>
+
+  <!-- Tela Final do Quiz de Perguntas -->
+  <div id="perguntas-end-screen" class="end-screen" style="display:none;">
+    <button class="back-button" id="backButtonPerguntasEndScreen">
+      <i class="fas fa-arrow-left"></i> Voltar ao Menu
+    </button>
+    <p id="perguntas-final-message"></p>
+    <ul id="perguntas-error-list"></ul>
+    <button id="perguntas-restart-button" class="restart-button">
+      <i class="fas fa-sync-alt"></i> Tentar Novamente
+    </button>
+    <button id="perguntas-menu-button" class="restart-button">
+      <i class="fas fa-home"></i> Menu Principal
+    </button>
   </div>
 
   <script type="module" src="script.js"></script>
