@@ -16,12 +16,13 @@ body {
   background: var(--background-gradient);
   color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
 }
 
+/* Tela de Cadastro */
 .register-container {
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
@@ -31,7 +32,8 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   max-width: 400px;
-  width: 90%;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .register-container h2 {
@@ -74,13 +76,47 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-.container {
+/* Containers gerais */
+.menu-container,
+.container,
+.quiz-container,
+.perguntas-container,
+.library-container,
+.ranking-container,
+.end-screen {
   text-align: center;
   width: 100%;
   max-width: 1200px;
-  display: none;
+  margin: auto;
+  padding: 2rem;
+  position: relative;
+  padding-top: 60px;
 }
 
+/* Botão Voltar (agora no canto inferior esquerdo) */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Título e Tabs */
 .title {
   font-size: 3rem;
   background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
@@ -109,7 +145,6 @@ body {
   align-items: center;
   gap: 8px;
   color: white;
-  font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
 }
 
@@ -119,30 +154,32 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-.quiz-container, .library-container, .ranking-container, .end-screen {
+/* Quiz e Perguntas */
+.quiz-container {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 2rem;
-  margin: 1rem auto;
+  margin: 1rem 0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 800px;
-  width: 90%;
-  display: none;
 }
 
-#question {
+#question,
+#perguntas-question {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   color: white;
 }
 
-#options {
+#options,
+#perguntas-options {
   list-style: none;
+  padding: 0;
 }
 
-#options li {
+#options li,
+#perguntas-options li {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid transparent;
   padding: 1rem;
@@ -156,27 +193,25 @@ body {
   color: white;
 }
 
-#options li::before {
-  content: "•";
-  color: var(--secondary-color);
-  font-weight: bold;
-}
-
-#options li:hover {
+#options li:hover,
+#perguntas-options li:hover {
   transform: translateX(10px);
   border-color: var(--primary-color);
 }
 
-#options li.correct {
+#options li.correct,
+#perguntas-options li.correct {
   background: rgba(72, 187, 120, 0.2);
   border-color: #48BB78;
 }
 
-#options li.wrong {
+#options li.wrong,
+#perguntas-options li.wrong {
   background: rgba(245, 101, 101, 0.2);
   border-color: #F56565;
 }
 
+/* Score e Timer */
 .score-container {
   margin: 1.5rem 0;
   font-size: 1.2rem;
@@ -184,65 +219,7 @@ body {
   color: var(--secondary-color);
 }
 
-.progress-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-  margin: 1.5rem auto;
-  max-width: 800px;
-  width: 90%;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  background: var(--accent-color);
-  transition: width 0.3s ease;
-  width: 0%;
-}
-
-.end-screen {
-  text-align: center;
-}
-
-#final-message {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-#error-list {
-  list-style: none;
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.error-item {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  border-left: 4px solid var(--accent-color);
-}
-
-.restart-button {
-  background: var(--primary-color);
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-}
-
-.restart-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-}
-
+/* Cards Biblioteca */
 .text-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
@@ -266,46 +243,147 @@ body {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.english::before, .portuguese::before {
-  margin-right: 8px;
-}
-
 .english::before {
   content: "🇬🇧";
+  margin-right: 8px;
 }
 
 .portuguese::before {
   content: "🇧🇷";
+  margin-right: 8px;
 }
 
+/* Ranking */
 #ranking-list {
   list-style: none;
+  padding: 0;
+}
+
+/* Substitua o estilo atual do ranking por este: */
+#ranking-list {
+  counter-reset: ranking;
+  padding: 0;
+  margin: 2rem 0;
 }
 
 #ranking-list li {
+  counter-increment: ranking;
+  background: rgba(255,255,255,0.05);
+  padding: 1.2rem;
+  margin: 0.8rem 0;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: px fr 100px 100px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para o 1º lugar */
+#ranking-list li:first-child {
+  background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+  color: #2F2F2F;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+}
+
+#ranking-list li:first-child::after {
+  content: "👑";
+  margin-left: 1rem;
+  font-size: 1.8em;
+}
+
+/* Estilo para o 2º lugar */
+#ranking-list li:nth-child(2) {
+  background: linear-gradient(135deg, #C0C0C0 0%, #A0A0A0 100%);
+}
+
+/* Estilo para o 3º lugar */
+#ranking-list li:nth-child(3) {
+  background: linear-gradient(135deg, #CD7F32 0%, #B87333 100%);
+}
+}
+
+/* Tela Final */
+.end-screen {
   background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#error-list,
+#perguntas-error-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.error-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
   margin: 0.5rem 0;
   border-radius: 8px;
+  border-left: 4px solid var(--accent-color);
+}
+
+/* Botão Reiniciar */
+.restart-button {
+  background: var(--primary-color);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+.restart-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Botões de Nível */
+.level-buttons {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
 }
 
-#ranking-list li:nth-child(1) {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
-  border-left: 4px solid gold;
+.level-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  transition: transform 0.2s;
 }
 
-#ranking-list li:nth-child(2) {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.1), rgba(255, 255, 255, 0.05));
-  border-left: 4px solid silver;
+.level-button:hover {
+  transform: scale(1.05);
 }
 
-#ranking-list li:nth-child(3) {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.1), rgba(255, 255, 255, 0.05));
-  border-left: 4px solid #cd7f32;
+#btnFacil {
+  background: #4CAF50;
 }
 
+#btnMedio {
+  background: #FFC107;
+}
+
+#btnDificil {
+  background: #F44336;
+}
+
+/* Animação */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -315,17 +393,52 @@ body {
   animation: fadeIn 0.5s ease-out;
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
   .title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
-  
+
   .tab-button {
     padding: 10px 15px;
     font-size: 0.9rem;
   }
-  
-  .quiz-container, .library-container, .ranking-container, .end-screen {
-    padding: 1.5rem;
+
+  .back-button {
+    bottom: 15px;
+    left: 10px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .level-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .register-container,
+  .menu-container,
+  .quiz-container,
+  .library-container,
+  .ranking-container,
+  .end-screen {
+    padding: 1rem;
+  }
+
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .restart-button,
+  .level-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
