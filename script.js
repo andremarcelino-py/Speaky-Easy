@@ -1,3 +1,4 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
@@ -16,6 +17,7 @@ const db = getFirestore(app);
 
 // Containers principais
 const registerContainer      = document.getElementById("register-container");
+const loginContainer         = document.getElementById("login-container");
 const menuContainer          = document.getElementById("menu-container");
 const quizContainer          = document.getElementById("quiz-container");
 const perguntasContainer     = document.getElementById("perguntas-container");
@@ -33,8 +35,13 @@ const frenchQuizContainer    = document.getElementById("french-container");
 const frenchEndScreen        = document.getElementById("french-end-screen");
 const frenchLibraryContainer = document.getElementById("french-library-container");
 
-// Botões
+// Elementos de cadastro/login
 const startButton        = document.getElementById("start-button");
+const loginButton        = document.getElementById("login-button");
+const goLoginLink        = document.getElementById("go-login");
+const goRegisterLink     = document.getElementById("go-register");
+
+// Outros botões (menu, quiz, etc.)
 const btnQuiz            = document.getElementById("btnQuiz");
 const btnPerguntas       = document.getElementById("btnPerguntas");
 const btnLibrary         = document.getElementById("btnLibrary");
@@ -58,24 +65,21 @@ const backButtonFrenchMenu = document.getElementById("backButtonFrenchMenu");
 const frenchRestartButton  = document.getElementById("french-restart-button");
 const frenchMenuButton     = document.getElementById("french-menu-button");
 
-// Elementos do Quiz Inglês
-const questionElement = document.getElementById("question");
-const optionsElement  = document.getElementById("options");
-const scoreElement    = document.getElementById("score");
-const timerElement    = document.getElementById("timer");
-const finalMessageElement = document.getElementById("final-message");
-const errorListElement   = document.getElementById("error-list");
-const rankingList        = document.getElementById("ranking-list");
+// Elementos do Quiz (inglês, perguntas, español, francês)
+const questionElement       = document.getElementById("question");
+const optionsElement        = document.getElementById("options");
+const scoreElement          = document.getElementById("score");
+const timerElement          = document.getElementById("timer");
+const finalMessageElement   = document.getElementById("final-message");
+const errorListElement      = document.getElementById("error-list");
 
-// Elementos do Quiz Perguntas
 const perguntasQuestionElement = document.getElementById("perguntas-question");
 const perguntasOptionsElement  = document.getElementById("perguntas-options");
 const perguntasScoreElement    = document.getElementById("perguntas-score");
 const perguntasTimerElement    = document.getElementById("perguntas-timer");
 const perguntasFinalMessageElement = document.getElementById("perguntas-final-message");
-const perguntasErrorListElement   = document.getElementById("perguntas-error-list");
+const perguntasErrorListElement    = document.getElementById("perguntas-error-list");
 
-// Elementos Espanhol
 const spanishQuestionElement = document.getElementById("spanish-question");
 const spanishOptionsElement  = document.getElementById("spanish-options");
 const spanishScoreElement    = document.getElementById("spanish-score");
@@ -83,7 +87,6 @@ const spanishTimerElement    = document.getElementById("spanish-timer");
 const spanishFinalMessageEl  = document.getElementById("spanish-final-message");
 const spanishErrorListEl     = document.getElementById("spanish-error-list");
 
-// Elementos Francês
 const frenchQuestionElement = document.getElementById("french-question");
 const frenchOptionsElement  = document.getElementById("french-options");
 const frenchScoreElement    = document.getElementById("french-score");
@@ -94,7 +97,7 @@ const frenchErrorListEl     = document.getElementById("french-error-list");
 // Função genérica para esconder todas as seções
 function hideAllSections() {
   [
-    registerContainer, menuContainer,
+    registerContainer, loginContainer, menuContainer,
     quizContainer, perguntasContainer, perguntasQuizContainer,
     libraryContainer, rankingContainer, endScreen, perguntasEndScreen,
     spanishMenuContainer, spanishQuizContainer, spanishEndScreen, spanishLibraryContainer,
@@ -102,7 +105,7 @@ function hideAllSections() {
   ].forEach(sec => sec && (sec.style.display = "none"));
 }
 
-// Função de voltar ao menu
+// Função para voltar ao menu
 function backToMenu() {
   stopTimer(); stopPerguntasTimer(); stopSpanishTimer(); stopFrenchTimer();
   hideAllSections();
@@ -122,18 +125,25 @@ function backToMenu() {
 
 // --- CADASTRO ---
 startButton.addEventListener("click", async () => {
-  const nameInput   = document.getElementById("name").value.trim();
-  const numberInput = document.getElementById("number").value.trim();
+  const nameInput     = document.getElementById("name").value.trim();
+  // Removido: const numberInput = document.getElementById("number").value.trim();
+  const passwordInput = document.getElementById("register-password").value.trim();
 
-  if (!nameInput || !numberInput) {
+  // Validação apenas do nome e senha
+  if (!nameInput || !passwordInput) {
     alert("Por favor, preencha todos os campos!");
     return;
   }
-
+  
   hideAllSections();
   try {
-    await addDoc(collection(db, "users"), { name: nameInput, number: numberInput });
-    menuContainer.style.display = "block";
+    await addDoc(collection(db, "users"), { 
+      name: nameInput, 
+      password: passwordInput // Em produção, utilize Firebase Authentication para segurança
+    });
+    // Após cadastro, redireciona para a tela de login
+    registerContainer.style.display = "none";
+    loginContainer.style.display = "block";
   } catch (err) {
     console.error("Erro ao salvar no Firestore:", err);
     alert("Não foi possível cadastrar. Tente novamente.");
@@ -141,9 +151,48 @@ startButton.addEventListener("click", async () => {
   }
 });
 
+// --- LOGIN ---
+loginButton.addEventListener("click", async () => {
+  const loginName     = document.getElementById("login-name").value.trim();
+  const loginPassword = document.getElementById("login-password").value.trim();
+
+  if (!loginName || !loginPassword) {
+    alert("Por favor, preencha todos os campos!");
+    return;
+  }
+  
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    let userFound = false;
+    snap.forEach(doc => {
+      const userData = doc.data();
+      if (userData.name === loginName && userData.password === loginPassword) {
+        userFound = true;
+        hideAllSections();
+        menuContainer.style.display = "block";
+      }
+    });
+    if (!userFound) {
+      alert("Dados de login incorretos! Tente novamente.");
+    }
+  } catch (err) {
+    console.error("Erro no login:", err);
+    alert("Erro ao efetuar login. Tente novamente.");
+  }
+});
+
+// Navegação entre telas de cadastro e login
+goLoginLink.addEventListener("click", () => {
+  registerContainer.style.display = "none";
+  loginContainer.style.display = "block";
+});
+goRegisterLink.addEventListener("click", () => {
+  loginContainer.style.display = "none";
+  registerContainer.style.display = "block";
+});
+
 // --- QUIZ INGLÊS ---
 let questions = [], score = 0, currentQuestion = 0, errors = [], quizTimer = 0, timerInterval;
-
 function getRandomQuestions() {
   return [...allQuestions].sort(() => Math.random() - 0.5).slice(0,15);
 }
@@ -173,11 +222,11 @@ function checkAnswer(sel) {
   const opts = optionsElement.querySelectorAll("li");
   opts.forEach((li,i)=>{
     li.classList.remove("correct","wrong");
-    if (i===q.answer) li.classList.add("correct");
-    else if (i===sel) li.classList.add("wrong");
-    li.style.pointerEvents="none";
+    if (i === q.answer) li.classList.add("correct");
+    else if (i === sel) li.classList.add("wrong");
+    li.style.pointerEvents = "none";
   });
-  if (sel===q.answer) { score++; scoreElement.textContent = score; }
+  if (sel === q.answer) { score++; scoreElement.textContent = score; }
   else errors.push(`Pergunta: ${q.question} - Resposta: ${q.options[q.answer]}`);
   setTimeout(()=>{
     currentQuestion++; loadQuestion();
@@ -191,8 +240,6 @@ function endQuiz() {
   errorListElement.innerHTML = errors.map(e=>`<li class="error-item">${e}</li>`).join("");
   saveScore(document.getElementById("name").value.trim(), score, quizTimer);
 }
-
-// Listener quiz
 btnQuiz.addEventListener("click", ()=>{
   hideAllSections();
   quizContainer.style.display = "block";
@@ -234,11 +281,11 @@ function checkPerguntasAnswer(sel) {
   const opts = perguntasOptionsElement.querySelectorAll("li");
   opts.forEach((li,i)=>{
     li.classList.remove("correct","wrong");
-    if (i===q.answer) li.classList.add("correct");
-    else if (i===sel) li.classList.add("wrong");
-    li.style.pointerEvents="none";
+    if (i === q.answer) li.classList.add("correct");
+    else if (i === sel) li.classList.add("wrong");
+    li.style.pointerEvents = "none";
   });
-  if (sel===q.answer) { perguntasScore++; perguntasScoreElement.textContent=perguntasScore; }
+  if (sel === q.answer) { perguntasScore++; perguntasScoreElement.textContent = perguntasScore; }
   else perguntasErrors.push({ question: q.question, correct: q.options[q.answer], libraryRef: q.libraryRef });
   setTimeout(()=>{
     currentPerguntaQuestion++; loadPerguntasQuestion();
@@ -285,11 +332,12 @@ window.showLibrarySection = function(sectionId){
 btnRanking.addEventListener("click", async ()=>{
   hideAllSections();
   rankingContainer.style.display="block";
+  const rankingList = document.getElementById("ranking-list");
   rankingList.innerHTML="";
   const snap = await getDocs(collection(db,"users"));
   let users = [];
   snap.forEach(doc=> users.push({ name: doc.data().name, score: doc.data().score||0, time: doc.data().time||9999 }));
-  users = users.filter(u=>u.time!==9999).sort((a,b)=>(b.score-a.score)|| (a.time-b.time));
+  users = users.filter(u=>u.time!==9999).sort((a,b)=>(b.score-a.score) || (a.time-b.time));
   users.forEach((u,i)=>{
     const li = document.createElement("li");
     li.className="animate-in";
@@ -322,8 +370,8 @@ function stopSpanishTimer(){ clearInterval(spanishTimerInterval); }
 function loadSpanishQuestion() {
   if (currentSpanishQuestion < spanishQuestions.length) {
     const q = spanishQuestions[currentSpanishQuestion];
-    spanishQuestionElement.textContent=q.question;
-    spanishOptionsElement.innerHTML="";
+    spanishQuestionElement.textContent = q.question;
+    spanishOptionsElement.innerHTML = "";
     q.options.forEach((opt,i)=>{
       const li=document.createElement("li");
       li.textContent=opt;
@@ -401,8 +449,8 @@ function stopFrenchTimer(){ clearInterval(frenchTimerInterval); }
 function loadFrenchQuestion() {
   if (currentFrenchQuestion < frenchQuestions.length) {
     const q = frenchQuestions[currentFrenchQuestion];
-    frenchQuestionElement.textContent=q.question;
-    frenchOptionsElement.innerHTML="";
+    frenchQuestionElement.textContent = q.question;
+    frenchOptionsElement.innerHTML = "";
     q.options.forEach((opt,i)=>{
       const li=document.createElement("li");
       li.textContent=opt;
@@ -467,24 +515,18 @@ async function saveScore(userName, score, time) {
   }
 }
 
-
-// Aguarda o DOM carregar para garantir que os elementos existam
+// Alterna a visualização do conteúdo da Biblioteca (expansível)
 document.addEventListener("DOMContentLoaded", () => {
-  // Seleciona todos os headers das seções da biblioteca
   const headers = document.querySelectorAll(".text-card .text-header");
-
   headers.forEach(header => {
-    // Adiciona um listener de clique em cada header
     header.addEventListener("click", () => {
-      // O próximo elemento do header é o .text-content correspondente
       const content = header.nextElementSibling;
-      // Alterna a classe 'active' para mostrar/ocultar o conteúdo
       content.classList.toggle("active");
     });
   });
 });
 
-// --- DADOS FIXOS ---
+// Lista de perguntas fixa
 const allQuestions = [
   { question: "What is 'eu sou estudante' in English?", options: ["I am student", "A student I am", "I student am", "I am a student"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Which one is correct?", options: ["Pizza do you like?", "Do you like pizza?", "Like pizza you?", "You pizza like?"], answer: 1, difficulty: "easy", libraryRef: "frases-basicas" },
