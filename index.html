@@ -1,44 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Speak Easy - Quiz de Inglês</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <!-- Tela de Cadastro -->
   <div id="register-container" class="register-container animate-in">
     <h2>Cadastro</h2>
-    <input type="text" id="name" placeholder="Digite seu nome">
-    <input type="number" id="number" placeholder="Digite seu número">
+    <input type="text" id="name" placeholder="Digite seu nome"/>
+    <input type="number" id="number" placeholder="Digite seu número"/>
     <button id="start-button">Iniciar <i class="fas fa-arrow-right"></i></button>
   </div>
 
-  <!-- Tela de Menu Principal -->
+  <!-- Menu Principal -->
   <div id="menu-container" class="menu-container" style="display:none;">
     <h1 class="title">Speak Easy</h1>
     <div class="tabs">
-      <button id="btnQuiz" class="tab-button animate-in">
-        <i class="fas fa-question-circle"></i> Quiz
-      </button>
-      <button id="btnPerguntas" class="tab-button animate-in">
-        <i class="fas fa-edit"></i> Perguntas
-      </button>
-      <button id="btnLibrary" class="tab-button animate-in">
-        <i class="fas fa-book-open"></i> Biblioteca
-      </button>
-      <button id="btnRanking" class="tab-button animate-in">
-        <i class="fas fa-trophy"></i> Ranking
-      </button>
+      <button id="btnQuiz" class="tab-button animate-in"><i class="fas fa-question-circle"></i> Quiz</button>
+      <button id="btnPerguntas" class="tab-button animate-in"><i class="fas fa-edit"></i> Perguntas</button>
+      <button id="btnLibrary" class="tab-button animate-in"><i class="fas fa-book-open"></i> Biblioteca</button>
+      <button id="btnSpanish" class="tab-button animate-in spanish"><i class="fas fa-globe"></i> Español</button>
+      <button id="btnFrench" class="tab-button animate-in french"><i class="fas fa-globe"></i> Français</button>
+      <button id="btnRanking" class="tab-button animate-in"><i class="fas fa-trophy"></i> Ranking</button>
     </div>
   </div>
 
-  <!-- Quiz Principal -->
-  <div id="quiz-container" class="quiz-container" style="display:none;">
+  <!-- Menu Español: Seleção de Contenido en Español -->
+  <div id="spanish-menu-container" class="menu-container" style="display:none;">
+    <h2>Contenido en Español</h2>
+    <div class="tabs">
+      <button id="btnSpanishQuiz" class="tab-button animate-in spanish">
+         <i class="fas fa-question-circle"></i> Preguntas
+      </button>
+      <button id="btnSpanishLibrary" class="tab-button animate-in spanish">
+         <i class="fas fa-book-open"></i> Biblioteca
+      </button>
+    </div>
+    <button class="back-button" id="backButtonSpanishMenu">
+      <i class="fas fa-arrow-left"></i> Volver al Menú Principal
     </button>
+  </div>
+
+  <!-- Quiz en Español -->
+  <div id="spanish-container" class="quiz-container" style="display:none;">
+    <button class="back-button" id="backButtonSpanish">
+      <i class="fas fa-arrow-left"></i> Volver al Menú
+    </button>
+    <div id="spanish-quiz">
+      <p id="spanish-question"></p>
+      <ul id="spanish-options"></ul>
+    </div>
+    <div class="score-container">
+      <p>Puntuación: <span id="spanish-score">0</span>/15</p>
+      <p>Tiempo: <span id="spanish-timer">0</span> s</p>
+    </div>
+  </div>
+
+  <!-- Tela Final do Quiz en Español -->
+  <div id="spanish-end-screen" class="end-screen" style="display:none;">
+    <button class="back-button" id="backButtonSpanishEndScreen">
+      <i class="fas fa-arrow-left"></i> Volver al Menú
+    </button>
+    <p id="spanish-final-message"></p>
+    <ul id="spanish-error-list"></ul>
+    <button id="spanish-restart-button" class="restart-button">
+      <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+    </button>
+    <button id="spanish-menu-button" class="restart-button">
+      <i class="fas fa-home"></i> Menú Principal
+    </button>
+  </div>
+
+  <!-- Biblioteca en Español -->
+  <div id="spanish-library-container" class="library-container" style="display:none;">
+    <button class="back-button" id="backButtonSpanishLibrary">
+      <i class="fas fa-arrow-left"></i> Volver al Menú
+    </button>
+    <h2><i class="fas fa-book-open"></i> Biblioteca en Español</h2>
+    <!-- Seção: Frases Básicas -->
+    <div id="frases-basicas-es" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Frases Básicas</h3>
+      </div>
+      <div class="text-content">
+        <p class="spanish">Me gusta estudiar español</p>
+        <p class="spanish">Soy estudiante</p>
+      </div>
+    </div>
+    <!-- Seção: Verbos -->
+    <div id="verbos-es" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Verbos</h3>
+      </div>
+      <div class="text-content">
+        <p>Ejemplo: leer, escribir, hablar, comer y vivir.</p>
+      </div>
+    </div>
+    <!-- Seção: Expresiones Idiomáticas -->
+    <div id="expresiones-es" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Expresiones Idiomáticas</h3>
+      </div>
+      <div class="text-content">
+        <p>Ejemplo: "echar una mano" significa ayudar.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Français: Sélection de Contenu en Français -->
+  <div id="french-menu-container" class="menu-container" style="display:none;">
+    <h2>Contenu en Français</h2>
+    <div class="tabs">
+      <button id="btnFrenchQuiz" class="tab-button animate-in french">
+         <i class="fas fa-question-circle"></i> Questions
+      </button>
+      <button id="btnFrenchLibrary" class="tab-button animate-in french">
+         <i class="fas fa-book-open"></i> Bibliothèque
+      </button>
+    </div>
+    <button class="back-button" id="backButtonFrenchMenu">
+      <i class="fas fa-arrow-left"></i> Retour au Menu Principal
+    </button>
+  </div>
+
+  <!-- Quiz en Français -->
+  <div id="french-container" class="quiz-container" style="display:none;">
+    <button class="back-button" id="backButtonFrench">
+      <i class="fas fa-arrow-left"></i> Retour au Menu
+    </button>
+    <div id="french-quiz">
+      <p id="french-question"></p>
+      <ul id="french-options"></ul>
+    </div>
+    <div class="score-container">
+      <p>Score : <span id="french-score">0</span>/15</p>
+      <p>Temps : <span id="french-timer">0</span> s</p>
+    </div>
+  </div>
+
+  <!-- Écran Final du Quiz en Français -->
+  <div id="french-end-screen" class="end-screen" style="display:none;">
+    <button class="back-button" id="backButtonFrenchEndScreen">
+      <i class="fas fa-arrow-left"></i> Retour au Menu
+    </button>
+    <p id="french-final-message"></p>
+    <ul id="french-error-list"></ul>
+    <button id="french-restart-button" class="restart-button">
+      <i class="fas fa-sync-alt"></i> Réessayer
+    </button>
+    <button id="french-menu-button" class="restart-button">
+      <i class="fas fa-home"></i> Menu Principal
+    </button>
+  </div>
+
+  <!-- Bibliothèque en Français -->
+  <div id="french-library-container" class="library-container" style="display:none;">
+    <button class="back-button" id="backButtonFrenchLibrary">
+      <i class="fas fa-arrow-left"></i> Retour au Menu
+    </button>
+    <h2><i class="fas fa-book-open"></i> Bibliothèque en Français</h2>
+    <!-- Section: Phrases de Base -->
+    <div id="phrases-de-base-fr" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Phrases de Base</h3>
+      </div>
+      <div class="text-content">
+        <p class="french">J'aime étudier le français</p>
+        <p class="french">Je suis étudiant(e)</p>
+      </div>
+    </div>
+    <!-- Section: Verbes -->
+    <div id="verbes-fr" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Verbes</h3>
+      </div>
+      <div class="text-content">
+        <p>Exemple : lire, écrire, parler, manger et vivre.</p>
+      </div>
+    </div>
+    <!-- Section: Expressions Idiomatiques -->
+    <div id="expressions-fr" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Expressions Idiomatiques</h3>
+      </div>
+      <div class="text-content">
+        <p>Exemple : "donner un coup de main" signifie aider.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Principal (en anglais) -->
+  <div id="quiz-container" class="quiz-container" style="display:none;">
     <div id="quiz">
       <p id="question"></p>
       <ul id="options"></ul>
@@ -77,13 +240,13 @@
     </div>
   </div>
 
-  <!-- Biblioteca -->
+  <!-- Biblioteca (em inglês) -->
   <div id="library-container" class="library-container" style="display:none;">
     <button class="back-button" id="backButtonLibrary">
       <i class="fas fa-arrow-left"></i> Voltar ao Menu
     </button>
     <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
-    <!-- Seção de Frases Básicas -->
+    <!-- Seção: Frases Básicas -->
     <div id="frases-basicas" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -96,7 +259,10 @@
         <p class="portuguese">Eu sou estudante</p>
       </div>
     </div>
-    <!-- Seção de Verbos -->
+    <!-- Outras seções da biblioteca podem ser adicionadas aqui -->
+      <!-- Seção de Verbos -->
+
+
     <div id="verbos" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -156,6 +322,51 @@
 
       </div>
     </div>
+      <!-- NOVO CONTEÚDO: Palavras Interrogativas -->
+  <div id="interrogative-words" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Palavras Interrogativas</h3>
+    </div>
+    <div class="text-content">
+      <p>Essas palavras são essenciais para formular perguntas:</p>
+      <ul>
+        <li class="english">Who - Quem</li>
+        <li class="english">What - O que</li>
+        <li class="english">When - Quando</li>
+        <li class="english">Where - Onde</li>
+        <li class="english">Why - Por que</li>
+        <li class="english">How - Como</li>
+      </ul>
+      <p>Observe que cada uma tem sua função para determinar o tipo de resposta que esperamos.</p>
+    </div>
+  </div>
+  
+  <!-- NOVO CONTEÚDO: Mais Perguntas -->
+  <div id="more-questions" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Mais Perguntas</h3>
+    </div>
+    <div class="text-content">
+      <p>Abaixo, veja exemplos de perguntas comuns com suas traduções:</p>
+      <p class="english">What is your favorite food?</p>
+      <p class="portuguese">Qual é a sua comida favorita?</p>
+      <p class="english">When did you start learning English?</p>
+      <p class="portuguese">Quando você começou a aprender inglês?</p>
+      <p class="english">How often do you practice speaking?</p>
+      <p class="portuguese">Com que frequência você pratica falar?</p>
+      <p class="english">Who is your role model?</p>
+      <p class="portuguese">Quem é o seu ídolo?</p>
+      <p class="english">What do you do in your free time?</p>
+      <p class="portuguese">O que você faz no seu tempo livre?</p>
+    </div>
+  </div>
+</div>
+
+
+
+    
   </div>
 
   <!-- Ranking -->
