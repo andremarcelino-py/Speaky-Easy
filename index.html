@@ -9,12 +9,24 @@
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+
+
   <!-- Tela de Cadastro -->
-  <div id="register-container" class="register-container animate-in">
-    <h2>Cadastro</h2>
-    <input type="text" id="name" placeholder="Digite seu nome"/>
-    <input type="number" id="number" placeholder="Digite seu número"/>
-    <button id="start-button">Iniciar <i class="fas fa-arrow-right"></i></button>
+<div id="register-container" class="register-container animate-in">
+  <h2>Cadastro</h2>
+  <input type="text" id="name" placeholder="Digite seu nome"/>
+  <input type="password" id="register-password" placeholder="Crie uma senha"/>
+  <button id="start-button">Cadastrar <i class="fas fa-arrow-right"></i></button>
+  <p>Já tem uma conta? <a href="#" id="go-login">Login</a></p>
+</div>
+
+  <!-- Tela de Login -->
+  <div id="login-container" class="login-container" style="display:none;">
+    <h2>Login</h2>
+    <input type="text" id="login-name" placeholder="Digite seu nome">
+    <input type="password" id="login-password" placeholder="Digite sua senha">
+    <button id="login-button">Entrar</button>
+    <p>Não tem uma conta? <a href="#" id="go-register">Cadastre-se</a></p>
   </div>
 
   <!-- Menu Principal -->
@@ -259,10 +271,7 @@
         <p class="portuguese">Eu sou estudante</p>
       </div>
     </div>
-    <!-- Outras seções da biblioteca podem ser adicionadas aqui -->
-      <!-- Seção de Verbos -->
-
-
+    <!-- Seção: Verbos -->
     <div id="verbos" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -277,7 +286,7 @@
         <p class="portuguese">Ela não gosta de café</p>
       </div>
     </div>
-    <!-- Seção de Idioms -->
+    <!-- Seção: Idioms -->
     <div id="idioms" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -292,7 +301,7 @@
         <p class="portuguese">Sirva-se</p>
       </div>
     </div>
-    <!-- Seção de Gramática -->
+    <!-- Seção: Gramática -->
     <div id="grammar" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -304,7 +313,7 @@
         <p>Exemplo: use "doesn't" com sujeitos singulares (He doesn't like apples).</p>
       </div>
     </div>
-    <!-- Seção de Cumprimentos -->
+    <!-- Seção: Cumprimentos -->
     <div id="greetings" class="text-card animate-in">
       <div class="text-header">
         <i class="fas fa-star"></i>
@@ -319,54 +328,48 @@
         <p class="portuguese">Como vai você?</p>
         <p class="english">Have a good night</p>
         <p class="portuguese">Tenha uma boa noite</p>
-
       </div>
     </div>
-      <!-- NOVO CONTEÚDO: Palavras Interrogativas -->
-  <div id="interrogative-words" class="text-card animate-in">
-    <div class="text-header">
-      <i class="fas fa-star"></i>
-      <h3>Palavras Interrogativas</h3>
+    <!-- NOVO CONTEÚDO: Palavras Interrogativas -->
+    <div id="interrogative-words" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Palavras Interrogativas</h3>
+      </div>
+      <div class="text-content">
+        <p>Essas palavras são essenciais para formular perguntas:</p>
+        <ul>
+          <li class="english">Who - Quem</li>
+          <li class="english">What - O que</li>
+          <li class="english">When - Quando</li>
+          <li class="english">Where - Onde</li>
+          <li class="english">Why - Por que</li>
+          <li class="english">How - Como</li>
+        </ul>
+        <p>Observe que cada uma tem sua função para determinar o tipo de resposta que esperamos.</p>
+      </div>
     </div>
-    <div class="text-content">
-      <p>Essas palavras são essenciais para formular perguntas:</p>
-      <ul>
-        <li class="english">Who - Quem</li>
-        <li class="english">What - O que</li>
-        <li class="english">When - Quando</li>
-        <li class="english">Where - Onde</li>
-        <li class="english">Why - Por que</li>
-        <li class="english">How - Como</li>
-      </ul>
-      <p>Observe que cada uma tem sua função para determinar o tipo de resposta que esperamos.</p>
-    </div>
-  </div>
   
-  <!-- NOVO CONTEÚDO: Mais Perguntas -->
-  <div id="more-questions" class="text-card animate-in">
-    <div class="text-header">
-      <i class="fas fa-star"></i>
-      <h3>Mais Perguntas</h3>
+    <!-- NOVO CONTEÚDO: Mais Perguntas -->
+    <div id="more-questions" class="text-card animate-in">
+      <div class="text-header">
+        <i class="fas fa-star"></i>
+        <h3>Mais Perguntas</h3>
+      </div>
+      <div class="text-content">
+        <p>Abaixo, veja exemplos de perguntas comuns com suas traduções:</p>
+        <p class="english">What is your favorite food?</p>
+        <p class="portuguese">Qual é a sua comida favorita?</p>
+        <p class="english">When did you start learning English?</p>
+        <p class="portuguese">Quando você começou a aprender inglês?</p>
+        <p class="english">How often do you practice speaking?</p>
+        <p class="portuguese">Com que frequência você pratica falar?</p>
+        <p class="english">Who is your role model?</p>
+        <p class="portuguese">Quem é o seu ídolo?</p>
+        <p class="english">What do you do in your free time?</p>
+        <p class="portuguese">O que você faz no seu tempo livre?</p>
+      </div>
     </div>
-    <div class="text-content">
-      <p>Abaixo, veja exemplos de perguntas comuns com suas traduções:</p>
-      <p class="english">What is your favorite food?</p>
-      <p class="portuguese">Qual é a sua comida favorita?</p>
-      <p class="english">When did you start learning English?</p>
-      <p class="portuguese">Quando você começou a aprender inglês?</p>
-      <p class="english">How often do you practice speaking?</p>
-      <p class="portuguese">Com que frequência você pratica falar?</p>
-      <p class="english">Who is your role model?</p>
-      <p class="portuguese">Quem é o seu ídolo?</p>
-      <p class="english">What do you do in your free time?</p>
-      <p class="portuguese">O que você faz no seu tempo livre?</p>
-    </div>
-  </div>
-</div>
-
-
-
-    
   </div>
 
   <!-- Ranking -->

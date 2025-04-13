@@ -22,8 +22,8 @@ body {
   padding: 20px;
 }
 
-/* Tela de Cadastro */
-.register-container {
+/* Telas de Cadastro e Login */
+.register-container, .login-container {
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -36,12 +36,14 @@ body {
   margin-bottom: 20px;
 }
 
-.register-container h2 {
+.register-container h2, 
+.login-container h2 {
   margin-bottom: 1.5rem;
   color: white;
 }
 
-.register-container input {
+.register-container input,
+.login-container input {
   display: block;
   width: 100%;
   padding: 12px;
@@ -52,13 +54,15 @@ body {
   transition: all 0.3s ease;
 }
 
-.register-container input:focus {
+.register-container input:focus,
+.login-container input:focus {
   transform: scale(1.02);
   box-shadow: 0 0 15px var(--secondary-color);
   outline: none;
 }
 
-.register-container button {
+.register-container button,
+.login-container button {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
@@ -70,10 +74,33 @@ body {
   transition: all 0.3s ease;
 }
 
-.register-container button:hover {
+.register-container button:hover,
+.login-container button:hover {
   background-color: var(--secondary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Seção de Personagem */
+#character-selection {
+  margin: 1rem 0;
+  text-align: center;
+}
+.character-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.character-option {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+}
+.character-option.selected {
+  border: 2px solid var(--primary-color);
 }
 
 /* Containers Gerais */
@@ -172,7 +199,7 @@ body {
   color: white;
 }
 
-/* Opções unificadas para quiz (Inglês, Perguntas, Español e Français) */
+/* Opções dos quizzes */
 #options li,
 #perguntas-options li,
 #spanish-options li,
@@ -285,7 +312,7 @@ body {
   margin: 0.8rem 0;
   border-radius: 15px;
   display: grid;
-  grid-template-columns: px fr 100px 100px;
+  grid-template-columns: auto auto;
   align-items: center;
   transition: all 0.3s ease;
 }
@@ -445,7 +472,7 @@ body {
   }
 }
 
-/* Destaque para as seções em Español e Français */
+/* Destaque para seções em Español e Français */
 #spanish-container,
 #spanish-library-container,
 #french-container,
@@ -474,7 +501,7 @@ body {
   }
 }
 
-/* Botão "Aprenda Mais" (ou "En savoir plus") */
+/* Botão "Aprenda Mais" */
 .aprenda-mais-button {
   background-color: var(--secondary-color);
   border: none;
@@ -491,15 +518,14 @@ body {
   background-color: var(--accent-color);
 }
 
-/* Inicialmente, o conteúdo das seções ficará oculto */
+/* Inicialmente, conteúdo das seções oculto */
 .text-card .text-content {
   display: none;
-  /* Para animação opcional, você pode usar transição em altura, opacidade, etc. */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Quando ativa, o conteúdo fica visível */
+/* Conteúdo ativo */
 .text-card .text-content.active {
   display: block;
   opacity: 1;
