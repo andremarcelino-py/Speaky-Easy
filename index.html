@@ -21,17 +21,21 @@
 </div>
 
   <!-- Tela de Login -->
-  <div id="login-container" class="login-container" style="display:none;">
-    <h2>Login</h2>
-    <input type="text" id="login-name" placeholder="Digite seu nome">
-    <input type="password" id="login-password" placeholder="Digite sua senha">
-    <button id="login-button">Entrar</button>
-    <p>Não tem uma conta? <a href="#" id="go-register">Cadastre-se</a></p>
-  </div>
+<div id="login-container" class="login-container" style="display:none;">
+  <h2>Login</h2>
+  <input type="text" id="login-name" placeholder="Digite seu nome">
+  <input type="password" id="login-password" placeholder="Digite sua senha">
+  <button id="login-button">Entrar</button>
+  <p>Não tem uma conta? <a href="#" id="go-register">Cadastre-se</a></p>
+</div>
 
   <!-- Menu Principal -->
   <div id="menu-container" class="menu-container" style="display:none;">
     <h1 class="title">Speak Easy</h1>
+    <div id="user-info">
+      <img id="user-photo" src="images/default.png" alt="Foto de Perfil" class="user-photo"/>
+      <span id="user-name"></span>
+    </div>
     <div class="tabs">
       <button id="btnQuiz" class="tab-button animate-in"><i class="fas fa-question-circle"></i> Quiz</button>
       <button id="btnPerguntas" class="tab-button animate-in"><i class="fas fa-edit"></i> Perguntas</button>
@@ -40,9 +44,13 @@
       <button id="btnFrench" class="tab-button animate-in french"><i class="fas fa-globe"></i> Français</button>
       <button id="btnRanking" class="tab-button animate-in"><i class="fas fa-trophy"></i> Ranking</button>
     </div>
+    <!-- Botão de logout no menu principal -->
+<button id="logout-button" class="restart-button" style="position: absolute; top: 10px; right: 10px;">
+  Sair
+</button>
   </div>
 
-  <!-- Menu Español: Seleção de Contenido en Español -->
+  <!-- Menu Español: Selección de Contenido en Español -->
   <div id="spanish-menu-container" class="menu-container" style="display:none;">
     <h2>Contenido en Español</h2>
     <div class="tabs">
@@ -90,42 +98,69 @@
 
   <!-- Biblioteca en Español -->
   <div id="spanish-library-container" class="library-container" style="display:none;">
-    <button class="back-button" id="backButtonSpanishLibrary">
-      <i class="fas fa-arrow-left"></i> Volver al Menú
-    </button>
-    <h2><i class="fas fa-book-open"></i> Biblioteca en Español</h2>
-    <!-- Seção: Frases Básicas -->
-    <div id="frases-basicas-es" class="text-card animate-in">
-      <div class="text-header">
-        <i class="fas fa-star"></i>
-        <h3>Frases Básicas</h3>
-      </div>
-      <div class="text-content">
-        <p class="spanish">Me gusta estudiar español</p>
-        <p class="spanish">Soy estudiante</p>
-      </div>
+  <button class="back-button" id="backButtonSpanishLibrary">
+    <i class="fas fa-arrow-left"></i> Volver al Menú
+  </button>
+  <h2><i class="fas fa-book-open"></i> Biblioteca de Textos en Español</h2>
+
+  <!-- Sección: Frases Básicas -->
+  <div id="frases-basicas-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Frases Básicas</h3>
     </div>
-    <!-- Seção: Verbos -->
-    <div id="verbos-es" class="text-card animate-in">
-      <div class="text-header">
-        <i class="fas fa-star"></i>
-        <h3>Verbos</h3>
-      </div>
-      <div class="text-content">
-        <p>Ejemplo: leer, escribir, hablar, comer y vivir.</p>
-      </div>
-    </div>
-    <!-- Seção: Expresiones Idiomáticas -->
-    <div id="expresiones-es" class="text-card animate-in">
-      <div class="text-header">
-        <i class="fas fa-star"></i>
-        <h3>Expresiones Idiomáticas</h3>
-      </div>
-      <div class="text-content">
-        <p>Ejemplo: "echar una mano" significa ayudar.</p>
-      </div>
+    <div class="text-content">
+      <p class="spanish">Hola - Olá</p>
+      <p class="spanish">Adiós - Adeus</p>
+      <p class="spanish">Gracias - Obrigado</p>
+      <p class="spanish">Por favor - Por favor</p>
+      <p class="spanish">¿Cómo estás? - Como você está?</p>
     </div>
   </div>
+
+  <!-- Sección: Verbos Importantes -->
+  <div id="verbos-importantes-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Verbos Importantes</h3>
+    </div>
+    <div class="text-content">
+      <p>Ejemplo: hablar, comer, vivir, estudiar, trabajar.</p>
+      <p class="spanish">Yo hablo español - Eu falo espanhol</p>
+      <p class="spanish">Ella come manzanas - Ela come maçãs</p>
+      <p class="spanish">Nosotros vivimos en México - Nós moramos no México</p>
+    </div>
+  </div>
+
+  <!-- Sección: Preguntas Comunes -->
+  <div id="preguntas-comunes-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Preguntas Comunes</h3>
+    </div>
+    <div class="text-content">
+      <p class="spanish">¿Dónde vives? - Onde você mora?</p>
+      <p class="spanish">¿Qué hora es? - Que horas são?</p>
+      <p class="spanish">¿Cuánto cuesta? - Quanto custa?</p>
+      <p class="spanish">¿Puedes ayudarme? - Você pode me ajudar?</p>
+      <p class="spanish">¿Cómo te llamas? - Qual é o seu nome?</p>
+    </div>
+  </div>
+
+  <!-- Sección: Expresiones Idiomáticas -->
+  <div id="expresiones-idiomaticas-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Expresiones Idiomáticas</h3>
+    </div>
+    <div class="text-content">
+      <p class="spanish">Estar en las nubes - Estar nas nuvens</p>
+      <p class="spanish">Tener la sartén por el mango - Ter a faca e o queijo na mão</p>
+      <p class="spanish">Ser pan comido - Ser muito fácil</p>
+      <p class="spanish">Llover a cántaros - Chover muito</p>
+    </div>
+  </div>
+</div>
 
   <!-- Menu Français: Sélection de Contenu en Français -->
   <div id="french-menu-container" class="menu-container" style="display:none;">
@@ -330,6 +365,50 @@
         <p class="portuguese">Tenha uma boa noite</p>
       </div>
     </div>
+    <!-- NOVA SEÇÃO: Expressões Idiomáticas Avançadas -->
+<div id="idioms-advanced" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Expressões Idiomáticas Avançadas</h3>
+  </div>
+  <div class="text-content">
+    <p class="english">Burn the midnight oil - Trabalhar até tarde da noite</p>
+    <p class="english">Bite the bullet - Enfrentar algo difícil</p>
+    <p class="english">Hit the nail on the head - Acertar em cheio</p>
+    <p class="english">Let the cat out of the bag - Revelar um segredo</p>
+    <p class="english">Throw in the towel - Desistir</p>
+  </div>
+</div>
+
+<!-- NOVA SEÇÃO: Tempos Verbais -->
+<div id="verb-tenses" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Tempos Verbais</h3>
+  </div>
+  <div class="text-content">
+    <p><strong>Present Perfect:</strong> I have been to London - Eu estive em Londres</p>
+    <p><strong>Past Perfect:</strong> She had finished her homework before dinner - Ela tinha terminado a lição de casa antes do jantar</p>
+    <p><strong>Future Perfect:</strong> By next year, I will have graduated - No próximo ano, eu terei me formado</p>
+    <p><strong>Present Continuous:</strong> They are studying for the exam - Eles estão estudando para o exame</p>
+    <p><strong>Past Continuous:</strong> I was reading when the phone rang - Eu estava lendo quando o telefone tocou</p>
+  </div>
+</div>
+
+<!-- NOVA SEÇÃO: Vocabulário Técnico -->
+<div id="technical-vocabulary" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Vocabulário Técnico</h3>
+  </div>
+  <div class="text-content">
+    <p class="english">Algorithm - Algoritmo</p>
+    <p class="english">Database - Banco de dados</p>
+    <p class="english">Cloud Computing - Computação em nuvem</p>
+    <p class="english">Artificial Intelligence - Inteligência artificial</p>
+    <p class="english">Machine Learning - Aprendizado de máquina</p>
+  </div>
+</div>
     <!-- NOVO CONTEÚDO: Palavras Interrogativas -->
     <div id="interrogative-words" class="text-card animate-in">
       <div class="text-header">
@@ -374,12 +453,56 @@
 
   <!-- Ranking -->
   <div id="ranking-container" class="ranking-container" style="display:none;">
-    <button class="back-button" id="backButtonRanking">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <h2><i class="fas fa-trophy"></i> Ranking</h2>
-    <ul id="ranking-list"></ul>
+  <button class="back-button" id="backButtonRanking">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <h2><i class="fas fa-trophy"></i> Ranking</h2>
+  <div class="podium">
+    <div class="podium-item top-2">
+      <div class="podium-photo">
+        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-2-photo" />
+      </div>
+      <span id="top-2-name" class="podium-name">2º Lugar</span>
+      <div class="podium-details">
+        <span id="top-2-score">0 pontos</span>
+        <span id="top-2-time">0s</span>
+      </div>
+    </div>
+    <div class="podium-item top-1">
+      <div class="podium-photo">
+        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-1-photo" />
+      </div>
+      <span id="top-1-name" class="podium-name">1º Lugar</span>
+      <div class="podium-details">
+        <span id="top-1-score">0 pontos</span>
+        <span id="top-1-time">0s</span>
+      </div>
+    </div>
+    <div class="podium-item top-3">
+      <div class="podium-photo">
+        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-3-photo" />
+      </div>
+      <span id="top-3-name" class="podium-name">3º Lugar</span>
+      <div class="podium-details">
+        <span id="top-3-score">0 pontos</span>
+        <span id="top-3-time">0s</span>
+      </div>
+    </div>
   </div>
+  <ul id="ranking-list" class="ranking-list">
+  <!-- Exemplo de item do ranking a partir do 4º lugar -->
+  <li class="ranking-item">
+    <div class="ranking-photo">
+      <img src="images/default.png" alt="Avatar" />
+    </div>
+    <div class="ranking-details">
+      <span class="ranking-name">Nome do Jogador</span>
+      <span class="ranking-score">0 pontos</span>
+      <span class="ranking-time">0s</span>
+    </div>
+  </li>
+</ul>
+</div>
 
   <!-- Tela Final do Quiz Principal -->
   <div id="end-screen" class="end-screen" style="display:none;">
@@ -407,6 +530,34 @@
       <i class="fas fa-home"></i> Menu Principal
     </button>
   </div>
+
+  <!-- Tela de Perfil -->
+<div id="profile-container" class="profile-container" style="display:none;">
+  <button class="back-button" id="backButtonProfile">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <h2>Seu Perfil</h2>
+  <div class="profile-info">
+    <img id="profile-photo" src="images/default.png" alt="Foto de Perfil" class="profile-photo"/>
+    <p><strong>Nome:</strong> <span id="profile-name"></span></p>
+    <p><strong>Pontuação:</strong> <span id="profile-score">0</span></p>
+  </div>
+  <h3>Escolha sua Foto de Perfil</h3>
+  <div class="avatar-options">
+  <div class="avatar-option-container">
+    <img src="images/avatar0.png" class="avatar-option" data-avatar="images/avatar0.png" alt="Avatar 0"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar1.png" class="avatar-option" data-avatar="images/avatar1.png" alt="Avatar 1"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar2.png" class="avatar-option" data-avatar="images/avatar2.png" alt="Avatar 2"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar3.png" class="avatar-option" data-avatar="images/avatar3.png" alt="Avatar 3"/>
+  </div>
+</div>
+</div>
 
   <script type="module" src="script.js"></script>
 </body>
