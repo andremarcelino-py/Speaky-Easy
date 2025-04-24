@@ -543,20 +543,14 @@
     <p><strong>Pontuação:</strong> <span id="profile-score">0</span></p>
   </div>
   <h3>Escolha sua Foto de Perfil</h3>
-  <div class="avatar-options">
-  <div class="avatar-option-container">
-    <img src="images/avatar0.png" class="avatar-option" data-avatar="images/avatar0.png" alt="Avatar 0"/>
+  <div id="avatar-selection" class="avatar-selection">
+  <button id="prev-avatar" class="avatar-nav">&lt;</button>
+  <div class="avatar-display">
+    <img id="current-avatar" src="images/avatar1.png" alt="Avatar" />
   </div>
-  <div class="avatar-option-container">
-    <img src="images/avatar1.png" class="avatar-option" data-avatar="images/avatar1.png" alt="Avatar 1"/>
-  </div>
-  <div class="avatar-option-container">
-    <img src="images/avatar2.png" class="avatar-option" data-avatar="images/avatar2.png" alt="Avatar 2"/>
-  </div>
-  <div class="avatar-option-container">
-    <img src="images/avatar3.png" class="avatar-option" data-avatar="images/avatar3.png" alt="Avatar 3"/>
-  </div>
+  <button id="next-avatar" class="avatar-nav">&gt;</button>
 </div>
+<button id="select-avatar-button" class="select-avatar-button">Selecionar Avatar</button>
 </div>
 
   <script type="module" src="script.js"></script>
