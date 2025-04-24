@@ -819,3 +819,42 @@ avatarOptions.forEach(img => {
     });
   });
 });
+
+const avatars = [
+  "images/avatar1.png",
+  "images/avatar2.png",
+  "images/avatar3.png",
+  "images/avatar4.png",
+]; // Lista de avatares
+let currentAvatarIndex = 0;
+
+const avatarImage = document.getElementById("current-avatar");
+const prevButton = document.getElementById("prev-avatar");
+const nextButton = document.getElementById("next-avatar");
+const selectAvatarButton = document.getElementById("select-avatar-button");
+
+// Atualiza o avatar exibido
+function updateAvatar() {
+  avatarImage.src = avatars[currentAvatarIndex];
+}
+
+// Evento para o botão "Anterior"
+prevButton.addEventListener("click", () => {
+  currentAvatarIndex =
+    (currentAvatarIndex - 1 + avatars.length) % avatars.length;
+  updateAvatar();
+});
+
+// Evento para o botão "Próximo"
+nextButton.addEventListener("click", () => {
+  currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
+  updateAvatar();
+});
+
+// Evento para o botão "Selecionar Avatar"
+selectAvatarButton.addEventListener("click", () => {
+  const selectedAvatar = avatars[currentAvatarIndex];
+  document.getElementById("profile-photo").src = selectedAvatar;
+  document.getElementById("user-photo").src = selectedAvatar;
+  alert("Avatar selecionado com sucesso!");
+});
