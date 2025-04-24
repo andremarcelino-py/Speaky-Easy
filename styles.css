@@ -751,3 +751,57 @@ body {
     padding: 8px 16px;
   }
 }
+
+/* Botões de Níveis com Degradê Roxo */
+.level-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+/* Nível Fácil */
+#btnFacil {
+  background: linear-gradient(135deg, #9B5DE5, #7C3AED); /* Roxo claro para roxo escuro */
+  box-shadow: 0 4px 10px rgba(123, 58, 237, 0.4);
+}
+
+#btnFacil:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(123, 58, 237, 0.6);
+}
+
+/* Nível Médio */
+#btnMedio {
+  background: linear-gradient(135deg, #7C3AED, #5A189A); /* Roxo médio para roxo profundo */
+  box-shadow: 0 4px 10px rgba(90, 24, 154, 0.4);
+}
+
+#btnMedio:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(90, 24, 154, 0.6);
+}
+
+/* Nível Difícil */
+#btnDificil {
+  background: linear-gradient(135deg, #5A189A, #3A0CA3); /* Roxo profundo para roxo muito escuro */
+  box-shadow: 0 4px 10px rgba(58, 12, 163, 0.4);
+}
+
+#btnDificil:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(58, 12, 163, 0.6);
+}
+
+/* Responsividade para os botões de nível */
+@media (max-width: 768px) {
+  .level-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
