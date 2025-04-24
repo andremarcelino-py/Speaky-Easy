@@ -1,4 +1,3 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
@@ -101,7 +100,8 @@ function hideAllSections() {
     quizContainer, perguntasContainer, perguntasQuizContainer,
     libraryContainer, rankingContainer, endScreen, perguntasEndScreen,
     spanishMenuContainer, spanishQuizContainer, spanishEndScreen, spanishLibraryContainer,
-    frenchMenuContainer, frenchQuizContainer, frenchEndScreen, frenchLibraryContainer
+    frenchMenuContainer, frenchQuizContainer, frenchEndScreen, frenchLibraryContainer,
+    profileContainer // Adicione esta linha
   ].forEach(sec => sec && (sec.style.display = "none"));
 }
 
@@ -125,53 +125,68 @@ function backToMenu() {
 
 // --- CADASTRO ---
 startButton.addEventListener("click", async () => {
-  const nameInput     = document.getElementById("name").value.trim();
-  // Removido: const numberInput = document.getElementById("number").value.trim();
+  const nameInput = document.getElementById("name").value.trim();
   const passwordInput = document.getElementById("register-password").value.trim();
-
-  // Validação apenas do nome e senha
   if (!nameInput || !passwordInput) {
     alert("Por favor, preencha todos os campos!");
     return;
   }
-  
-  hideAllSections();
   try {
-    await addDoc(collection(db, "users"), { 
-      name: nameInput, 
-      password: passwordInput // Em produção, utilize Firebase Authentication para segurança
+    await addDoc(collection(db, "users"), {
+      name: nameInput,
+      password: passwordInput,
+      score: 0,
+      photoURL: "images/default.png"
     });
-    // Após cadastro, redireciona para a tela de login
-    registerContainer.style.display = "none";
+    hideAllSections();
     loginContainer.style.display = "block";
   } catch (err) {
-    console.error("Erro ao salvar no Firestore:", err);
+    console.error(err);
     alert("Não foi possível cadastrar. Tente novamente.");
-    registerContainer.style.display = "block";
   }
 });
 
 // --- LOGIN ---
+let currentUserName = ""; // Variável para armazenar o nome do usuário logado
+
+// Atualiza o nome do usuário no menu
+function updateUserName(name, photoURL = "images/default.png") {
+  currentUserName = name;
+  const userNameElement = document.getElementById("user-name");
+  const userPhotoElement = document.getElementById("user-photo");
+
+  if (userNameElement) {
+    userNameElement.textContent = `Bem-vindo, ${name}!`;
+  }
+  if (userPhotoElement) {
+    userPhotoElement.src = photoURL;
+  }
+}
+
+// Modifique o login para atualizar o nome do usuário
 loginButton.addEventListener("click", async () => {
-  const loginName     = document.getElementById("login-name").value.trim();
+  const loginName = document.getElementById("login-name").value.trim();
   const loginPassword = document.getElementById("login-password").value.trim();
 
   if (!loginName || !loginPassword) {
     alert("Por favor, preencha todos os campos!");
     return;
   }
-  
+
   try {
     const snap = await getDocs(collection(db, "users"));
     let userFound = false;
+
     snap.forEach(doc => {
       const userData = doc.data();
       if (userData.name === loginName && userData.password === loginPassword) {
         userFound = true;
+        updateUserName(loginName, userData.photoURL); // Atualiza o nome e a foto do usuário
         hideAllSections();
-        menuContainer.style.display = "block";
+        menuContainer.style.display = "block"; // Mostra o menu principal
       }
     });
+
     if (!userFound) {
       alert("Dados de login incorretos! Tente novamente.");
     }
@@ -228,6 +243,7 @@ function checkAnswer(sel) {
   });
   if (sel === q.answer) { score++; scoreElement.textContent = score; }
   else errors.push(`Pergunta: ${q.question} - Resposta: ${q.options[q.answer]}`);
+  saveProgress(currentUserName, { questions, score, currentQuestion, errors, quizTimer });
   setTimeout(()=>{
     currentQuestion++; loadQuestion();
   },1500);
@@ -240,11 +256,32 @@ function endQuiz() {
   errorListElement.innerHTML = errors.map(e=>`<li class="error-item">${e}</li>`).join("");
   saveScore(document.getElementById("name").value.trim(), score, quizTimer);
 }
-btnQuiz.addEventListener("click", ()=>{
+btnQuiz.addEventListener("click", async () => {
   hideAllSections();
   quizContainer.style.display = "block";
-  questions = getRandomQuestions();
-  score = 0; currentQuestion = 0; errors = [];
+  const savedProgress = await loadProgress(currentUserName);
+  if (savedProgress) {
+    const resume = confirm("Você tem progresso salvo. Deseja continuar de onde parou?");
+    if (resume) {
+      questions = savedProgress.questions;
+      score = savedProgress.score;
+      currentQuestion = savedProgress.currentQuestion;
+      errors = savedProgress.errors;
+      quizTimer = savedProgress.quizTimer;
+    } else {
+      questions = getRandomQuestions();
+      score = 0;
+      currentQuestion = 0;
+      errors = [];
+      quizTimer = 0;
+    }
+  } else {
+    questions = getRandomQuestions();
+    score = 0;
+    currentQuestion = 0;
+    errors = [];
+    quizTimer = 0;
+  }
   scoreElement.textContent = score;
   startTimer();
   loadQuestion();
@@ -329,35 +366,112 @@ window.showLibrarySection = function(sectionId){
 };
 
 // --- RANKING ---
-btnRanking.addEventListener("click", async ()=>{
-  hideAllSections();
-  rankingContainer.style.display="block";
+async function loadRanking() {
   const rankingList = document.getElementById("ranking-list");
-  rankingList.innerHTML="";
-  const snap = await getDocs(collection(db,"users"));
-  let users = [];
-  snap.forEach(doc=> users.push({ name: doc.data().name, score: doc.data().score||0, time: doc.data().time||9999 }));
-  users = users.filter(u=>u.time!==9999).sort((a,b)=>(b.score-a.score) || (a.time-b.time));
-  users.forEach((u,i)=>{
-    const li = document.createElement("li");
-    li.className="animate-in";
-    li.style.animationDelay=`${i*0.1}s`;
-    li.innerHTML=`<span>${i+1}. ${u.name}</span><span>Pontos: ${u.score} | Tempo: ${u.time}s</span>`;
-    rankingList.appendChild(li);
-  });
+  rankingList.innerHTML = ""; // Limpa o ranking atual
+
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    const users = [];
+
+    snap.forEach(doc => {
+      const userData = doc.data();
+      if (userData.score !== undefined && userData.time !== undefined) {
+        users.push(userData);
+      }
+    });
+
+    // Ordena os usuários pela pontuação e tempo
+    users.sort((a, b) => {
+      if (b.score === a.score) {
+        return a.time - b.time; // Menor tempo primeiro
+      }
+      return b.score - a.score; // Maior pontuação primeiro
+    });
+
+    // Preenche o pódio
+    if (users[0]) {
+      document.getElementById("top-1-photo").src = users[0].photoURL || "images/default.png";
+      document.getElementById("top-1-name").textContent = users[0].name;
+      document.getElementById("top-1-score").textContent = `${users[0].score} pontos`;
+      document.getElementById("top-1-time").textContent = `${users[0].time}s`;
+    }
+    if (users[1]) {
+      document.getElementById("top-2-photo").src = users[1].photoURL || "images/default.png";
+      document.getElementById("top-2-name").textContent = users[1].name;
+      document.getElementById("top-2-score").textContent = `${users[1].score} pontos`;
+      document.getElementById("top-2-time").textContent = `${users[1].time}s`;
+    }
+    if (users[2]) {
+      document.getElementById("top-3-photo").src = users[2].photoURL || "images/default.png";
+      document.getElementById("top-3-name").textContent = users[2].name;
+      document.getElementById("top-3-score").textContent = `${users[2].score} pontos`;
+      document.getElementById("top-3-time").textContent = `${users[2].time}s`;
+    }
+
+    // Preenche o restante do ranking
+    users.slice(3).forEach((user, index) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("ranking-item");
+      listItem.innerHTML = `
+        <div class="ranking-photo-container">
+          <img src="${user.photoURL || 'images/default.png'}" alt="Foto de Perfil" class="ranking-photo"/>
+        </div>
+        <span>${index + 4}. ${user.name}</span>
+        <span>${user.score} pontos - ${user.time}s</span>
+      `;
+      rankingList.appendChild(listItem);
+    });
+  } catch (err) {
+    console.error("Erro ao carregar o ranking:", err);
+  }
+}
+
+// Evento para exibir o ranking ao clicar no botão
+btnRanking.addEventListener("click", () => {
+  hideAllSections();
+  loadRanking();
+  document.getElementById("ranking-container").style.display = "block";
 });
 
 // --- QUIZ ESPAÑOL ---
 let spanishQuestions = [], spanishScore = 0, currentSpanishQuestion = 0, spanishErrors = [], spanishTimer = 0, spanishTimerInterval;
 function getRandomSpanishQuestions() {
   const all = [
-    { question: "¿Cómo se dice 'Hello' en español?", options:["Hola","Adiós","Gracias","Por favor"], answer:0 },
-    { question: "¿Qué significa 'Goodbye' en español?", options:["Hola","Adiós","Buenas noches","Gracias"], answer:1 },
-    { question: "¿Cómo se dice 'Thank you' en español?", options:["Por favor","Gracias","De nada","Perdón"], answer:1 },
-    { question: "¿Cuál es el plural de 'amigo'?", options:["Amigos","Amigas","Amigoes","Amigues"], answer:0 },
-    { question: "¿Cómo se dice 'I am learning Spanish' en español?", options:["Estoy aprendiendo español","Aprendo español","Yo español aprendo","Aprendiendo estoy español"], answer:0 }
+    { question: "¿Cómo se dice 'Olá' en español?", options: ["Hola", "Adiós", "Gracias", "Por favor"], answer: 0 },
+    { question: "¿Qué significa 'Adeus' en español?", options: ["Hola", "Adiós", "Buenas noches", "Gracias"], answer: 1 },
+    { question: "¿Cómo se dice 'Obrigado' en español?", options: ["Por favor", "Gracias", "De nada", "Perdón"], answer: 1 },
+    { question: "¿Cuál es el plural de 'amigo'?", options: ["Amigos", "Amigas", "Amigoes", "Amigues"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou aprendendo espanhol' en español?", options: ["Estoy aprendiendo español", "Aprendo español", "Yo español aprendo", "Aprendiendo estoy español"], answer: 0 },
+    { question: "¿Qué significa 'Bom dia' en español?", options: ["Buenas noches", "Buenos días", "Buenas tardes", "Hola"], answer: 1 },
+    { question: "¿Cómo se dice 'Eu gosto de comer maçãs' en español?", options: ["Me gusta comer manzanas", "Yo como manzanas", "Me gusta manzanas", "Comer manzanas me gusta"], answer: 0 },
+    { question: "¿Qué significa 'Onde você mora?' en español?", options: ["¿Dónde vives?", "¿Cómo estás?", "¿Cuál es tu nombre?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Que horas são?' en español?", options: ["¿Qué hora es?", "¿Dónde está?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Qué significa 'Por favor'?", options: ["Gracias", "Por favor", "Disculpe", "De nada"], answer: 1 },
+    { question: "¿Cómo se dice 'Eu sou professor' en español?", options: ["Soy profesor", "Yo soy profesor", "Profesor soy", "Soy un profesor"], answer: 0 },
+    { question: "¿Qué significa 'De nada'?", options: ["De nada", "Gracias", "Disculpe", "Por favor"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou feliz' en español?", options: ["Estoy feliz", "Yo feliz", "Soy feliz", "Feliz estoy"], answer: 0 },
+    { question: "¿Qué significa 'Qual é o seu nome?' en español?", options: ["¿Cómo te llamas?", "¿Cómo estás?", "¿Dónde vives?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou cansado' en español?", options: ["Estoy cansado", "Yo cansado", "Soy cansado", "Cansado estoy"], answer: 0 },
+    { question: "¿Qué significa 'O que você faz?' en español?", options: ["¿Qué haces?", "¿Dónde estás?", "¿Cómo estás?", "¿Cuál es tu nombre?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu gosto de ler livros' en español?", options: ["Me gusta leer libros", "Yo leo libros", "Me gusta libros", "Leer libros me gusta"], answer: 0 },
+    { question: "¿Qué significa 'Quanto custa?' en español?", options: ["¿Cuánto cuesta?", "¿Dónde está?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou aprendendo' en español?", options: ["Estoy aprendiendo", "Yo aprendo", "Aprendiendo estoy", "Aprendo"], answer: 0 },
+    { question: "¿Qué significa 'Que horas são?' en español?", options: ["¿Qué hora es?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou com fome' en español?", options: ["Tengo hambre", "Yo hambre", "Soy hambre", "Hambre tengo"], answer: 0 },
+    { question: "¿Qué significa 'Você pode me ajudar?' en español?", options: ["¿Puedes ayudarme?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou com sede' en español?", options: ["Tengo sed", "Yo sed", "Soy sed", "Sed tengo"], answer: 0 },
+    { question: "¿Qué significa 'Onde fica o banheiro?' en español?", options: ["¿Dónde está el baño?", "¿Cómo estás?", "¿Qué haces?", "¿Dónde vives?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou com frio' en español?", options: ["Tengo frío", "Yo frío", "Soy frío", "Frío tengo"], answer: 0 },
+    { question: "¿Qué significa 'O que você quer comer?' en español?", options: ["¿Qué quieres comer?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou com calor' en español?", options: ["Tengo calor", "Yo calor", "Soy calor", "Calor tengo"], answer: 0 },
+    { question: "¿Qué significa 'O que você quer beber?' en español?", options: ["¿Qué quieres beber?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou estudando' en español?", options: ["Estoy estudiando", "Yo estudio", "Estudiando estoy", "Estudio"], answer: 0 },
+    { question: "¿Qué significa 'O que você está fazendo?' en español?", options: ["¿Qué estás haciendo?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu estou trabalhando' en español?", options: ["Estoy trabajando", "Yo trabajo", "Trabajando estoy", "Trabajo"], answer: 0 },
+    { question: "¿Qué significa 'Onde você trabalha?' en español?", options: ["¿Dónde trabajas?", "¿Cómo estás?", "¿Qué haces?", "¿Dónde vives?"], answer: 0 }
   ];
-  return [...all].sort(()=>Math.random()-0.5).slice(0,15);
+  return [...all].sort(() => Math.random() - 0.5).slice(0, 15);
 }
 function startSpanishTimer() {
   spanishTimer=0; spanishTimerElement.textContent=spanishTimer;
@@ -528,6 +642,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Lista de perguntas fixa
 const allQuestions = [
+  { question: "What does 'Burn the midnight oil' mean?", options: ["Work late into the night", "Waste time", "Sleep early", "Take a break"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "Which sentence uses the Present Perfect tense?", options: ["I have been to Paris", "I went to Paris", "I am going to Paris", "I will go to Paris"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "What is the correct translation of 'Artificial Intelligence'?", options: ["Inteligência artificial", "Inteligência natural", "Inteligência computacional", "Inteligência humana"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
+  { question: "Which sentence is grammatically correct?", options: ["She don't like apples", "She doesn't likes apples", "She doesn't like apples", "She not like apples"], answer: 2, difficulty: "hard", libraryRef: "grammar" },
+  { question: "What does 'Throw in the towel' mean?", options: ["To give up", "To start a fight", "To clean something", "To win a competition"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "Which is an example of Future Perfect tense?", options: ["I will have finished the project by tomorrow", "I am finishing the project now", "I finished the project yesterday", "I will finish the project tomorrow"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "What is the plural of 'crisis'?", options: ["Crises", "Crisis", "Crisises", "Criseses"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "What does 'Hit the nail on the head' mean?", options: ["To be exactly right", "To make a mistake", "To fix something", "To hurt someone"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "What is the meaning of 'Serendipity'?", options: ["A fortunate discovery", "A mistake", "A coincidence", "A disaster"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Which sentence uses the Past Perfect tense?", options: ["She had finished her homework before dinner", "She finished her homework before dinner", "She finishes her homework before dinner", "She is finishing her homework before dinner"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "What does 'A blessing in disguise' mean?", options: ["A hidden benefit", "A visible problem", "A curse", "A mistake"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "What is the correct form of the verb 'to be' in the sentence: 'He ___ a doctor.'?", options: ["is", "are", "am", "be"], answer: 0, difficulty: "medium", libraryRef: "grammar" },
+  { question: "What does 'Cutting corners' mean?", options: ["Doing something poorly to save time or money", "Taking a shortcut", "Avoiding work", "Completing a task perfectly"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "What is the meaning of 'Eureka'?", options: ["I found it", "I lost it", "I broke it", "I fixed it"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Which sentence uses the Present Continuous tense?", options: ["They are studying for the exam", "They study for the exam", "They studied for the exam", "They will study for the exam"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "What does 'The ball is in your court' mean?", options: ["It's your decision now", "The game is over", "You lost the opportunity", "You need to wait"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "What is the plural of 'phenomenon'?", options: ["Phenomena", "Phenomenons", "Phenomenas", "Phenomenon"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "What does 'To kill two birds with one stone' mean?", options: ["To achieve two goals with one action", "To fail twice", "To waste time", "To make a mistake"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
+  { question: "Which sentence uses the Future Perfect tense?", options: ["By next year, I will have graduated", "I will graduate next year", "I am graduating next year", "I graduated last year"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "What does 'To bite off more than you can chew' mean?", options: ["To take on more than you can handle", "To eat too much", "To make a mistake", "To give up"], answer: 0, difficulty: "hard", libraryRef: "idioms-advanced" },
   { question: "What is 'eu sou estudante' in English?", options: ["I am student", "A student I am", "I student am", "I am a student"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Which one is correct?", options: ["Pizza do you like?", "Do you like pizza?", "Like pizza you?", "You pizza like?"], answer: 1, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "What does 'I am learning English' mean?", options: ["Eu aprendi inglês", "Eu estou aprendendo inglês", "Eu ensino inglês", "Eu amo inglês"], answer: 1, difficulty: "medium", libraryRef: "frases-basicas" },
@@ -558,3 +692,130 @@ const allQuestions = [
   { question: "How do you say 'Eu gosto de música' in English?", options: ["I like music", "I like of music", "I music like", "I likes music"], answer: 0, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "What is the correct past tense of 'have'?", options: ["Haved", "Has", "Had", "Have"], answer: 2, difficulty: "medium", libraryRef: "verbos" },
 ];
+
+// Adicionando funcionalidade de redefinição de senha
+const resetPasswordButton = document.getElementById("reset-password-button");
+if (resetPasswordButton) {
+  resetPasswordButton.addEventListener("click", async () => {
+    const loginName = document.getElementById("login-name").value.trim();
+    if (!loginName) {
+      alert("Por favor, insira seu nome para redefinir a senha.");
+      return;
+    }
+    try {
+      const snap = await getDocs(collection(db, "users"));
+      let userFound = false;
+      snap.forEach(doc => {
+        if (doc.data().name === loginName) {
+          userFound = true;
+          const newPassword = prompt("Digite sua nova senha:");
+          if (newPassword) {
+            updateDoc(doc.ref, { password: newPassword });
+            alert("Senha redefinida com sucesso!");
+          }
+        }
+      });
+      if (!userFound) alert("Usuário não encontrado.");
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao redefinir a senha. Tente novamente.");
+    }
+  });
+}
+
+// Adicionando funcionalidade de logout
+const logoutButton = document.getElementById("logout-button");
+if (logoutButton) {
+  logoutButton.addEventListener("click", () => {
+    currentUserName = "";
+    hideAllSections();
+    loginContainer.style.display = "block";
+  });
+}
+
+// Função para salvar progresso do usuário
+async function saveProgress(userName, progress) {
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    snap.forEach(doc => {
+      if (doc.data().name === userName) {
+        updateDoc(doc.ref, { progress });
+      }
+    });
+  } catch (err) {
+    console.error("Erro ao salvar progresso:", err);
+  }
+}
+
+// Função para carregar progresso do usuário
+async function loadProgress(userName) {
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    let userProgress = null;
+    snap.forEach(doc => {
+      if (doc.data().name === userName) {
+        userProgress = doc.data().progress || null;
+      }
+    });
+    return userProgress;
+  } catch (err) {
+    console.error("Erro ao carregar progresso:", err);
+    return null;
+  }
+}
+
+// Elementos da tela de perfil
+const profileContainer = document.getElementById("profile-container");
+const profileNameElement = document.getElementById("profile-name");
+const profileScoreElement = document.getElementById("profile-score");
+const profilePhotoElement = document.getElementById("profile-photo");
+const avatarOptions = document.querySelectorAll(".avatar-option");
+const backButtonProfile = document.getElementById("backButtonProfile");
+
+// Exibir a tela de perfil ao clicar no nome do usuário
+const userNameElement = document.getElementById("user-name");
+if (userNameElement) {
+  userNameElement.style.cursor = "pointer";
+  userNameElement.addEventListener("click", () => {
+    hideAllSections();
+    loadProfileData();
+    profileContainer.style.display = "block";
+  });
+}
+
+// Voltar ao menu principal
+backButtonProfile.addEventListener("click", backToMenu);
+
+// Carregar dados do perfil do usuário
+async function loadProfileData() {
+  const snap = await getDocs(collection(db, "users"));
+  snap.forEach(doc => {
+    const user = doc.data();
+    if (user.name === currentUserName) {
+      profileNameElement.textContent = user.name;
+      profileScoreElement.textContent = user.score ?? 0;
+      profilePhotoElement.src = user.photoURL || "images/default.png";
+      avatarOptions.forEach(img => {
+        if (img.dataset.avatar === user.photoURL) img.classList.add("selected");
+        else img.classList.remove("selected");
+      });
+    }
+  });
+}
+
+// Atualizar foto de perfil
+avatarOptions.forEach(img => {
+  img.addEventListener("click", async () => {
+    avatarOptions.forEach(i => i.classList.remove("selected"));
+    img.classList.add("selected");
+    profilePhotoElement.src = img.dataset.avatar;
+
+    // Atualizar no Firebase
+    const snap = await getDocs(collection(db, "users"));
+    snap.forEach(doc => {
+      if (doc.data().name === currentUserName) {
+        updateDoc(doc.ref, { photoURL: img.dataset.avatar });
+      }
+    });
+  });
+});
