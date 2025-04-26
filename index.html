@@ -11,8 +11,23 @@
 <body>
 
 
+  <!-- Tela de Boas-Vindas -->
+<div id="welcome-container" class="welcome-container">
+  <header class="welcome-header">
+    <div class="logo">Speak Easy</div>
+  </header>
+  <main class="welcome-content">
+    <h1 class="welcome-slogan">O jeito <span>fácil</span> de aprender inglês!</h1>
+    <p class="welcome-description">Domine o idioma com quizzes interativos e textos bilíngues. Comece agora e transforme seu aprendizado!</p>
+    <div class="welcome-buttons">
+      <button id="start-now" class="btn-primary">Comece Agora</button>
+      <button id="login" class="btn-secondary">Já Tenho uma Conta</button>
+    </div>
+  </main>
+</div>
+
   <!-- Tela de Cadastro -->
-<div id="register-container" class="register-container animate-in">
+<div id="register-container" class="register-container animate-in" style="display:none;">
   <h2>Cadastro</h2>
   <input type="text" id="name" placeholder="Digite seu nome"/>
   <input type="password" id="register-password" placeholder="Crie uma senha"/>
@@ -458,38 +473,38 @@
   </button>
   <h2><i class="fas fa-trophy"></i> Ranking</h2>
   <div class="podium">
-    <div class="podium-item top-2">
-      <div class="podium-photo">
-        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-2-photo" />
-      </div>
-      <span id="top-2-name" class="podium-name">2º Lugar</span>
-      <div class="podium-details">
-        <span id="top-2-score">0 pontos</span>
-        <span id="top-2-time">0s</span>
-      </div>
+  <div class="podium-item top-2">
+    <div class="podium-photo">
+      <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-2-photo" />
     </div>
-    <div class="podium-item top-1">
-      <div class="podium-photo">
-        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-1-photo" />
-      </div>
-      <span id="top-1-name" class="podium-name">1º Lugar</span>
-      <div class="podium-details">
-        <span id="top-1-score">0 pontos</span>
-        <span id="top-1-time">0s</span>
-      </div>
-    </div>
-    <div class="podium-item top-3">
-      <div class="podium-photo">
-        <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-3-photo" />
-      </div>
-      <span id="top-3-name" class="podium-name">3º Lugar</span>
-      <div class="podium-details">
-        <span id="top-3-score">0 pontos</span>
-        <span id="top-3-time">0s</span>
-      </div>
+    <span id="top-2-name" class="podium-name">2º Lugar</span>
+    <div class="podium-details">
+      <span id="top-2-score">0 pontos</span>
+      <span id="top-2-time">0s</span>
     </div>
   </div>
-  <ul id="ranking-list" class="ranking-list">
+  <div class="podium-item top-1">
+    <div class="podium-photo">
+      <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-1-photo" />
+    </div>
+    <span id="top-1-name" class="podium-name">1º Lugar</span>
+    <div class="podium-details">
+      <span id="top-1-score">0 pontos</span>
+      <span id="top-1-time">0s</span>
+    </div>
+  </div>
+  <div class="podium-item top-3">
+    <div class="podium-photo">
+      <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-3-photo" />
+    </div>
+    <span id="top-3-name" class="podium-name">3º Lugar</span>
+    <div class="podium-details">
+      <span id="top-3-score">0 pontos</span>
+      <span id="top-3-time">0s</span>
+    </div>
+  </div>
+</div>
+<ul id="ranking-list" class="ranking-list">
   <!-- Exemplo de item do ranking a partir do 4º lugar -->
   <li class="ranking-item">
     <div class="ranking-photo">
@@ -497,8 +512,7 @@
     </div>
     <div class="ranking-details">
       <span class="ranking-name">Nome do Jogador</span>
-      <span class="ranking-score">0 pontos</span>
-      <span class="ranking-time">0s</span>
+      <span class="ranking-score-time">0 pontos - 0s</span>
     </div>
   </li>
 </ul>
@@ -543,14 +557,47 @@
     <p><strong>Pontuação:</strong> <span id="profile-score">0</span></p>
   </div>
   <h3>Escolha sua Foto de Perfil</h3>
-  <div id="avatar-selection" class="avatar-selection">
-  <button id="prev-avatar" class="avatar-nav">&lt;</button>
-  <div class="avatar-display">
-    <img id="current-avatar" src="images/avatar1.png" alt="Avatar" />
+  <div class="avatar-options">
+  <div class="avatar-option-container">
+    <img src="images/avatar0.png" class="avatar-option" data-avatar="images/avatar0.png" alt="Avatar 0"/>
   </div>
-  <button id="next-avatar" class="avatar-nav">&gt;</button>
+  <div class="avatar-option-container">
+    <img src="images/avatar1.png" class="avatar-option" data-avatar="images/avatar1.png" alt="Avatar 1"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar2.png" class="avatar-option" data-avatar="images/avatar2.png" alt="Avatar 2"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar3.png" class="avatar-option" data-avatar="images/avatar3.png" alt="Avatar 3"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar4.png" class="avatar-option" data-avatar="images/avatar4.png" alt="Avatar 4"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar5.png" class="avatar-option" data-avatar="images/avatar5.png" alt="Avatar 5"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar6.png" class="avatar-option" data-avatar="images/avatar6.png" alt="Avatar 6"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar7.png" class="avatar-option" data-avatar="images/avatar7.png" alt="Avatar 7"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar8.png" class="avatar-option" data-avatar="images/avatar8.png" alt="Avatar 8"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar9.png" class="avatar-option" data-avatar="images/avatar9.png" alt="Avatar 9"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar10.png" class="avatar-option" data-avatar="images/avatar10.png" alt="Avatar 10"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar11.png" class="avatar-option" data-avatar="images/avatar11.png" alt="Avatar 11"/>
+  </div>
+  <div class="avatar-option-container">
+    <img src="images/avatar12.png" class="avatar-option" data-avatar="images/avatar12.png" alt="Avatar 12"/>
+  </div>
 </div>
-<button id="select-avatar-button" class="select-avatar-button">Selecionar Avatar</button>
 </div>
 
   <script type="module" src="script.js"></script>
