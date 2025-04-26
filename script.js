@@ -196,6 +196,30 @@ loginButton.addEventListener("click", async () => {
   }
 });
 
+// Exibir a tela de cadastro ao clicar em "Comece Agora"
+document.getElementById("start-now").addEventListener("click", () => {
+  document.getElementById("welcome-container").style.display = "none";
+  document.getElementById("register-container").style.display = "block";
+});
+
+// Exibir a tela de login ao clicar em "Já Tenho uma Conta"
+document.getElementById("login").addEventListener("click", () => {
+  document.getElementById("welcome-container").style.display = "none";
+  document.getElementById("login-container").style.display = "block";
+});
+
+// Alternar para a tela de login a partir da tela de cadastro
+document.getElementById("go-login").addEventListener("click", () => {
+  document.getElementById("register-container").style.display = "none";
+  document.getElementById("login-container").style.display = "block";
+});
+
+// Alternar para a tela de cadastro a partir da tela de login
+document.getElementById("go-register").addEventListener("click", () => {
+  document.getElementById("login-container").style.display = "none";
+  document.getElementById("register-container").style.display = "block";
+});
+
 // Navegação entre telas de cadastro e login
 goLoginLink.addEventListener("click", () => {
   registerContainer.style.display = "none";
@@ -803,58 +827,31 @@ async function loadProfileData() {
   });
 }
 
-// Atualizar foto de perfil
+// Elementos do menu principal
+const userPhotoElement = document.getElementById("user-photo");
+
+// Atualizar foto de perfil ao selecionar um avatar
 avatarOptions.forEach(img => {
   img.addEventListener("click", async () => {
     avatarOptions.forEach(i => i.classList.remove("selected"));
     img.classList.add("selected");
     profilePhotoElement.src = img.dataset.avatar;
 
+    // Atualizar avatar no menu principal
+    userPhotoElement.src = img.dataset.avatar;
+
     // Atualizar no Firebase
-    const snap = await getDocs(collection(db, "users"));
-    snap.forEach(doc => {
-      if (doc.data().name === currentUserName) {
-        updateDoc(doc.ref, { photoURL: img.dataset.avatar });
-      }
-    });
+    try {
+      const snap = await getDocs(collection(db, "users"));
+      snap.forEach(doc => {
+        if (doc.data().name === currentUserName) {
+          updateDoc(doc.ref, { photoURL: img.dataset.avatar });
+        }
+      });
+      alert("Avatar atualizado com sucesso!");
+    } catch (err) {
+      console.error("Erro ao atualizar avatar:", err);
+      alert("Erro ao salvar avatar. Tente novamente.");
+    }
   });
-});
-
-const avatars = [
-  "images/avatar1.png",
-  "images/avatar2.png",
-  "images/avatar3.png",
-  "images/avatar4.png",
-]; // Lista de avatares
-let currentAvatarIndex = 0;
-
-const avatarImage = document.getElementById("current-avatar");
-const prevButton = document.getElementById("prev-avatar");
-const nextButton = document.getElementById("next-avatar");
-const selectAvatarButton = document.getElementById("select-avatar-button");
-
-// Atualiza o avatar exibido
-function updateAvatar() {
-  avatarImage.src = avatars[currentAvatarIndex];
-}
-
-// Evento para o botão "Anterior"
-prevButton.addEventListener("click", () => {
-  currentAvatarIndex =
-    (currentAvatarIndex - 1 + avatars.length) % avatars.length;
-  updateAvatar();
-});
-
-// Evento para o botão "Próximo"
-nextButton.addEventListener("click", () => {
-  currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
-  updateAvatar();
-});
-
-// Evento para o botão "Selecionar Avatar"
-selectAvatarButton.addEventListener("click", () => {
-  const selectedAvatar = avatars[currentAvatarIndex];
-  document.getElementById("profile-photo").src = selectedAvatar;
-  document.getElementById("user-photo").src = selectedAvatar;
-  alert("Avatar selecionado com sucesso!");
 });
