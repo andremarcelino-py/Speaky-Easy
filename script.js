@@ -92,6 +92,9 @@ const frenchScoreElement    = document.getElementById("french-score");
 const frenchTimerElement    = document.getElementById("french-timer");
 const frenchFinalMessageEl  = document.getElementById("french-final-message");
 const frenchErrorListEl     = document.getElementById("french-error-list");
+// Duplicate declaration of menuContainer removed
+
+
 
 // Função genérica para esconder todas as seções
 function hideAllSections() {
@@ -101,7 +104,7 @@ function hideAllSections() {
     libraryContainer, rankingContainer, endScreen, perguntasEndScreen,
     spanishMenuContainer, spanishQuizContainer, spanishEndScreen, spanishLibraryContainer,
     frenchMenuContainer, frenchQuizContainer, frenchEndScreen, frenchLibraryContainer,
-    profileContainer // Adicione esta linha
+    profileContainer, exercisesContainer // Inclua o contêiner de exercícios aqui
   ].forEach(sec => sec && (sec.style.display = "none"));
 }
 
@@ -872,6 +875,7 @@ avatarOptions.forEach(img => {
 });
 
 // --- ABA DE EXERCÍCIOS ---
+const btnExercises = document.getElementById("btnExercises");
 const exercisesContainer = document.getElementById("exercises-container");
 const exerciseQuestionElement = document.getElementById("exercise-question");
 const exerciseInputElement = document.getElementById("exercise-input");
@@ -879,53 +883,185 @@ const exerciseSubmitButton = document.getElementById("exercise-submit");
 const exerciseFeedbackElement = document.getElementById("exercise-feedback");
 const backButtonExercises = document.getElementById("backButtonExercises");
 
+
+// Adiciona o evento de clique para voltar ao menu principal
+backButtonExercises.addEventListener("click", () => {
+  hideAllSections(); // Esconde todas as seções
+  menuContainer.style.display = "block"; // Mostra o menu principal
+});
+
 // Lista de perguntas e respostas para os exercícios
 const exercises = [
-  { question: "What is the capital of France?", answer: "Paris", explanation: "The capital of France is Paris." },
-  { question: "What is 5 + 3?", answer: "8", explanation: "5 + 3 equals 8." },
-  { question: "Translate 'Olá' to English.", answer: "Hello", explanation: "'Olá' in English is 'Hello'." },
+  {
+    question: "What is the capital of Germany?",
+    answer: "Berlin",
+    explanation: `
+      The capital of Germany is Berlin. It is known for its rich history and cultural landmarks such as the Brandenburg Gate and the Berlin Wall.
+      <table>
+        <tr><th>Country</th><th>Capital</th></tr>
+        <tr><td>Germany</td><td>Berlin</td></tr>
+        <tr><td>France</td><td>Paris</td></tr>
+        <tr><td>Italy</td><td>Rome</td></tr>
+      </table>
+    `,
+  },
+  {
+    question: "Solve: 12 × 8",
+    answer: "96",
+    explanation: `
+      The multiplication of 12 and 8 equals 96.
+      <table>
+        <tr><th>Operation</th><th>Result</th></tr>
+        <tr><td>12 × 8</td><td>96</td></tr>
+        <tr><td>12 × 7</td><td>84</td></tr>
+        <tr><td>12 × 6</td><td>72</td></tr>
+      </table>
+    `,
+  },
+  {
+    question: "Translate 'Bonjour' to English.",
+    answer: "Hello",
+    explanation: `
+      'Bonjour' is a French word that translates to 'Hello' in English. It is commonly used as a greeting during the day.
+      <ul>
+        <li><strong>Bonjour</strong> → Hello</li>
+        <li><strong>Bonsoir</strong> → Good evening</li>
+        <li><strong>Merci</strong> → Thank you</li>
+      </ul>
+    `,
+  },
+  {
+    question: "What is the square root of 144?",
+    answer: "12",
+    explanation: `
+      The square root of 144 is 12 because 12 × 12 = 144.
+      <table>
+        <tr><th>Number</th><th>Square Root</th></tr>
+        <tr><td>144</td><td>12</td></tr>
+        <tr><td>121</td><td>11</td></tr>
+        <tr><td>100</td><td>10</td></tr>
+      </table>
+    `,
+  },
+  {
+    question: "What is the chemical symbol for water?",
+    answer: "H2O",
+    explanation: `
+      The chemical symbol for water is H<sub>2</sub>O, which represents two hydrogen atoms bonded to one oxygen atom.
+      <ul>
+        <li><strong>H</strong>: Hydrogen</li>
+        <li><strong>O</strong>: Oxygen</li>
+        <li><strong>H<sub>2</sub>O</strong>: Water</li>
+      </ul>
+    `,
+  },
+  {
+    question: "What is the largest planet in our solar system?",
+    answer: "Jupiter",
+    explanation: `
+      Jupiter is the largest planet in our solar system. It is a gas giant with a diameter of about 139,820 km.
+      <table>
+        <tr><th>Planet</th><th>Diameter (km)</th></tr>
+        <tr><td>Jupiter</td><td>139,820</td></tr>
+        <tr><td>Saturn</td><td>116,460</td></tr>
+        <tr><td>Earth</td><td>12,742</td></tr>
+      </table>
+    `,
+  },
+  {
+    question: "What is the past tense of 'run'?",
+    answer: "Ran",
+    explanation: `
+      The past tense of 'run' is 'ran'. For example: "Yesterday, I ran 5 kilometers."
+      <ul>
+        <li><strong>Present:</strong> run</li>
+        <li><strong>Past:</strong> ran</li>
+        <li><strong>Future:</strong> will run</li>
+      </ul>
+    `,
+  },
+  {
+    question: "What is the value of π (pi) to 3 decimal places?",
+    answer: "3.142",
+    explanation: `
+      The value of π (pi) to 3 decimal places is 3.142. It is a mathematical constant used to calculate the circumference and area of circles.
+      <table>
+        <tr><th>Formula</th><th>Example</th></tr>
+        <tr><td>Circumference = 2πr</td><td>2 × 3.142 × 5 = 31.42</td></tr>
+        <tr><td>Area = πr²</td><td>3.142 × 5² = 78.55</td></tr>
+      </table>
+    `,
+  },
+  {
+    question: "Who wrote 'Romeo and Juliet'?",
+    answer: "William Shakespeare",
+    explanation: `
+      'Romeo and Juliet' is a famous play written by William Shakespeare. It is a tragic love story set in Verona, Italy.
+      <ul>
+        <li><strong>Author:</strong> William Shakespeare</li>
+        <li><strong>Genre:</strong> Tragedy</li>
+        <li><strong>Setting:</strong> Verona, Italy</li>
+      </ul>
+    `,
+  },
+  {
+    question: "What is the speed of light in a vacuum?",
+    answer: "299,792 km/s",
+    explanation: `
+      The speed of light in a vacuum is approximately 299,792 kilometers per second (km/s).
+      <table>
+        <tr><th>Medium</th><th>Speed (km/s)</th></tr>
+        <tr><td>Vacuum</td><td>299,792</td></tr>
+        <tr><td>Air</td><td>299,700</td></tr>
+        <tr><td>Water</td><td>225,000</td></tr>
+      </table>
+    `,
+  },
+  // Adicione mais perguntas aqui seguindo o mesmo formato
 ];
 
-let currentExerciseIndex = 0;
+// Função para embaralhar as perguntas e selecionar 20 aleatórias
+function getRandomExercises() {
+  return [...exercises].sort(() => Math.random() - 0.5).slice(0, 20);
+}
 
-// Função para carregar a próxima pergunta
+// Atualize a função de carregamento de exercícios para usar as perguntas aleatórias
+let currentExerciseIndex = 0;
+let randomExercises = getRandomExercises();
+
 function loadExercise() {
-  if (currentExerciseIndex < exercises.length) {
-    const currentExercise = exercises[currentExerciseIndex];
-    exerciseQuestionElement.textContent = currentExercise.question;
+  if (currentExerciseIndex < randomExercises.length) {
+    const currentExercise = randomExercises[currentExerciseIndex];
+    exerciseQuestionElement.innerHTML = currentExercise.question;
     exerciseInputElement.value = ""; // Limpa o campo de entrada
-    exerciseFeedbackElement.textContent = ""; // Limpa o feedback
+    exerciseFeedbackElement.innerHTML = ""; // Limpa o feedback
   } else {
-    exerciseQuestionElement.textContent = "You have completed all exercises!";
+    exerciseQuestionElement.textContent = "Você completou todos os exercícios!";
     exerciseInputElement.style.display = "none";
     exerciseSubmitButton.style.display = "none";
   }
 }
 
-// Evento para verificar a resposta do usuário
+// Atualize o evento de envio para usar as perguntas aleatórias
 exerciseSubmitButton.addEventListener("click", () => {
   const userAnswer = exerciseInputElement.value.trim();
-  const currentExercise = exercises[currentExerciseIndex];
+  const currentExercise = randomExercises[currentExerciseIndex];
 
   if (userAnswer.toLowerCase() === currentExercise.answer.toLowerCase()) {
-    exerciseFeedbackElement.textContent = `Correct! ${currentExercise.explanation}`;
-    exerciseFeedbackElement.style.color = "green";
+    exerciseFeedbackElement.innerHTML = `<p style="color: green;">Correct! ${currentExercise.explanation}</p>`;
   } else {
-    exerciseFeedbackElement.textContent = `Incorrect. ${currentExercise.explanation}`;
-    exerciseFeedbackElement.style.color = "red";
+    exerciseFeedbackElement.innerHTML = `<p style="color: red;">Incorrect. ${currentExercise.explanation}</p>`;
   }
 
   currentExerciseIndex++;
   setTimeout(loadExercise, 3000); // Carrega a próxima pergunta após 3 segundos
 });
 
-// Botão para voltar ao menu principal
-backButtonExercises.addEventListener("click", backToMenu);
-
-// Botão para abrir a aba de exercícios
+// Mostra a aba de exercícios ao clicar no botão
 btnExercises.addEventListener("click", () => {
-  hideAllSections();
-  exercisesContainer.style.display = "block";
-  currentExerciseIndex = 0; // Reinicia os exercícios
-  loadExercise();
+  hideAllSections(); // Esconde todas as outras seções
+  exercisesContainer.style.display = "block"; // Mostra o contêiner de exercícios
+  currentExerciseIndex = 0; // Reinicia o índice dos exercícios
+  randomExercises = getRandomExercises(); // Gera uma nova lista de exercícios aleatórios
+  loadExercise(); // Carrega o primeiro exercício
 });
