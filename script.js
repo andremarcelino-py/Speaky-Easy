@@ -280,36 +280,41 @@ function endQuiz() {
   errorListElement.innerHTML = errors.map(e=>`<li class="error-item">${e}</li>`).join("");
   saveScore(document.getElementById("name").value.trim(), score, quizTimer);
 }
+
+// Adicione um novo contêiner para a aba de aviso no HTML
+const quizWarningContainer = document.getElementById("quiz-warning-container");
+const quizWarningMessage = document.getElementById("quiz-warning-message");
+const quizWarningBackButton = document.getElementById("quiz-warning-back-button");
+
+// Modifique o evento do botão do quiz principal
 btnQuiz.addEventListener("click", async () => {
   hideAllSections();
-  quizContainer.style.display = "block";
+
   const savedProgress = await loadProgress(currentUserName);
   if (savedProgress) {
-    const resume = confirm("Você tem progresso salvo. Deseja continuar de onde parou?");
-    if (resume) {
-      questions = savedProgress.questions;
-      score = savedProgress.score;
-      currentQuestion = savedProgress.currentQuestion;
-      errors = savedProgress.errors;
-      quizTimer = savedProgress.quizTimer;
-    } else {
-      questions = getRandomQuestions();
-      score = 0;
-      currentQuestion = 0;
-      errors = [];
-      quizTimer = 0;
-    }
+    // Exibir a aba de aviso
+    quizWarningMessage.textContent = "Você já realizou este quiz. Você só pode fazê-lo uma vez.";
+    quizWarningContainer.style.display = "block";
   } else {
+    // Iniciar o quiz normalmente
+    quizContainer.style.display = "block";
     questions = getRandomQuestions();
     score = 0;
     currentQuestion = 0;
     errors = [];
     quizTimer = 0;
+    scoreElement.textContent = score;
+    startTimer();
+    loadQuestion();
   }
-  scoreElement.textContent = score;
-  startTimer();
-  loadQuestion();
 });
+
+// Evento para o botão de voltar ao menu na aba de aviso
+quizWarningBackButton.addEventListener("click", () => {
+  quizWarningContainer.style.display = "none"; // Oculta a mensagem
+  menuContainer.style.display = "block"; // Retorna ao menu principal
+});
+
 restartButton.addEventListener("click", ()=>{
   btnQuiz.click();
 });
@@ -568,13 +573,23 @@ spanishMenuButton.addEventListener("click", backToMenu);
 let frenchQuestions = [], frenchScore = 0, currentFrenchQuestion = 0, frenchErrors = [], frenchTimer = 0, frenchTimerInterval;
 function getRandomFrenchQuestions() {
   const all = [
-    { question: "Comment dit-on 'Hello' en français?", options:["Bonjour","Au revoir","Merci","S'il vous plaît"], answer:0 },
-    { question: "Que signifie 'Goodbye' en français?", options:["Bonjour","Au revoir","Bonne nuit","Merci"], answer:1 },
-    { question: "Comment dit-on 'Thank you' en français?", options:["S'il vous plaît","Merci","De rien","Pardon"], answer:1 },
-    { question: "Quel est le pluriel de 'ami'?", options:["Amis","Amies","Amis","Ami(e)s"], answer:0 },
-    { question: "Comment dit-on 'I am learning French' en français?", options:["J'apprends le français","Je français apprends","J'apprendrai le français","Je suis en train d'apprendre le français"], answer:0 }
+    { question: "Comment dit-on 'Hello' en français?", options: ["Bonjour", "Au revoir", "Merci", "S'il vous plaît"], answer: 0 },
+    { question: "Que signifie 'Goodbye' en français?", options: ["Bonjour", "Au revoir", "Bonne nuit", "Merci"], answer: 1 },
+    { question: "Comment dit-on 'Thank you' en français?", options: ["S'il vous plaît", "Merci", "De rien", "Pardon"], answer: 1 },
+    { question: "Quel est le pluriel de 'ami'?", options: ["Amis", "Amies", "Ami(e)s", "Ami"], answer: 0 },
+    { question: "Comment dit-on 'I am learning French' en français?", options: ["J'apprends le français", "Je français apprends", "J'apprendrai le français", "Je suis en train d'apprendre le français"], answer: 0 },
+    { question: "Que signifie 'Bonne nuit' en français?", options: ["Good night", "Good morning", "Goodbye", "Good evening"], answer: 0 },
+    { question: "Comment dit-on 'Je suis fatigué' en français?", options: ["Je suis fatigué", "Je suis heureux", "Je suis triste", "Je suis en colère"], answer: 0 },
+    { question: "Que signifie 'Où habitez-vous?' en français?", options: ["Where do you live?", "How are you?", "What is your name?", "What do you do?"], answer: 0 },
+    { question: "Comment dit-on 'Je voudrais un café' en français?", options: ["I would like a coffee", "I want a coffee", "I need a coffee", "I drink a coffee"], answer: 0 },
+    { question: "Que signifie 'Quelle heure est-il?' en français?", options: ["What time is it?", "Where are you?", "How are you?", "What are you doing?"], answer: 0 },
+    { question: "Comment dit-on 'Je suis étudiant' en français?", options: ["I am a student", "I am a teacher", "I am a worker", "I am a doctor"], answer: 0 },
+    { question: "Que signifie 'Merci beaucoup' en français?", options: ["Thank you very much", "You're welcome", "Please", "Excuse me"], answer: 0 },
+    { question: "Comment dit-on 'Je suis heureux' en français?", options: ["I am happy", "I am sad", "I am tired", "I am angry"], answer: 0 },
+    { question: "Que signifie 'Quel est votre nom?' en français?", options: ["What is your name?", "How are you?", "Where do you live?", "What do you do?"], answer: 0 },
+    { question: "Comment dit-on 'Je suis en colère' en français?", options: ["I am angry", "I am happy", "I am sad", "I am tired"], answer: 0 }
   ];
-  return [...all].sort(()=>Math.random()-0.5).slice(0,15);
+  return [...all].sort(() => Math.random() - 0.5).slice(0, 15);
 }
 function startFrenchTimer() {
   frenchTimer=0; frenchTimerElement.textContent=frenchTimer;
@@ -854,4 +869,63 @@ avatarOptions.forEach(img => {
       alert("Erro ao salvar avatar. Tente novamente.");
     }
   });
+});
+
+// --- ABA DE EXERCÍCIOS ---
+const exercisesContainer = document.getElementById("exercises-container");
+const exerciseQuestionElement = document.getElementById("exercise-question");
+const exerciseInputElement = document.getElementById("exercise-input");
+const exerciseSubmitButton = document.getElementById("exercise-submit");
+const exerciseFeedbackElement = document.getElementById("exercise-feedback");
+const backButtonExercises = document.getElementById("backButtonExercises");
+
+// Lista de perguntas e respostas para os exercícios
+const exercises = [
+  { question: "What is the capital of France?", answer: "Paris", explanation: "The capital of France is Paris." },
+  { question: "What is 5 + 3?", answer: "8", explanation: "5 + 3 equals 8." },
+  { question: "Translate 'Olá' to English.", answer: "Hello", explanation: "'Olá' in English is 'Hello'." },
+];
+
+let currentExerciseIndex = 0;
+
+// Função para carregar a próxima pergunta
+function loadExercise() {
+  if (currentExerciseIndex < exercises.length) {
+    const currentExercise = exercises[currentExerciseIndex];
+    exerciseQuestionElement.textContent = currentExercise.question;
+    exerciseInputElement.value = ""; // Limpa o campo de entrada
+    exerciseFeedbackElement.textContent = ""; // Limpa o feedback
+  } else {
+    exerciseQuestionElement.textContent = "You have completed all exercises!";
+    exerciseInputElement.style.display = "none";
+    exerciseSubmitButton.style.display = "none";
+  }
+}
+
+// Evento para verificar a resposta do usuário
+exerciseSubmitButton.addEventListener("click", () => {
+  const userAnswer = exerciseInputElement.value.trim();
+  const currentExercise = exercises[currentExerciseIndex];
+
+  if (userAnswer.toLowerCase() === currentExercise.answer.toLowerCase()) {
+    exerciseFeedbackElement.textContent = `Correct! ${currentExercise.explanation}`;
+    exerciseFeedbackElement.style.color = "green";
+  } else {
+    exerciseFeedbackElement.textContent = `Incorrect. ${currentExercise.explanation}`;
+    exerciseFeedbackElement.style.color = "red";
+  }
+
+  currentExerciseIndex++;
+  setTimeout(loadExercise, 3000); // Carrega a próxima pergunta após 3 segundos
+});
+
+// Botão para voltar ao menu principal
+backButtonExercises.addEventListener("click", backToMenu);
+
+// Botão para abrir a aba de exercícios
+btnExercises.addEventListener("click", () => {
+  hideAllSections();
+  exercisesContainer.style.display = "block";
+  currentExerciseIndex = 0; // Reinicia os exercícios
+  loadExercise();
 });
