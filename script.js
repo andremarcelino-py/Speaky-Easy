@@ -917,171 +917,177 @@ backButtonExercises.addEventListener("click", () => {
   menuContainer.style.display = "block"; // Mostra o menu principal
 });
 
-// Lista de perguntas e respostas para os exercícios
-const exercises = [
+// Array de perguntas, respostas e explicações
+const exerciseQuestions = [
   {
-    question: "What is the capital of Germany?",
-    answer: "Berlin",
-    explanation: `
-      The capital of Germany is Berlin. It is known for its rich history and cultural landmarks such as the Brandenburg Gate and the Berlin Wall.
-      <table>
-        <tr><th>Country</th><th>Capital</th></tr>
-        <tr><td>Germany</td><td>Berlin</td></tr>
-        <tr><td>France</td><td>Paris</td></tr>
-        <tr><td>Italy</td><td>Rome</td></tr>
-      </table>
-    `,
+    question: "Qual é a capital da França?",
+    answer: "Paris",
+    explanation: "Paris é a capital da França e é conhecida como a Cidade Luz.",
+  },
+  
+  // Perguntas em inglês
+  {
+    question: "What is the synonym of 'happy'?",
+    answer: "Joyful",
+    explanation: "A synonym for 'happy' is 'joyful', which means feeling or showing great pleasure.",
   },
   {
-    question: "Solve: 12 × 8",
-    answer: "96",
-    explanation: `
-      The multiplication of 12 and 8 equals 96.
-      <table>
-        <tr><th>Operation</th><th>Result</th></tr>
-        <tr><td>12 × 8</td><td>96</td></tr>
-        <tr><td>12 × 7</td><td>84</td></tr>
-        <tr><td>12 × 6</td><td>72</td></tr>
-      </table>
-    `,
+    question: "What is the antonym of 'big'?",
+    answer: "Small",
+    explanation: "The antonym of 'big' is 'small', which means of a size that is less than normal.",
   },
   {
-    question: "Translate 'Bonjour' to English.",
-    answer: "Hello",
-    explanation: `
-      'Bonjour' is a French word that translates to 'Hello' in English. It is commonly used as a greeting during the day.
-      <ul>
-        <li><strong>Bonjour</strong> → Hello</li>
-        <li><strong>Bonsoir</strong> → Good evening</li>
-        <li><strong>Merci</strong> → Thank you</li>
-      </ul>
-    `,
+    question: "What is the plural of 'child'?",
+    answer: "Children",
+    explanation: "The plural of 'child' is 'children', which refers to more than one child.",
   },
   {
-    question: "What is the square root of 144?",
-    answer: "12",
-    explanation: `
-      The square root of 144 is 12 because 12 × 12 = 144.
-      <table>
-        <tr><th>Number</th><th>Square Root</th></tr>
-        <tr><td>144</td><td>12</td></tr>
-        <tr><td>121</td><td>11</td></tr>
-        <tr><td>100</td><td>10</td></tr>
-      </table>
-    `,
+    question: "What is the past tense of 'go'?",
+    answer: "Went",
+    explanation: "The past tense of 'go' is 'went', used to describe an action that happened in the past.",
   },
   {
-    question: "What is the chemical symbol for water?",
-    answer: "H2O",
-    explanation: `
-      The chemical symbol for water is H<sub>2</sub>O, which represents two hydrogen atoms bonded to one oxygen atom.
-      <ul>
-        <li><strong>H</strong>: Hydrogen</li>
-        <li><strong>O</strong>: Oxygen</li>
-        <li><strong>H<sub>2</sub>O</strong>: Water</li>
-      </ul>
-    `,
+    question: "What is the opposite of 'hot'?",
+    answer: "Cold",
+    explanation: "The opposite of 'hot' is 'cold', which refers to a low temperature.",
   },
   {
-    question: "What is the largest planet in our solar system?",
-    answer: "Jupiter",
-    explanation: `
-      Jupiter is the largest planet in our solar system. It is a gas giant with a diameter of about 139,820 km.
-      <table>
-        <tr><th>Planet</th><th>Diameter (km)</th></tr>
-        <tr><td>Jupiter</td><td>139,820</td></tr>
-        <tr><td>Saturn</td><td>116,460</td></tr>
-        <tr><td>Earth</td><td>12,742</td></tr>
-      </table>
-    `,
+    question: "What is the meaning of 'apple'?",
+    answer: "A fruit",
+    explanation: "An apple is a fruit that is typically round, red, green, or yellow, and sweet or tart in taste.",
   },
   {
-    question: "What is the past tense of 'run'?",
-    answer: "Ran",
-    explanation: `
-      The past tense of 'run' is 'ran'. For example: "Yesterday, I ran 5 kilometers."
-      <ul>
-        <li><strong>Present:</strong> run</li>
-        <li><strong>Past:</strong> ran</li>
-        <li><strong>Future:</strong> will run</li>
-      </ul>
-    `,
+    question: "What is the capital of the United States?",
+    answer: "Washington, D.C.",
+    explanation: "Washington, D.C. is the capital of the United States and the seat of its federal government.",
   },
   {
-    question: "What is the value of π (pi) to 3 decimal places?",
-    answer: "3.142",
-    explanation: `
-      The value of π (pi) to 3 decimal places is 3.142. It is a mathematical constant used to calculate the circumference and area of circles.
-      <table>
-        <tr><th>Formula</th><th>Example</th></tr>
-        <tr><td>Circumference = 2πr</td><td>2 × 3.142 × 5 = 31.42</td></tr>
-        <tr><td>Area = πr²</td><td>3.142 × 5² = 78.55</td></tr>
-      </table>
-    `,
+    question: "What is the opposite of 'fast'?",
+    answer: "Slow",
+    explanation: "The opposite of 'fast' is 'slow', which means moving or operating at a low speed.",
   },
   {
-    question: "Who wrote 'Romeo and Juliet'?",
-    answer: "William Shakespeare",
-    explanation: `
-      'Romeo and Juliet' is a famous play written by William Shakespeare. It is a tragic love story set in Verona, Italy.
-      <ul>
-        <li><strong>Author:</strong> William Shakespeare</li>
-        <li><strong>Genre:</strong> Tragedy</li>
-        <li><strong>Setting:</strong> Verona, Italy</li>
-      </ul>
-    `,
+    question: "What is the meaning of 'blue'?",
+    answer: "A color",
+    explanation: "Blue is a primary color that is often associated with the sky and the ocean.",
   },
   {
-    question: "What is the speed of light in a vacuum?",
-    answer: "299,792 km/s",
-    explanation: `
-      The speed of light in a vacuum is approximately 299,792 kilometers per second (km/s).
-      <table>
-        <tr><th>Medium</th><th>Speed (km/s)</th></tr>
-        <tr><td>Vacuum</td><td>299,792</td></tr>
-        <tr><td>Air</td><td>299,700</td></tr>
-        <tr><td>Water</td><td>225,000</td></tr>
-      </table>
-    `,
+    question: "What is the plural of 'mouse'?",
+    answer: "Mice",
+    explanation: "The plural of 'mouse' is 'mice', which refers to more than one mouse.",
   },
-  // Adicione mais perguntas aqui seguindo o mesmo formato
+  {
+    question: "What is the past tense of 'eat'?",
+    answer: "Ate",
+    explanation: "The past tense of 'eat' is 'ate', used to describe the act of consuming food in the past.",
+  },
+  {
+    question: "What is the synonym of 'beautiful'?",
+    answer: "Pretty",
+    explanation: "A synonym for 'beautiful' is 'pretty', which means pleasing to the eye or attractive.",
+  },
+  {
+    question: "What is the opposite of 'day'?",
+    answer: "Night",
+    explanation: "The opposite of 'day' is 'night', which refers to the period of darkness between sunset and sunrise.",
+  },
+  {
+    question: "What is the meaning of 'dog'?",
+    answer: "An animal",
+    explanation: "A dog is a domesticated animal often kept as a pet or used for work.",
+  },
+  {
+    question: "What is the capital of England?",
+    answer: "London",
+    explanation: "London is the capital of England and one of the most famous cities in the world.",
+  },
 ];
 
-// Função para embaralhar as perguntas e selecionar 20 aleatórias
-function getRandomExercises() {
-  return [...exercises].sort(() => Math.random() - 0.5).slice(0, 20);
-}
+let currentExerciseQuestionIndex = 0; // Índice da pergunta atual
+const correctExerciseAnswers = [];
+const similarityThreshold = 0.8; // Limite de similaridade (80%)
 
-// Atualize a função de carregamento de exercícios para usar as perguntas aleatórias
-let currentExerciseIndex = 0;
-let randomExercises = getRandomExercises();
+// Função para calcular similaridade entre duas strings
+function calculateSimilarity(str1, str2) {
+  const normalize = (str) => str.toLowerCase().trim();
+  const [a, b] = [normalize(str1), normalize(str2)];
+  let matches = 0;
 
-function loadExercise() {
-  if (currentExerciseIndex < randomExercises.length) {
-    const currentExercise = randomExercises[currentExerciseIndex];
-    exerciseQuestionElement.innerHTML = currentExercise.question;
-    exerciseInputElement.value = ""; // Limpa o campo de entrada
-    exerciseFeedbackElement.innerHTML = ""; // Limpa o feedback
-  } else {
-    exerciseQuestionElement.textContent = "Você completou todos os exercícios!";
-    exerciseInputElement.style.display = "none";
-    exerciseSubmitButton.style.display = "none";
-  }
-}
-
-// Atualize o evento de envio para usar as perguntas aleatórias
-exerciseSubmitButton.addEventListener("click", () => {
-  const userAnswer = exerciseInputElement.value.trim();
-  const currentExercise = randomExercises[currentExerciseIndex];
-
-  if (userAnswer.toLowerCase() === currentExercise.answer.toLowerCase()) {
-    exerciseFeedbackElement.innerHTML = `<p style="color: green;">Correct! ${currentExercise.explanation}</p>`;
-  } else {
-    exerciseFeedbackElement.innerHTML = `<p style="color: red;">Incorrect. ${currentExercise.explanation}</p>`;
+  for (let i = 0; i < Math.min(a.length, b.length); i++) {
+    if (a[i] === b[i]) matches++;
   }
 
-  currentExerciseIndex++;
-  setTimeout(loadExercise, 3000); // Carrega a próxima pergunta após 3 segundos
+  return matches / Math.max(a.length, b.length);
+}
+
+// Função para exibir a próxima pergunta
+function showNextQuestion() {
+  if (currentExerciseQuestionIndex < exerciseQuestions.length) {
+      const questionElement = document.getElementById("exercise-question");
+      questionElement.textContent = exerciseQuestions[currentExerciseQuestionIndex].question;
+    } else {
+      document.getElementById("exercise-feedback").textContent =
+        "Você completou todos os exercícios!";
+      document.getElementById("exercise-input").disabled = true;
+      document.getElementById("exercise-submit").disabled = true;
+    }
+}
+
+// Função para adicionar um exercício acertado ao bloco
+function addCorrectAnswer(question, userAnswer, correctAnswer, explanation) {
+  const correctAnswersList = document.getElementById("correct-answers-list");
+
+  // Cria um novo bloco para o exercício acertado
+  const answerBlock = document.createElement("div");
+  answerBlock.className = "correct-answer-item";
+  answerBlock.style.border = "2px solid #4caf50";
+  answerBlock.style.padding = "10px";
+  answerBlock.style.marginBottom = "10px";
+  answerBlock.style.borderRadius = "5px";
+  answerBlock.style.backgroundColor = "#e8f5e9";
+  answerBlock.style.color = "#2e7d32";
+
+  answerBlock.innerHTML = `
+    <p><strong>Pergunta:</strong> ${question}</p>
+    <p><strong>Sua Resposta:</strong> ${userAnswer}</p>
+    <p><strong>Resposta Correta:</strong> ${correctAnswer}</p>
+    <p><strong>Explicação:</strong> ${explanation}</p>
+  `;
+
+  // Adiciona o bloco ao contêiner
+  correctAnswersList.appendChild(answerBlock);
+}
+
+// Manipular envio de resposta
+document.getElementById("exercise-submit").addEventListener("click", () => {
+  const userAnswer = document.getElementById("exercise-input").value.trim();
+  const currentQuestion = exerciseQuestions[currentExerciseQuestionIndex];
+
+  // Verifica se a resposta é semelhante o suficiente
+  if (
+    calculateSimilarity(userAnswer, currentQuestion.answer) >=
+    similarityThreshold
+  ) {
+    correctExerciseAnswers.push({
+      question: currentQuestion.question,
+      answer: userAnswer,
+    });
+    document.getElementById("exercise-feedback").textContent =
+      "Resposta correta!";
+    addCorrectAnswer(
+      currentQuestion.question,
+      userAnswer,
+      currentQuestion.answer,
+      currentQuestion.explanation
+    ); // Adiciona ao bloco de acertos
+    currentExerciseQuestionIndex++; // Avança para a próxima pergunta
+    showNextQuestion(); // Exibe a próxima pergunta
+  } else {
+    document.getElementById("exercise-feedback").textContent =
+      "Resposta incorreta!";
+  }
+
+  document.getElementById("exercise-input").value = ""; // Limpar entrada
 });
 
 // Mostra a aba de exercícios ao clicar no botão
@@ -1092,3 +1098,6 @@ btnExercises.addEventListener("click", () => {
   randomExercises = getRandomExercises(); // Gera uma nova lista de exercícios aleatórios
   loadExercise(); // Carrega o primeiro exercício
 });
+
+// Inicializa a primeira pergunta
+showNextQuestion();
