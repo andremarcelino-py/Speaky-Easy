@@ -92,9 +92,6 @@ const frenchScoreElement    = document.getElementById("french-score");
 const frenchTimerElement    = document.getElementById("french-timer");
 const frenchFinalMessageEl  = document.getElementById("french-final-message");
 const frenchErrorListEl     = document.getElementById("french-error-list");
-// Duplicate declaration of menuContainer removed
-
-
 
 // Função genérica para esconder todas as seções
 function hideAllSections() {
@@ -166,6 +163,36 @@ function updateUserName(name, photoURL = "images/default.png") {
   }
 }
 
+// Verifica se é a primeira vez que o usuário faz login
+function checkFirstTimeLogin() {
+  const isFirstTime = localStorage.getItem("firstTimeLogin") === null;
+
+  if (isFirstTime) {
+    // Exibe o popup
+    const popup = document.getElementById("first-time-popup");
+    popup.style.display = "flex";
+
+    // Botão "Ir para o Perfil"
+    document.getElementById("go-to-profile").addEventListener("click", () => {
+      popup.style.display = "none";
+      hideAllSections();
+      profileContainer.style.display = "block"; // Redireciona para o perfil
+    });
+
+    // Botão "Depois"
+    document.getElementById("skip-profile").addEventListener("click", () => {
+      popup.style.display = "none";
+      menuContainer.style.display = "block"; // Redireciona para o menu principal
+    });
+
+    // Marca que o usuário já fez login pela primeira vez
+    localStorage.setItem("firstTimeLogin", "false");
+  } else {
+    // Redireciona diretamente para o menu principal
+    menuContainer.style.display = "block";
+  }
+}
+
 // Modifique o login para atualizar o nome do usuário
 loginButton.addEventListener("click", async () => {
   const loginName = document.getElementById("login-name").value.trim();
@@ -186,7 +213,7 @@ loginButton.addEventListener("click", async () => {
         userFound = true;
         updateUserName(loginName, userData.photoURL); // Atualiza o nome e a foto do usuário
         hideAllSections();
-        menuContainer.style.display = "block"; // Mostra o menu principal
+        checkFirstTimeLogin(); // Verifica se é a primeira vez que o usuário faz login
       }
     });
 
