@@ -14,11 +14,14 @@
   <!-- Tela de Boas-Vindas -->
 <div id="welcome-container" class="welcome-container">
   <header class="welcome-header">
-    <div class="logo">Speak Easy</div>
+    <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
+    <h1 class="logo-text">Speak Easy</h1> <!-- Adicionando o nome ao lado ou abaixo da logo -->
   </header>
   <main class="welcome-content">
-    <h1 class="welcome-slogan">O jeito <span>fácil</span> de aprender inglês!</h1>
-    <p class="welcome-description">Domine o idioma com quizzes interativos e textos bilíngues. Comece agora e transforme seu aprendizado!</p>
+    <h1 class="welcome-slogan">O jeito <span>fácil</span> de falar outra língua!</h1>
+    <p class="welcome-description">
+       Comece agora e transforme seu aprendizado!
+    </p>
     <div class="welcome-buttons">
       <button id="start-now" class="btn-primary">Comece Agora</button>
       <button id="login" class="btn-secondary">Já Tenho uma Conta</button>
@@ -28,6 +31,10 @@
 
   <!-- Tela de Cadastro -->
 <div id="register-container" class="register-container animate-in" style="display:none;">
+  <header class="welcome-header">
+    <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
+    <h1 class="logo-text">Speak Easy</h1>
+  </header>
   <h2>Cadastro</h2>
   <input type="text" id="name" placeholder="Digite seu nome"/>
   <input type="password" id="register-password" placeholder="Crie uma senha"/>
@@ -37,6 +44,10 @@
 
   <!-- Tela de Login -->
 <div id="login-container" class="login-container" style="display:none;">
+  <header class="welcome-header">
+    <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
+    <h1 class="logo-text">Speak Easy</h1>
+  </header>
   <h2>Login</h2>
   <input type="text" id="login-name" placeholder="Digite seu nome">
   <input type="password" id="login-password" placeholder="Digite sua senha">
@@ -45,25 +56,28 @@
 </div>
 
   <!-- Menu Principal -->
-  <div id="menu-container" class="menu-container" style="display:none;">
-    <h1 class="title">Speak Easy</h1>
-    <div id="user-info">
-      <img id="user-photo" src="images/default.png" alt="Foto de Perfil" class="user-photo"/>
-      <span id="user-name"></span>
-    </div>
-    <div class="tabs">
-      <button id="btnQuiz" class="tab-button animate-in"><i class="fas fa-question-circle"></i> Quiz</button>
-      <button id="btnPerguntas" class="tab-button animate-in"><i class="fas fa-edit"></i> Perguntas</button>
-      <button id="btnLibrary" class="tab-button animate-in"><i class="fas fa-book-open"></i> Biblioteca</button>
-      <button id="btnSpanish" class="tab-button animate-in spanish"><i class="fas fa-globe"></i> Español</button>
-      <button id="btnFrench" class="tab-button animate-in french"><i class="fas fa-globe"></i> Français</button>
-      <button id="btnRanking" class="tab-button animate-in"><i class="fas fa-trophy"></i> Ranking</button>
-    </div>
-    <!-- Botão de logout no menu principal -->
-<button id="logout-button" class="restart-button" style="position: absolute; top: 10px; right: 10px;">
-  Sair
-</button>
+<div id="menu-container" class="menu-container" style="display:none;">
+  <header class="welcome-header">
+    <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
+    <h1 class="logo-text"></h1>
+  </header>
+  <h1 class="title">Bem-vindo ao Speak Easy</h1>
+  <div id="user-info">
+    <img id="user-photo" src="images/default.png" alt="Foto de Perfil" class="user-photo"/>
+    <span id="user-name"></span>
   </div>
+  <div class="tabs">
+    <button id="btnQuiz" class="tab-button animate-in"><i class="fas fa-question-circle"></i> Quiz</button>
+    <button id="btnPerguntas" class="tab-button animate-in"><i class="fas fa-edit"></i> Perguntas</button>
+    <button id="btnLibrary" class="tab-button animate-in"><i class="fas fa-book-open"></i> Biblioteca</button>
+    <button id="btnSpanish" class="tab-button animate-in spanish"><i class="fas fa-globe"></i> Español</button>
+    <button id="btnFrench" class="tab-button animate-in french"><i class="fas fa-globe"></i> Français</button>
+    <button id="btnExercises">Exercícios</button>
+    <button id="btnRanking" class="tab-button animate-in"><i class="fas fa-trophy"></i> Ranking</button>
+  </div>
+  <!-- Botão de logout no menu principal -->
+  <button id="logout-button" class="restart-button">Sair</button>
+</div>
 
   <!-- Menu Español: Selección de Contenido en Español -->
   <div id="spanish-menu-container" class="menu-container" style="display:none;">
@@ -175,6 +189,35 @@
       <p class="spanish">Llover a cántaros - Chover muito</p>
     </div>
   </div>
+
+  <!-- Sección: Preguntas Avanzadas -->
+<div id="preguntas-avanzadas-es" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Preguntas Avanzadas</h3>
+  </div>
+  <div class="text-content">
+    <p class="spanish">¿Qué opinas sobre el cambio climático? - O que você acha sobre a mudança climática?</p>
+    <p class="spanish">¿Cuál es tu libro favorito y por qué? - Qual é o seu livro favorito e por quê?</p>
+    <p class="spanish">¿Qué harías si ganaras la lotería? - O que você faria se ganhasse na loteria?</p>
+    <p class="spanish">¿Cómo describirías tu ciudad natal? - Como você descreveria sua cidade natal?</p>
+    <p class="spanish">¿Qué te motiva a aprender español? - O que te motiva a aprender espanhol?</p>
+  </div>
+</div>
+
+<!-- Sección: Cultura Española -->
+<div id="cultura-es" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Cultura Española</h3>
+  </div>
+  <div class="text-content">
+    <p class="spanish">La paella es un plato típico de España, originario de Valencia.</p>
+    <p class="spanish">El flamenco es un estilo de música y danza tradicional de Andalucía.</p>
+    <p class="spanish">La Sagrada Familia es una famosa basílica en Barcelona diseñada por Antoni Gaudí.</p>
+    <p class="spanish">El idioma español tiene más de 500 millones de hablantes en el mundo.</p>
+  </div>
+</div>
 </div>
 
   <!-- Menu Français: Sélection de Contenu en Français -->
@@ -471,51 +514,59 @@
   <button class="back-button" id="backButtonRanking">
     <i class="fas fa-arrow-left"></i> Voltar ao Menu
   </button>
-  <h2><i class="fas fa-trophy"></i> Ranking</h2>
+  <h2 class="ranking-title"><i class="fas fa-trophy"></i> Ranking</h2>
   <div class="podium">
-  <div class="podium-item top-2">
+  <!-- Primeiro Lugar -->
+  <div class="podium-item first-place">
+    <div class="podium-rank">🥇</div>
+    <div class="podium-photo shine">
+      <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-1-photo" />
+    </div>
+    <div class="podium-details">
+      <span id="top-1-name" class="podium-name">1º Lugar</span>
+      <span id="top-1-score" class="podium-score">0 pontos</span>
+      <span id="top-1-time" class="podium-time">0s</span>
+    </div>
+  </div>
+
+  <!-- Segundo Lugar -->
+  <div class="podium-item second-place">
+    <div class="podium-rank">🥈</div>
     <div class="podium-photo">
       <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-2-photo" />
     </div>
-    <span id="top-2-name" class="podium-name">2º Lugar</span>
     <div class="podium-details">
-      <span id="top-2-score">0 pontos</span>
-      <span id="top-2-time">0s</span>
+      <span id="top-2-name" class="podium-name">2º Lugar</span>
+      <span id="top-2-score" class="podium-score">0 pontos</span>
+      <span id="top-2-time" class="podium-time">0s</span>
     </div>
   </div>
-  <div class="podium-item top-1">
-    <div class="podium-photo">
-      <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-1-photo" />
-    </div>
-    <span id="top-1-name" class="podium-name">1º Lugar</span>
-    <div class="podium-details">
-      <span id="top-1-score">0 pontos</span>
-      <span id="top-1-time">0s</span>
-    </div>
-  </div>
-  <div class="podium-item top-3">
+
+  <!-- Terceiro Lugar -->
+  <div class="podium-item third-place">
+    <div class="podium-rank">🥉</div>
     <div class="podium-photo">
       <img src="images/default.png" alt="Avatar" class="ranking-photo" id="top-3-photo" />
     </div>
-    <span id="top-3-name" class="podium-name">3º Lugar</span>
     <div class="podium-details">
-      <span id="top-3-score">0 pontos</span>
-      <span id="top-3-time">0s</span>
+      <span id="top-3-name" class="podium-name">3º Lugar</span>
+      <span id="top-3-score" class="podium-score">0 pontos</span>
+      <span id="top-3-time" class="podium-time">0s</span>
     </div>
   </div>
 </div>
-<ul id="ranking-list" class="ranking-list">
-  <!-- Exemplo de item do ranking a partir do 4º lugar -->
-  <li class="ranking-item">
-    <div class="ranking-photo">
-      <img src="images/default.png" alt="Avatar" />
-    </div>
-    <div class="ranking-details">
-      <span class="ranking-name">Nome do Jogador</span>
-      <span class="ranking-score-time">0 pontos - 0s</span>
-    </div>
-  </li>
-</ul>
+  <ul id="ranking-list" class="ranking-list">
+    <!-- Exemplo de item do ranking a partir do 4º lugar -->
+    <li class="ranking-item">
+      <div class="ranking-photo">
+        <img src="images/default.png" alt="Avatar" />
+      </div>
+      <div class="ranking-details">
+        <span class="ranking-name">Nome do Jogador</span>
+        <span class="ranking-score-time">0 pontos - 0s</span>
+      </div>
+    </li>
+  </ul>
 </div>
 
   <!-- Tela Final do Quiz Principal -->
@@ -598,6 +649,21 @@
     <img src="images/avatar12.png" class="avatar-option" data-avatar="images/avatar12.png" alt="Avatar 12"/>
   </div>
 </div>
+</div>
+
+  <!-- Aba de aviso do quiz -->
+<div id="quiz-warning-container" style="display: none;">
+  <p id="quiz-warning-message">Você já realizou este quiz. Você só pode fazê-lo uma vez.</p>
+  <button id="quiz-warning-back-button">Voltar ao Menu</button>
+</div>
+
+<div id="exercises-container" style="display: none;">
+  <h2>Exercícios</h2>
+  <p id="exercise-question"></p>
+  <input type="text" id="exercise-input" placeholder="Digite sua resposta aqui" />
+  <button id="exercise-submit">Enviar</button>
+  <p id="exercise-feedback"></p>
+  <button id="backButtonExercises">Voltar ao Menu</button>
 </div>
 
   <script type="module" src="script.js"></script>
