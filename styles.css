@@ -1028,7 +1028,7 @@ body {
 }
 
 .popup-content {
-  background: rgba(110, 7, 125, 0.105);
+  background: rgb(255, 255, 255);
   color: black;
   padding: 20px;
   border-radius: 10px;
