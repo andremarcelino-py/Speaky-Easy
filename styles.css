@@ -1064,3 +1064,16 @@ body {
   background-color: var(--accent-color);
   color: white;
 }
+.correct-answer-item {
+  border: 2px solid #4caf50; /* Verde para indicar acerto */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #e8f5e9; /* Fundo verde claro */
+  color: #2e7d32; /* Texto verde escuro */
+  font-family: 'Poppins', sans-serif;
+}
+
+.correct-answer-item p {
+  margin: 5px 0;
+}
