@@ -1101,3 +1101,59 @@ btnExercises.addEventListener("click", () => {
 
 // Inicializa a primeira pergunta
 showNextQuestion();
+
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+
+  // Ação para a tecla Enter
+  if (key === 'Enter') {
+    // Verifica se está na tela de Cadastro
+    if (document.getElementById('register-container').style.display === 'block') {
+      document.getElementById('start-button').click();
+    }
+
+    // Verifica se está na tela de Login
+    if (document.getElementById('login-container').style.display === 'block') {
+      document.getElementById('login-button').click();
+    }
+
+    // Verifica se está na tela de Exercícios
+    if (document.getElementById('exercises-container').style.display === 'block') {
+      document.getElementById('exercise-submit').click();
+    }
+  }
+
+  // Ação para a tecla Esc
+  if (key === 'Escape') {
+    // Verifica se está na tela de Cadastro
+    if (document.getElementById('register-container').style.display === 'block') {
+      document.getElementById('go-login').click();
+    }
+
+    // Verifica se está na tela de Login
+    if (document.getElementById('login-container').style.display === 'block') {
+      document.getElementById('go-register').click();
+    }
+
+    // Verifica se está na tela de Exercícios
+    if (document.getElementById('exercises-container').style.display === 'block') {
+      document.getElementById('backButtonExercises').click();
+    }
+
+    // Verifica se está na tela de Aviso do Quiz
+    if (document.getElementById('quiz-warning-container').style.display === 'block') {
+      document.getElementById('quiz-warning-back-button').click();
+    }
+
+    // Verifica se está em qualquer outra aba (exceto Quiz)
+    const quizContainers = [
+      document.getElementById('quiz-container')
+      
+    ];
+
+    const isInQuiz = quizContainers.some(container => container && container.style.display === 'block');
+    if (!isInQuiz) {
+      backToMenu(); // Volta ao menu principal
+    }
+  }
+});
