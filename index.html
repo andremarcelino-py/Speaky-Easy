@@ -626,10 +626,22 @@
       <i class="fas fa-arrow-left"></i> Voltar ao Menu
     </button>
     <p id="final-message"></p>
-    <ul id="error-list"></ul>
-    <button id="restart-button" class="restart-button">
-      <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+    <h2></h2>
+    <p id="score-summary"></p>
+    <p id="time-summary"></p>
+    <p id="motivational-message"></p>
+    <h3>Questões Erradas</h3>
+        <ul id="error-list">
+      <!-- Questões erradas serão inseridas dinamicamente -->
+</ul>
+    <button id="learn-more-button" class="restart-button">
+      <i class="fas fa-book-open"></i> Saiba Mais
     </button>
+
+      <i></i>
+    
+    <button id="restart-button" class="restart-button">
+
   </div>
 
   <!-- Tela Final do Quiz de Perguntas -->
@@ -737,6 +749,7 @@
   <p id="exercise-question"></p>
   <input type="text" id="exercise-input" placeholder="Digite sua resposta aqui" />
   <button id="exercise-submit">Enviar</button>
+  <button id="exercise-skip">Pular Pergunta</button>
   <p id="exercise-feedback"></p>
   
   <!-- Bloco para exibir os exercícios acertados -->
@@ -757,6 +770,18 @@
   </div>
 </div>
 
+<div id="results-container" class="results-container" style="display:none;">
+  <button class="back-button" id="backButtonResults">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+
+</div>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>© 2025 Speak Easy. Todos os direitos reservados.</p>
+  </footer>
+  
   <script type="module" src="script.js"></script>
 </body>
 </html>
