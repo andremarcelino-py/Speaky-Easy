@@ -1275,19 +1275,42 @@ backButtonResults.addEventListener('click', () => {
   document.getElementById('menu-container').style.display = 'block';
 });
 
-// Função para exibir mensagem motivacional
+// Função para exibir mensagem motivacional (15 frases, referências atuais, inglês e brincadeiras com "Speak Easy")
 function showMotivationalMessage(score, totalQuestions) {
   let motivationalMessage = '';
-  if (score === totalQuestions) {
-    motivationalMessage = 'Parabéns! Você acertou todas as questões! 🎉';
-  } else if (score >= totalQuestions * 0.8) {
-    motivationalMessage = 'Ótimo trabalho! Continue assim! 💪';
-  } else if (score >= totalQuestions * 0.5) {
-    motivationalMessage = 'Bom esforço! Você está no caminho certo! 🚀';
-  } else {
-    motivationalMessage = 'Não desista! Continue praticando! 🌟';
-  }
+  const percent = score / totalQuestions;
 
+  if (score === totalQuestions) {
+    motivationalMessage = 'Você zerou! Aqui é Speak Easy, mas seu inglês tá Speak Master! 🏆🇬🇧';
+  } else if (percent >= 0.95) {
+    motivationalMessage = 'Só faltou o sotaque britânico! Tá quase virando lenda do Speak Easy! 👑✨';
+  } else if (percent >= 0.9) {
+    motivationalMessage = 'Mandou aquele GG! Já pode dar aula no Speak Easy! 😎📚';
+  } else if (percent >= 0.85) {
+    motivationalMessage = 'Seu inglês tá mais fácil que pedir delivery! Bora pro próximo nível no Speak Easy! 🍔🚀';
+  } else if (percent >= 0.8) {
+    motivationalMessage = 'Top demais! Já já tá assistindo série sem legenda, estilo Speak Easy! 📺🔥';
+  } else if (percent >= 0.75) {
+    motivationalMessage = 'Tá fluindo! Aqui é Speak Easy, mas você tá quase Speak Pro! 💬💪';
+  } else if (percent >= 0.7) {
+    motivationalMessage = 'Safe! Seu inglês tá subindo de elo no Speak Easy! 🛡️';
+  } else if (percent >= 0.65) {
+    motivationalMessage = 'Tá indo bem! Logo logo vai pedir café em Londres sem travar! ☕🇬🇧';
+  } else if (percent >= 0.6) {
+    motivationalMessage = 'Falta pouco pra virar referência no Speak Easy! Keep going! 🚦';
+  } else if (percent >= 0.5) {
+    motivationalMessage = 'Tá no caminho! Melhorando aqui, arrasando lá fora! 🌍😉';
+  } else if (percent >= 0.4) {
+    motivationalMessage = 'Não desanima! Até o Google Tradutor já errou, mas você tá aprendendo de verdade! 📱🔄';
+  } else if (percent >= 0.3) {
+    motivationalMessage = 'Faz parte! Todo mundo já usou legenda, mas só os brabos continuam no Speak Easy! 🎬💡';
+  } else if (percent >= 0.2) {
+    motivationalMessage = 'Primeiro passo já foi! No Speak Easy, cada erro é um aprendizado! 👣';
+  } else if (percent >= 0.1) {
+    motivationalMessage = 'Começou, já é metade do caminho! Speak Easy é pra quem não desiste! 🚀';
+  } else {
+    motivationalMessage = 'Zero barra zero, mas relaxa: até o dicionário começou do A! Bora tentar de novo no Speak Easy! 📖😅';
+  }
   // Exibe em popup (alert) ou em um elemento HTML
   // alert(motivationalMessage); // Descomente para usar popup
 
