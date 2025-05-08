@@ -602,6 +602,10 @@ async function loadRanking() {
     users.slice(3).forEach((user, index) => {
       const listItem = document.createElement("li");
       listItem.classList.add("ranking-item");
+      // Destaca o bloco do usuário logado
+      if (user.name === currentUserName) {
+        listItem.classList.add("meu-destaque");
+      }
       listItem.innerHTML = `
         <div class="ranking-photo-container">
           <img src="${user.photoURL || 'images/default.png'}" alt="Foto de Perfil" class="ranking-photo"/>
