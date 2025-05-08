@@ -834,7 +834,6 @@ body {
   vertical-align: middle;
 }
 
-
 /* Estilo do Carrossel */
 .avatar-carousel {
   display: flex;
@@ -1161,10 +1160,6 @@ body {
   font-size: 16px;
 }
 
-.results-container .restart-button {
-  margin-top: 20px;
-}
-
 /* Estilo para a tela final do quiz */
 .end-screen {
   text-align: center;
@@ -1311,4 +1306,190 @@ body {
 .wrong-questions-list li:hover {
   transform: translateX(10px);
   box-shadow: 0 4px 10px rgba(245, 101, 101, 0.4);
+}
+
+/* Estilo para a aba de vocabulário */
+.vocab-tab.completed { background: #4caf50; color: #fff; }
+.vocab-tab { margin: 4px; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
+.vocab-content { margin-top: 20px; }
+
+/* Estilo para a aba de vocabulário dinâmico */
+.vocab-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.vocab-tab {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+}
+
+.vocab-tab:hover {
+  background: var(--primary-color);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+}
+
+.vocab-tab.completed {
+  background: #4caf50;
+  color: #fff;
+  border-color: #388e3c;
+  box-shadow: 0 0 10px 2px rgba(76, 175, 80, 0.3);
+}
+
+.vocab-content {
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#vocab-image {
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+  background: #fff;
+  padding: 8px;
+}
+
+#vocab-phase {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#vocab-question {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+#vocab-answer {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  background: rgba(255,255,255,0.9);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+#vocab-answer:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--secondary-color);
+  transform: scale(1.02);
+}
+
+#vocab-submit {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 1rem;
+}
+
+#vocab-submit:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+}
+
+#vocab-feedback {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+}
+
+#vocab-progress {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .vocab-content {
+    padding: 1rem;
+  }
+  #vocab-phase {
+    max-width: 100%;
+  }
+  .vocab-tab {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Destaca perguntas erradas */
+.error-item {
+  border: 2px solid #e53935;
+  background: #ffebee;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  color: #b71c1c;
+  box-shadow: 0 2px 6px rgba(229,57,53,0.08);
+}
+
+/* Botão Aprenda Mais */
+.aprenda-mais-button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  margin-top: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.aprenda-mais-button:hover {
+  background: #1565c0;
+}
+
+/* Botão Voltar ao Menu do Quiz */
+#quiz-back-menu-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+#quiz-back-menu-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
