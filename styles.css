@@ -1493,3 +1493,47 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
+/* Adicione ao seu styles.css */
+.meu-destaque {
+  border: 3px solid #ff9800 !important;
+  background: #ffe0fd28 !important;
+  box-shadow: 0 0 10px #ff9800;
+}
+
+
+/* Destaque para o botão Voltar ao Menu nas telas de erros/respostas */
+.btn-voltar-menu-destaque {
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  padding: 10px 28px;
+  margin-top: 18px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px #ff980055;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.btn-voltar-menu-destaque:hover {
+  background: #e65100;
+}
+
+/* Destaque para o botão Voltar ao Menu na tela de parabenização */
+#congratulations-back-button {
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  padding: 12px 32px;
+  margin-top: 20px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px #ff980055;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+#congratulations-back-button:hover {
+  background: #e65100;
+  transform: scale(1.05);
+}
