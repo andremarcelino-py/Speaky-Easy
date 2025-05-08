@@ -33,7 +33,6 @@ const frenchMenuContainer    = document.getElementById("french-menu-container");
 const frenchQuizContainer    = document.getElementById("french-container");
 const frenchEndScreen        = document.getElementById("french-end-screen");
 const frenchLibraryContainer = document.getElementById("french-library-container");
-const resultsContainer       = document.getElementById("results-container");
 
 // Elementos de cadastro/login
 const startButton        = document.getElementById("start-button");
@@ -64,9 +63,6 @@ const btnFrenchLibrary   = document.getElementById("btnFrenchLibrary");
 const backButtonFrenchMenu = document.getElementById("backButtonFrenchMenu");
 const frenchRestartButton  = document.getElementById("french-restart-button");
 const frenchMenuButton     = document.getElementById("french-menu-button");
-const resultsButton        = document.getElementById("results-button");
-const learnMoreButton      = document.getElementById("learn-more-button");
-const backButtonResults    = document.getElementById("backButtonResults");
 
 // Elementos do Quiz (inglês, perguntas, español, francês)
 const questionElement       = document.getElementById("question");
@@ -105,7 +101,7 @@ function hideAllSections() {
     libraryContainer, rankingContainer, endScreen, perguntasEndScreen,
     spanishMenuContainer, spanishQuizContainer, spanishEndScreen, spanishLibraryContainer,
     frenchMenuContainer, frenchQuizContainer, frenchEndScreen, frenchLibraryContainer,
-    profileContainer, exercisesContainer, resultsContainer // Inclua o contêiner de resultados aqui
+    profileContainer, exercisesContainer // Inclua o contêiner de exercícios aqui
   ].forEach(sec => sec && (sec.style.display = "none"));
 }
 
@@ -121,8 +117,7 @@ function backToMenu() {
   "backButtonQuiz", "backButtonPerguntas", "backButtonPerguntasQuiz",
   "backButtonLibrary", "backButtonRanking", "backButtonEndScreen", "backButtonPerguntasEndScreen",
   "backButtonSpanish", "backButtonSpanishLibrary", "backButtonSpanishEndScreen",
-  "backButtonFrench", "backButtonFrenchLibrary", "backButtonFrenchEndScreen",
-  "backButtonResults"
+  "backButtonFrench", "backButtonFrenchLibrary", "backButtonFrenchEndScreen"
 ].forEach(id => {
   const btn = document.getElementById(id);
   if (btn) btn.addEventListener("click", backToMenu);
@@ -291,8 +286,6 @@ function loadQuestion() {
     });
   } else endQuiz();
 }
-
-// Modifique a função `checkAnswer` para registrar as perguntas erradas
 function checkAnswer(sel) {
   const q = questions[currentQuestion];
   const opts = optionsElement.querySelectorAll("li");
@@ -307,58 +300,90 @@ function checkAnswer(sel) {
     score++;
     scoreElement.textContent = score;
   } else {
-    errors.push({ question: q.question, selectedAnswer: q.options[sel] });
+    errors.push({
+      question: q.question,
+      correct: q.options[q.answer],
+      libraryRef: q.libraryRef, // Adiciona a referência da biblioteca
+    });
   }
 
-  saveProgress(currentUserName, { questions, score, currentQuestion, errors, quizTimer });
   setTimeout(() => {
     currentQuestion++;
     loadQuestion();
   }, 1500);
 }
-
-// Função para exibir as questões erradas com o botão "Revisar"
-function displayWrongAnswers() {
-  const errorList = document.getElementById("error-list");
-  errorList.innerHTML = ""; // Limpa a lista antes de adicionar os itens
-
-  errors.forEach((error) => {
-    const questionData = allQuestions.find((q) => q.question === error.question);
-
-    if (questionData) {
-      const listItem = document.createElement("li");
-      listItem.innerHTML = `
-        <p><strong>Pergunta:</strong> ${questionData.question}</p>
-        <p><strong>Resposta Correta:</strong> ${questionData.options[questionData.answer]}</p>
-        <button class="review-button" onclick="showLibrarySection('${questionData.libraryRef}')">
-          Revisar
-        </button>
-      `;
-      errorList.appendChild(listItem);
-    }
-  });
-}
-
-// Função para navegar até a seção da biblioteca
-function showLibrarySection(sectionId) {
-  hideAllSections();
-  libraryContainer.style.display = "block";
-  document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-}
-
-// Modifique a função `endQuiz` para exibir as questões erradas
 function endQuiz() {
   stopTimer();
   quizContainer.style.display = "none";
-  endScreen.style.display = "block";
-  finalMessageElement.textContent = `Pontuação Final: ${score}/${questions.length} | Tempo: ${quizTimer}s`;
 
-  // Exibe as questões erradas
-  displayWrongAnswers();
+  // Obter mensagem motivacional
+  const motivationalMessage = getMotivationalMessage(score, questions.length);
+  congratulationsTitle.textContent = motivationalMessage.title;
+  congratulationsMessage.textContent = motivationalMessage.message;
 
-  // Exibe mensagem motivacional
-  showMotivationalMessage(score, questions.length);
+  // Preencher a lista de erros
+  errorListElement.innerHTML = errors.map((error) => `
+    <li class="error-item" style="margin-bottom: 10px;">
+      <p><strong>Pergunta:</strong> ${error.question}</p>
+      <p><strong>Resposta Correta:</strong> ${error.correct}</p>
+      <button class="aprenda-mais-button" onclick="showLibrarySection('${error.libraryRef}')">
+        Aprenda Mais
+      </button>
+    </li>
+  `).join("");
+
+  // Exibir a tela de parabenização
+  congratulationsContainer.style.display = "block";
+
+  // Salvar pontuação final
+  saveScore(document.getElementById("name").value.trim(), score, quizTimer);
 }
+
+// Função para redirecionar para a biblioteca correspondente
+function showLibrarySection(libraryRef) {
+  hideAllSections();
+  libraryContainer.style.display = "block";
+  document.getElementById(libraryRef)?.scrollIntoView({ behavior: "smooth" });
+}
+
+// Referências aos elementos da tela de parabenização
+const congratulationsContainer = document.getElementById("congratulations-container");
+const congratulationsTitle = document.getElementById("congratulations-title");
+const congratulationsMessage = document.getElementById("congratulations-message");
+const congratulationsBackButton = document.getElementById("congratulations-back-button");
+
+// Mensagens motivacionais baseadas na pontuação
+function getMotivationalMessage(score, totalQuestions) {
+  const percentage = (score / totalQuestions) * 100;
+
+  if (percentage === 100) {
+    return {
+      title: "Parabéns! 🎉",
+      message: "Você acertou todas as perguntas! Um desempenho perfeito! Continue assim!",
+    };
+  } else if (percentage >= 80) {
+    return {
+      title: "Ótimo trabalho! 👏",
+      message: "Você foi muito bem! Continue praticando para alcançar a perfeição!",
+    };
+  } else if (percentage >= 50) {
+    return {
+      title: "Bom esforço! 💪",
+      message: "Você está no caminho certo! Continue praticando para melhorar ainda mais!",
+    };
+  } else {
+    return {
+      title: "Não desista! 🌟",
+      message: "Cada erro é uma oportunidade de aprendizado. Continue tentando!",
+    };
+  }
+}
+
+// Evento para o botão "Voltar ao Menu" na tela de parabenização
+congratulationsBackButton.addEventListener("click", () => {
+  congratulationsContainer.style.display = "none"; // Ocultar a tela de parabenização
+  menuContainer.style.display = "block"; // Voltar ao menu principal
+});
 
 // Adicione um novo contêiner para a aba de aviso no HTML
 const quizWarningContainer = document.getElementById("quiz-warning-container");
@@ -448,9 +473,6 @@ function endPerguntasQuiz() {
       <button onclick="showLibrarySection('${err.libraryRef}')">Aprenda Mais</button>
     </li>
   `).join("");
-
-  // Exibe mensagem motivacional
-  showMotivationalMessage(perguntasScore, perguntasQuestions.length);
 }
 function startPerguntasQuiz(dif) {
   perguntasQuestions = allQuestions.filter(q=>q.difficulty===dif).sort(()=>Math.random()-0.5).slice(0,10);
@@ -565,7 +587,7 @@ function getRandomSpanishQuestions() {
     { question: "¿Qué significa 'Qual é o seu nome?' en español?", options: ["¿Cómo te llamas?", "¿Cómo estás?", "¿Dónde vives?", "¿Qué haces?"], answer: 0 },
     { question: "¿Cómo se dice 'Eu estou cansado' en español?", options: ["Estoy cansado", "Yo cansado", "Soy cansado", "Cansado estoy"], answer: 0 },
     { question: "¿Qué significa 'O que você faz?' en español?", options: ["¿Qué haces?", "¿Dónde estás?", "¿Cómo estás?", "¿Cuál es tu nombre?"], answer: 0 },
-    { question: "¿Cómo se dice 'Eu gosto de ler livros' en español?", options: ["Me gusta leer libros", "Yo leo libros", "Me gusta libros", "Leer libros me gusta"], answer: 0 },
+    { question: "¿Cómo se dice 'Eu gosto de ler livros' en español?", options: ["Me gusta leer libros", "Yo leo livros", "Me gusta livros", "Leer livros me gusta"], answer: 0 },
     { question: "¿Qué significa 'Quanto custa?' en español?", options: ["¿Cuánto cuesta?", "¿Dónde está?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
     { question: "¿Cómo se dice 'Eu estou aprendendo' en español?", options: ["Estoy aprendiendo", "Yo aprendo", "Aprendiendo estoy", "Aprendo"], answer: 0 },
     { question: "¿Qué significa 'Que horas são?' en español?", options: ["¿Qué hora es?", "¿Dónde estás?", "¿Cómo estás?", "¿Qué haces?"], answer: 0 },
@@ -631,9 +653,6 @@ function endSpanishQuiz() {
       <button class="aprenda-mais-button" onclick="showLibrarySectionSpanish()">Aprenda Mais</button>
     </li>
   `).join("");
-
-  // Exibe mensagem motivacional
-  showMotivationalMessage(spanishScore, spanishQuestions.length);
 }
 window.showLibrarySectionSpanish = function() {
   hideAllSections();
@@ -723,9 +742,6 @@ function endFrenchQuiz() {
       <button class="aprenda-mais-button" onclick="showLibrarySectionFrench()">En savoir plus</button>
     </li>
   `).join("");
-
-  // Exibe mensagem motivacional
-  showMotivationalMessage(frenchScore, frenchQuestions.length);
 }
 window.showLibrarySectionFrench = function() {
   hideAllSections();
@@ -744,11 +760,15 @@ backButtonFrenchMenu.addEventListener("click", backToMenu);
 frenchRestartButton.addEventListener("click", ()=> btnFrenchQuiz.click());
 frenchMenuButton.addEventListener("click", backToMenu);
 
+
+saveScore(currentUserName, score, quizTimer);
+
+
 // --- SALVAR PONTUAÇÃO ---
 async function saveScore(userName, score, time) {
-  const snap = await getDocs(collection(db,"users"));
+  const snap = await getDocs(collection(db, "users"));
   let userDoc = null;
-  snap.forEach(doc=>{
+  snap.forEach(doc => {
     if (doc.data().name === userName) userDoc = doc.ref;
   });
   if (userDoc) {
@@ -767,6 +787,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Lista de perguntas fixa
 const allQuestions = [
   // 15 com answer: 0
   { question: "What does the idiom 'Break the ice' mean?", options: ["Start a conversation in a social setting", "Break something fragile", "Go outside in winter", "Make a mistake"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
@@ -1165,14 +1186,6 @@ document.getElementById("exercise-submit").addEventListener("click", () => {
   document.getElementById("exercise-input").value = ""; // Limpar entrada
 });
 
-// Função para pular para a próxima pergunta
-document.getElementById("exercise-skip").addEventListener("click", () => {
-  currentExerciseQuestionIndex++;
-  document.getElementById("exercise-feedback").textContent = "Pergunta pulada!";
-  document.getElementById("exercise-input").value = "";
-  showNextQuestion();
-});
-
 // Mostra a aba de exercícios ao clicar no botão
 btnExercises.addEventListener("click", () => {
   hideAllSections(); // Esconde todas as outras seções
@@ -1240,86 +1253,3 @@ document.addEventListener('keydown', (event) => {
     }
   }
 });
-
-// --- RESULTADOS ---
-resultsButton.addEventListener('click', () => {
-  document.getElementById('end-screen').style.display = 'none';
-  document.getElementById('results-container').style.display = 'block';
-
-  const score = parseInt(document.getElementById('score').textContent, 10);
-  const totalQuestions = 15; // Total de questões do quiz
-  const wrongQuestions = []; // Substitua com as questões erradas do quiz
-
-  // Exibir pontuação
-  document.getElementById('score-summary').textContent = `Você acertou ${score} de ${totalQuestions} questões.`;
-
-  // Exibir questões erradas
-  const wrongQuestionsList = document.getElementById('wrong-questions-list');
-  wrongQuestionsList.innerHTML = '';
-  wrongQuestions.forEach((question) => {
-    const li = document.createElement('li');
-    li.textContent = question; // Substitua com o texto da questão errada
-    wrongQuestionsList.appendChild(li);
-  });
-});
-
-// Botão "Aprenda Mais"
-learnMoreButton.addEventListener('click', () => {
-  document.getElementById('results-container').style.display = 'none';
-  document.getElementById('library-container').style.display = 'block';
-});
-
-// Botão "Voltar" nos resultados
-backButtonResults.addEventListener('click', () => {
-  document.getElementById('results-container').style.display = 'none';
-  document.getElementById('menu-container').style.display = 'block';
-});
-
-// Função para exibir mensagem motivacional (15 frases, referências atuais, inglês e brincadeiras com "Speak Easy")
-function showMotivationalMessage(score, totalQuestions) {
-  let motivationalMessage = '';
-  const percent = score / totalQuestions;
-
-  if (score === totalQuestions) {
-    motivationalMessage = 'Você zerou! Aqui é Speak Easy, mas seu inglês tá Speak Master! 🏆🇬🇧';
-  } else if (percent >= 0.95) {
-    motivationalMessage = 'Só faltou o sotaque britânico! Tá quase virando lenda do Speak Easy! 👑✨';
-  } else if (percent >= 0.9) {
-    motivationalMessage = 'Mandou aquele GG! Já pode dar aula no Speak Easy! 😎📚';
-  } else if (percent >= 0.85) {
-    motivationalMessage = 'Seu inglês tá mais fácil que pedir delivery! Bora pro próximo nível no Speak Easy! 🍔🚀';
-  } else if (percent >= 0.8) {
-    motivationalMessage = 'Top demais! Já já tá assistindo série sem legenda, estilo Speak Easy! 📺🔥';
-  } else if (percent >= 0.75) {
-    motivationalMessage = 'Tá fluindo! Aqui é Speak Easy, mas você tá quase Speak Pro! 💬💪';
-  } else if (percent >= 0.7) {
-    motivationalMessage = 'Safe! Seu inglês tá subindo de elo no Speak Easy! 🛡️';
-  } else if (percent >= 0.65) {
-    motivationalMessage = 'Tá indo bem! Logo logo vai pedir café em Londres sem travar! ☕🇬🇧';
-  } else if (percent >= 0.6) {
-    motivationalMessage = 'Falta pouco pra virar referência no Speak Easy! Keep going! 🚦';
-  } else if (percent >= 0.5) {
-    motivationalMessage = 'Tá no caminho! Melhorando aqui, arrasando lá fora! 🌍😉';
-  } else if (percent >= 0.4) {
-    motivationalMessage = 'Não desanima! Até o Google Tradutor já errou, mas você tá aprendendo de verdade! 📱🔄';
-  } else if (percent >= 0.3) {
-    motivationalMessage = 'Faz parte! Todo mundo já usou legenda, mas só os brabos continuam no Speak Easy! 🎬💡';
-  } else if (percent >= 0.2) {
-    motivationalMessage = 'Primeiro passo já foi! No Speak Easy, cada erro é um aprendizado! 👣';
-  } else if (percent >= 0.1) {
-    motivationalMessage = 'Começou, já é metade do caminho! Speak Easy é pra quem não desiste! 🚀';
-  } else {
-    motivationalMessage = 'Zero barra zero, mas relaxa: até o dicionário começou do A! Bora tentar de novo no Speak Easy! 📖😅';
-  }
-  // Exibe em popup (alert) ou em um elemento HTML
-  // alert(motivationalMessage); // Descomente para usar popup
-
-  // Exibe em um elemento na tela (certifique-se de ter um elemento com id="motivational-message")
-  const msgEl = document.getElementById('motivational-message');
-  if (msgEl) {
-    msgEl.textContent = motivationalMessage;
-    msgEl.style.display = 'block';
-  } else {
-    alert(motivationalMessage); // Fallback para popup se o elemento não existir
-  }
-}
