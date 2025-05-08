@@ -337,6 +337,9 @@ function endQuiz() {
 
   // Salvar pontuação final
   saveScore(document.getElementById("name").value.trim(), score, quizTimer);
+
+  // SALVAR PROGRESSO PARA BLOQUEAR NOVO QUIZ
+  saveProgress(currentUserName, { finished: true }); // <-- Adicione esta linha
 }
 
 // Função para redirecionar para a biblioteca correspondente
@@ -354,29 +357,45 @@ const congratulationsBackButton = document.getElementById("congratulations-back-
 
 // Mensagens motivacionais baseadas na pontuação
 function getMotivationalMessage(score, totalQuestions) {
-  const percentage = (score / totalQuestions) * 100;
+  const percent = score / totalQuestions;
+  let motivationalMessage;
 
-  if (percentage === 100) {
-    return {
-      title: "Parabéns! 🎉",
-      message: "Você acertou todas as perguntas! Um desempenho perfeito! Continue assim!",
-    };
-  } else if (percentage >= 80) {
-    return {
-      title: "Ótimo trabalho! 👏",
-      message: "Você foi muito bem! Continue praticando para alcançar a perfeição!",
-    };
-  } else if (percentage >= 50) {
-    return {
-      title: "Bom esforço! 💪",
-      message: "Você está no caminho certo! Continue praticando para melhorar ainda mais!",
-    };
+  if (score === totalQuestions) {
+    motivationalMessage = 'Você zerou! Aqui é Speak Easy, mas seu inglês tá Speak Master! 🏆🇬🇧';
+  } else if (percent >= 0.95) {
+    motivationalMessage = 'Só faltou o sotaque britânico! Tá quase virando lenda do Speak Easy! 👑✨';
+  } else if (percent >= 0.9) {
+    motivationalMessage = 'Mandou aquele GG! Já pode dar aula no Speak Easy! 😎📚';
+  } else if (percent >= 0.85) {
+    motivationalMessage = 'Seu inglês tá mais fácil que pedir delivery! Bora pro próximo nível no Speak Easy! 🍔🚀';
+  } else if (percent >= 0.8) {
+    motivationalMessage = 'Top demais! Já já tá assistindo série sem legenda, estilo Speak Easy! 📺🔥';
+  } else if (percent >= 0.75) {
+    motivationalMessage = 'Tá fluindo! Aqui é Speak Easy, mas você tá quase Speak Pro! 💬💪';
+  } else if (percent >= 0.7) {
+    motivationalMessage = 'Safe! Seu inglês tá subindo de elo no Speak Easy! 🛡️';
+  } else if (percent >= 0.65) {
+    motivationalMessage = 'Tá indo bem! Logo logo vai pedir café em Londres sem travar! ☕🇬🇧';
+  } else if (percent >= 0.6) {
+    motivationalMessage = 'Falta pouco pra virar referência no Speak Easy! Keep going! 🚦';
+  } else if (percent >= 0.5) {
+    motivationalMessage = 'Tá no caminho! Melhorando aqui, arrasando lá fora! 🌍😉';
+  } else if (percent >= 0.4) {
+    motivationalMessage = 'Não desanima! Até o Google Tradutor já errou, mas você tá aprendendo de verdade! 📱🔄';
+  } else if (percent >= 0.3) {
+    motivationalMessage = 'Faz parte! Todo mundo já usou legenda, mas só os brabos continuam no Speak Easy! 🎬💡';
+  } else if (percent >= 0.2) {
+    motivationalMessage = 'Primeiro passo já foi! No Speak Easy, cada erro é um aprendizado! 👣';
+  } else if (percent >= 0.1) {
+    motivationalMessage = 'Começou, já é metade do caminho! Speak Easy é pra quem não desiste! 🚀';
   } else {
-    return {
-      title: "Não desista! 🌟",
-      message: "Cada erro é uma oportunidade de aprendizado. Continue tentando!",
-    };
+    motivationalMessage = 'Zero barra zero, mas relaxa: até o dicionário começou do A! Bora tentar de novo no Speak Easy! 📖😅';
   }
+
+  return {
+    title: "Parabéns!",
+    message: motivationalMessage
+  };
 }
 
 // Evento para o botão "Voltar ao Menu" na tela de parabenização
@@ -463,10 +482,10 @@ function checkPerguntasAnswer(sel) {
 }
 function endPerguntasQuiz() {
   stopPerguntasTimer();
-  perguntasQuizContainer.style.display="none";
-  perguntasEndScreen.style.display="block";
+  perguntasQuizContainer.style.display = "none";
+  perguntasEndScreen.style.display = "block";
   perguntasFinalMessageElement.textContent = `Pontuação Final: ${perguntasScore}/${perguntasQuestions.length} | Tempo: ${perguntasTimer}s`;
-  perguntasErrorListElement.innerHTML = perguntasErrors.map(err=>`
+  perguntasErrorListElement.innerHTML = perguntasErrors.map(err => `
     <li class="error-item">
       ${err.question}<br>
       Resposta correta: ${err.correct}
@@ -475,27 +494,64 @@ function endPerguntasQuiz() {
   `).join("");
 }
 function startPerguntasQuiz(dif) {
-  perguntasQuestions = allQuestions.filter(q=>q.difficulty===dif).sort(()=>Math.random()-0.5).slice(0,10);
-  perguntasScore=0; currentPerguntaQuestion=0; perguntasErrors=[];
-  perguntasScoreElement.textContent=perguntasScore;
+  perguntasQuestions = allQuestions.filter(q => q.difficulty === dif).sort(() => Math.random() - 0.5).slice(0,10);
+  perguntasScore = 0; currentPerguntaQuestion = 0; perguntasErrors = [];
+  perguntasScoreElement.textContent = perguntasScore;
   hideAllSections();
-  perguntasQuizContainer.style.display="block";
+  perguntasQuizContainer.style.display = "block";
   startPerguntasTimer();
   loadPerguntasQuestion();
 }
-btnPerguntas.addEventListener("click", ()=>{ hideAllSections(); perguntasContainer.style.display="block"; });
+btnPerguntas.addEventListener("click", ()=>{ hideAllSections(); perguntasContainer.style.display = "block"; });
 btnFacil.addEventListener("click", ()=> startPerguntasQuiz("easy"));
 btnMedio.addEventListener("click", ()=> startPerguntasQuiz("medium"));
 btnDificil.addEventListener("click", ()=> startPerguntasQuiz("hard"));
-perguntasRestartButton.addEventListener("click", ()=> startPerguntasQuiz(perguntasQuestions[0]?.difficulty||"easy"));
+perguntasRestartButton.addEventListener("click", ()=> startPerguntasQuiz(perguntasQuestions[0]?.difficulty || "easy"));
 perguntasMenuButton.addEventListener("click", backToMenu);
 
 // --- BIBLIOTECA ---
-btnLibrary.addEventListener("click", ()=>{ hideAllSections(); libraryContainer.style.display="block"; });
+btnLibrary.addEventListener("click", ()=>{ hideAllSections(); libraryContainer.style.display = "block"; });
 window.showLibrarySection = function(sectionId){
   hideAllSections();
-  libraryContainer.style.display="block";
+  libraryContainer.style.display = "block";
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+};
+
+// Função para abrir a biblioteca e esconder o botão de voltar ao menu
+function openLibraryFromLearnMore() {
+  hideAllSections();
+  document.getElementById('library-container').style.display = 'block';
+  // Esconde o botão de voltar ao menu na biblioteca
+  document.getElementById('backButtonLibrary').style.display = 'none';
+}
+
+// Função para mostrar o botão de voltar ao menu quando sair da biblioteca
+function closeLibraryAndShowMenu() {
+  document.getElementById('library-container').style.display = 'none';
+  document.getElementById('menu-container').style.display = 'block';
+  // Mostra o botão de voltar ao menu novamente
+  document.getElementById('backButtonLibrary').style.display = '';
+}
+
+// Exemplo de uso: supondo que o botão "Aprenda Mais" tenha id="learn-more-btn"
+const learnMoreBtn = document.getElementById('learn-more-btn');
+if (learnMoreBtn) {
+  learnMoreBtn.addEventListener('click', openLibraryFromLearnMore);
+}
+
+// No botão de fechar/voltar da biblioteca, use closeLibraryAndShowMenu
+const backButtonLibrary = document.getElementById('backButtonLibrary');
+if (backButtonLibrary) {
+  backButtonLibrary.addEventListener('click', () => {
+    // Esconde a biblioteca
+    libraryContainer.style.display = "none";
+    // Esconde a lista de erros e respostas corretas (tela de parabenização)
+    if (congratulationsContainer) {
+      congratulationsContainer.style.display = "none";
+    }
+    // Volta ao menu principal
+    menuContainer.style.display = "block";
+  });
 };
 
 // --- RANKING ---
@@ -1253,3 +1309,17 @@ document.addEventListener('keydown', (event) => {
     }
   }
 });
+
+// Unifica o botão "Voltar ao Menu" após qualquer quiz
+const backToMenuButton = document.getElementById("backToMenuButton");
+if (backToMenuButton) {
+  backToMenuButton.addEventListener("click", () => {
+    // Oculta todas as telas de finalização de quiz
+    congratulationsContainer.style.display = "none";
+    perguntasEndScreen.style.display = "none";
+    spanishEndScreen.style.display = "none";
+    frenchEndScreen.style.display = "none";
+    // Volta ao menu principal
+    menuContainer.style.display = "block";
+  });
+};
