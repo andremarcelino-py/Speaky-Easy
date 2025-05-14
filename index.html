@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
 
@@ -381,6 +382,9 @@
     <div class="score-container">
       <p>Pontuação: <span id="score">0</span>/15</p>
       <p>Tempo: <span id="timer">0</span> s</p>
+    <div id="quiz-progress-bar-container" style="width: 100%; margin-bottom: 16px;">
+      <div id="quiz-progress-bar" style="height: 16px; background: #4caf50; width: 0%; border-radius: 8px; transition: width 0.3s;"></div>
+    </div>
     </div>
   </div>
 
@@ -396,6 +400,9 @@
       <button id="btnDificil" class="level-button">Difícil</button>
     </div>
   </div>
+
+
+  
 
   <!-- Quiz de Perguntas -->
   <div id="perguntas-quiz-container" class="quiz-container" style="display:none;">
@@ -560,26 +567,182 @@
   </div>
 </div>
 
-<!-- Seção: Mais Perguntas -->
-<div id="more-questions" class="text-card animate-in">
+<!-- Seção: Perguntas Pessoais -->
+<div id="personal-questions" class="text-card animate-in">
   <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Mais Perguntas 🗣️</h3>
+    <i class="fas fa-user"></i>
+    <h3>Perguntas Pessoais 🗣️</h3>
   </div>
   <div class="text-content">
-    <p>Abaixo, veja exemplos de perguntas comuns com suas traduções:</p>
-    <p class="english">What is your favorite food? 🍔</p>
-    <p class="portuguese">Qual é a sua comida favorita? 🍔</p>
-    <p class="english">When did you start learning English? 📅</p>
-    <p class="portuguese">Quando você começou a aprender inglês? 📅</p>
-    <p class="english">How often do you practice speaking? 🗣️</p>
-    <p class="portuguese">Com que frequência você pratica falar? 🗣️</p>
-    <p class="english">Who is your role model? 🌟</p>
-    <p class="portuguese">Quem é o seu ídolo? 🌟</p>
-    <p class="english">What do you do in your free time? 🕒</p>
-    <p class="portuguese">O que você faz no seu tempo livre? 🕒</p>
+    <p class="english">What is your name?</p>
+    <p class="portuguese">Qual é o seu nome?</p>
+    <p class="english">Where do you live?</p>
+    <p class="portuguese">Onde você mora?</p>
+    <p class="english">How old are you?</p>
+    <p class="portuguese">Quantos anos você tem?</p>
+    <p class="english">What do you do in your free time?</p>
+    <p class="portuguese">O que você faz no seu tempo livre?</p>
+    <p class="english">Do you have any pets?</p>
+    <p class="portuguese">Você tem algum animal de estimação?</p>
   </div>
 </div>
+
+
+<!-- Seção: Verbos Irregulares -->
+<div id="irregular-verbs" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-star"></i>
+    <h3>Verbos Irregulares 🚀</h3>
+  </div>
+  <div class="text-content">
+    <p>Os verbos irregulares não seguem as regras comuns de conjugação. Exemplos incluem "go" (went), "have" (had) e "be" (was/were).</p>
+    <p>Exemplos:</p>
+    <p class="english">I went to the store yesterday 🏬</p>
+    <p class="portuguese">Eu fui à loja ontem 🏬</p>
+    <p class="english">She had a great time at the party 🎉</p>
+    <p class="portuguese">Ela se divertiu muito na festa 🎉</p>
+  </div>
+</div>
+  <!-- Seção: Expressões de Tempo -->
+
+  
+<!-- Seção: Métodos Ágeis -->
+<div id="agile-methods" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-project-diagram"></i>
+    <h3>Métodos Ágeis 🚀</h3>
+  </div>
+  <div class="text-content">
+    <p>Métodos ágeis são abordagens para gestão e desenvolvimento de projetos que valorizam colaboração, flexibilidade e entregas rápidas.</p>
+    <p class="english"><strong>Scrum</strong> 🏉 - An agile framework that divides work into cycles called <em>sprints</em>.</p>
+    <p class="portuguese"><strong>Scrum</strong> 🏉 - Um framework ágil que divide o trabalho em ciclos chamados <em>sprints</em>.</p>
+    <p class="english"><strong>Kanban</strong> 🗂️ - A visual method for managing tasks using boards and cards.</p>
+    <p class="portuguese"><strong>Kanban</strong> 🗂️ - Um método visual para gerenciar tarefas usando quadros e cartões.</p>
+    <p class="english"><strong>Daily Stand-up</strong> ⏰ - A quick daily meeting to align the team.</p>
+    <p class="portuguese"><strong>Daily Stand-up</strong> ⏰ - Reunião diária rápida para alinhar o time.</p>
+    <p class="english"><strong>Product Backlog</strong> 📋 - Prioritized list of everything that needs to be done in the project.</p>
+    <p class="portuguese"><strong>Product Backlog</strong> 📋 - Lista priorizada de tudo que deve ser feito no projeto.</p>
+    <p class="english"><strong>Sprint Retrospective</strong> 🔄 - Meeting to reflect and improve the process after each sprint.</p>
+    <p class="portuguese"><strong>Sprint Retrospective</strong> 🔄 - Reunião para refletir e melhorar o processo após cada sprint.</p>
+    <p class="english"><strong>Agile Manifesto</strong> 📜 - Values and principles for agile software development.</p>
+    <p class="portuguese"><strong>Manifesto Ágil</strong> 📜 - Valores e princípios para desenvolvimento ágil de software.</p>
+  </div>
+</div>
+
+<!-- Seção: Conversação -->
+  <div id="conversation" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-comments"></i>
+      <h3>Conversação 🗨️</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">How are you today? 😊</p>
+      <p class="portuguese">Como você está hoje? 😊</p>
+      <p class="english">Can you help me, please?</p>
+      <p class="portuguese">Você pode me ajudar, por favor?</p>
+      <p class="english">What do you like to do for fun?</p>
+      <p class="portuguese">O que você gosta de fazer para se divertir?</p>
+      <p class="english">Could you repeat that, please?</p>
+      <p class="portuguese">Você pode repetir, por favor?</p>
+      <p class="english">I didn't understand. Can you explain?</p>
+      <p class="portuguese">Eu não entendi. Você pode explicar?</p>
+    </div>
+  </div>
+
+
+<!-- Seção: Saudações -->
+<div id="greetings" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-handshake"></i>
+    <h3>Saudações 👋</h3>
+  </div>
+  <div class="text-content">
+    <p class="english">Hello! How are you?</p>
+    <p class="portuguese">Olá! Como você está?</p>
+    <p class="english">Good morning!</p>
+    <p class="portuguese">Bom dia!</p>
+    <p class="english">Good night!</p>
+    <p class="portuguese">Boa noite!</p>
+    <p class="english">See you later!</p>
+    <p class="portuguese">Até mais!</p>
+  </div>
+</div>
+
+<!-- Seção: Pedidos e Cortesia -->
+<div id="politeness" class="text-card animate-in">
+  <div class="text-header">
+    <i class="fas fa-smile"></i>
+    <h3>Pedidos e Cortesia 🙏</h3>
+  </div>
+  <div class="text-content">
+    <p class="english">Can you help me, please?</p>
+    <p class="portuguese">Você pode me ajudar, por favor?</p>
+    <p class="english">Thank you very much!</p>
+    <p class="portuguese">Muito obrigado!</p>
+    <p class="english">You're welcome!</p>
+    <p class="portuguese">De nada!</p>
+    <p class="english">Excuse me, where is the bathroom?</p>
+    <p class="portuguese">Com licença, onde fica o banheiro?</p>
+  </div>
+</div>
+
+
+
+
+  <!-- Seção: Dia a Dia -->
+  <div id="daily-routine" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-calendar-day"></i>
+      <h3>Dia a Dia 🏠</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">I wake up at 7 a.m.</p>
+      <p class="portuguese">Eu acordo às 7 da manhã.</p>
+      <p class="english">I go to work by bus.</p>
+      <p class="portuguese">Eu vou para o trabalho de ônibus.</p>
+      <p class="english">I have lunch at noon.</p>
+      <p class="portuguese">Eu almoço ao meio-dia.</p>
+      <p class="english">I like to watch TV in the evening.</p>
+      <p class="portuguese">Eu gosto de assistir TV à noite.</p>
+      <p class="english">I go to bed at 10 p.m.</p>
+      <p class="portuguese">Eu vou dormir às 22h.</p>
+    </div>
+  </div>
+
+  <!-- Seção: Mais Perguntas (expandida) -->
+  <div id="more-questions" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3> Perguntas 🗣️</h3>
+    </div>
+    <div class="text-content">
+      <p>Abaixo, veja exemplos de perguntas comuns com suas traduções:</p>
+      <p class="english">What is your favorite food? 🍔</p>
+      <p class="portuguese">Qual é a sua comida favorita? 🍔</p>
+      <p class="english">When did you start learning English? 📅</p>
+      <p class="portuguese">Quando você começou a aprender inglês? 📅</p>
+      <p class="english">How often do you practice speaking? 🗣️</p>
+      <p class="portuguese">Com que frequência você pratica falar? 🗣️</p>
+      <p class="english">Who is your role model? 🌟</p>
+      <p class="portuguese">Quem é o seu ídolo? 🌟</p>
+      <p class="english">What do you do in your free time? 🕒</p>
+      <p class="portuguese">O que você faz no seu tempo livre? 🕒</p>
+      <p class="english">Where do you live? 🏠</p>
+      <p class="portuguese">Onde você mora? 🏠</p>
+      <p class="english">Why are you learning English? 🤔</p>
+      <p class="portuguese">Por que você está aprendendo inglês? 🤔</p>
+      <p class="english">Do you have any pets? 🐶</p>
+      <p class="portuguese">Você tem algum animal de estimação? 🐶</p>
+      <p class="english">What is your favorite movie? 🎬</p>
+      <p class="portuguese">Qual é o seu filme favorito? 🎬</p>
+      <p class="english">How do you get to school or work? 🚗</p>
+      <p class="portuguese">Como você vai para a escola ou trabalho? 🚗</p>
+      <p class="english">What time do you usually wake up? ⏰</p>
+      <p class="portuguese">Que horas você costuma acordar? ⏰</p>
+      <p class="english">Have you ever traveled abroad? ✈️</p>
+      <p class="portuguese">Você já viajou para o exterior? ✈️</p>
+    </div>
+  </div>
   </div>
 
   <!-- Ranking -->
@@ -805,7 +968,7 @@
 <div id="first-time-popup" class="popup" style="display: none;">
   <div class="popup-content">
     <h2>Bem-vindo ao Speak Easy!</h2>
-    <p>Gostaríamos de conhecer você melhor. Que tal configurar seu perfil agora?</p>
+    <p>Gostaríamos de oferecer a melhor experiência. Que tal escolher seu avatar agora?</p>
     <button id="go-to-profile">Ir para o Perfil</button>
     <button id="skip-profile">Depois</button>
   </div>
