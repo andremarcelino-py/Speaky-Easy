@@ -737,21 +737,37 @@ spanishMenuButton.addEventListener("click", backToMenu);
 let frenchQuestions = [], frenchScore = 0, currentFrenchQuestion = 0, frenchErrors = [], frenchTimer = 0, frenchTimerInterval;
 function getRandomFrenchQuestions() {
   const all = [
-    { question: "Comment dit-on 'Hello' en français?", options: ["Bonjour", "Au revoir", "Merci", "S'il vous plaît"], answer: 0 },
-    { question: "Que signifie 'Goodbye' en français?", options: ["Bonjour", "Au revoir", "Bonne nuit", "Merci"], answer: 1 },
-    { question: "Comment dit-on 'Thank you' en français?", options: ["S'il vous plaît", "Merci", "De rien", "Pardon"], answer: 1 },
-    { question: "Quel est le pluriel de 'ami'?", options: ["Amis", "Amies", "Ami(e)s", "Ami"], answer: 0 },
-    { question: "Comment dit-on 'I am learning French' en français?", options: ["J'apprends le français", "Je français apprends", "J'apprendrai le français", "Je suis en train d'apprendre le français"], answer: 0 },
-    { question: "Que signifie 'Bonne nuit' en français?", options: ["Good night", "Good morning", "Goodbye", "Good evening"], answer: 0 },
-    { question: "Comment dit-on 'Je suis fatigué' en français?", options: ["Je suis fatigué", "Je suis heureux", "Je suis triste", "Je suis en colère"], answer: 0 },
-    { question: "Que signifie 'Où habitez-vous?' en français?", options: ["Where do you live?", "How are you?", "What is your name?", "What do you do?"], answer: 0 },
-    { question: "Comment dit-on 'Je voudrais un café' en français?", options: ["I would like a coffee", "I want a coffee", "I need a coffee", "I drink a coffee"], answer: 0 },
-    { question: "Que signifie 'Quelle heure est-il?' en français?", options: ["What time is it?", "Where are you?", "How are you?", "What are you doing?"], answer: 0 },
-    { question: "Comment dit-on 'Je suis étudiant' en français?", options: ["I am a student", "I am a teacher", "I am a worker", "I am a doctor"], answer: 0 },
-    { question: "Que signifie 'Merci beaucoup' en français?", options: ["Thank you very much", "You're welcome", "Please", "Excuse me"], answer: 0 },
-    { question: "Comment dit-on 'Je suis heureux' en français?", options: ["I am happy", "I am sad", "I am tired", "I am angry"], answer: 0 },
-    { question: "Que signifie 'Quel est votre nom?' en français?", options: ["What is your name?", "How are you?", "Where do you live?", "What do you do?"], answer: 0 },
-    { question: "Comment dit-on 'Je suis en colère' en français?", options: ["I am angry", "I am happy", "I am sad", "I am tired"], answer: 0 }
+    { question: "Como se diz 'Olá' em francês?", options: ["Bonjour", "Bonsoir", "Salut", "Merci"], answer: 0 },
+    { question: "O que significa 'Merci' em português?", options: ["Por favor", "Desculpe", "Obrigado", "Tchau"], answer: 2 },
+    { question: "Como perguntar 'Onde fica o banheiro?' em francês?", options: ["Où est la cuisine ?", "Où est la salle de bain ?", "Où est la chambre ?", "Où est le salon ?"], answer: 1 },
+    { question: "Qual é o plural de 'animal' em francês?", options: ["Animaux", "Animals", "Animales", "Animauxes"], answer: 0 },
+    { question: "Como dizer 'Eu sou estudante' em francês?", options: ["Je suis étudiant", "Je suis professeur", "Je suis médico", "Je suis ingénieur"], answer: 0 },
+    { question: "O que significa 'Bonne nuit' em português?", options: ["Boa noite", "Bom dia", "Tchau", "Boa tarde"], answer: 0 },
+    { question: "Como perguntar 'Como vai você?' em francês?", options: ["Comment tu t'appelles ?", "Comment ça va ?", "Où habites-tu ?", "Quel âge as-tu ?"], answer: 1 },
+    { question: "O que quer dizer 'Au revoir' em português?", options: ["Até logo", "Adeus", "Obrigado", "Olá"], answer: 1 },
+    { question: "Como dizer 'Meu nome é Marie' em francês?", options: ["Je m'appelle Marie", "Je suis Marie", "Mon nom est Marie", "Marie je m'appelle"], answer: 0 },
+    { question: "O que significa 'Où habites-tu ?' em português?", options: ["Onde você mora?", "Como você está?", "Qual seu nome?", "O que você faz?"], answer: 0 },
+    { question: "Como pedir um café em francês?", options: ["Je voudrais un café", "Je veux un café", "Je prends un café", "Je bois un café"], answer: 0 },
+    { question: "O que quer dizer 'Merci beaucoup' em português?", options: ["Muito obrigado", "De nada", "Por favor", "Com licença"], answer: 0 },
+    { question: "Como dizer 'Estou feliz' em francês?", options: ["Je suis heureux", "Je suis triste", "Je suis fatigué", "Je suis en colère"], answer: 0 },
+    { question: "O que significa 'Quel âge as-tu ?' em português?", options: ["Quantos anos você tem?", "Onde você mora?", "Qual seu nome?", "Como você está?"], answer: 0 },
+    { question: "Como dizer 'Eu gosto de aprender francês' em francês?", options: ["J'aime apprendre le français", "J'apprends le francês", "Je parle francês", "Je comprends le francês"], answer: 0 },
+    // Novas perguntas abaixo
+    { question: "Como se diz 'Bom dia' em francês?", options: ["Bonsoir", "Bonjour", "Bonne nuit", "Salut"], answer: 1 },
+    { question: "O que significa 'Pardon' em português?", options: ["Com licença", "Desculpe", "Por favor", "Obrigado"], answer: 1 },
+    { question: "Como perguntar 'Qual é o seu nome?' em francês?", options: ["Quel âge as-tu ?", "Comment tu t'appelles ?", "Où habites-tu ?", "Comment ça va ?"], answer: 1 },
+    { question: "Como dizer 'Eu não entendo' em francês?", options: ["Je comprends", "Je ne comprends pas", "Je suis perdido", "Je ne sais pas"], answer: 1 },
+    { question: "O que significa 'Bonne soirée' em português?", options: ["Boa tarde", "Boa noite (despedida)", "Boa noite (cumprimento)", "Bom dia"], answer: 1 },
+    { question: "Como se diz 'Por favor' em francês?", options: ["Merci", "S'il vous plaît", "Excusez-moi", "Bonjour"], answer: 1 },
+    { question: "Como perguntar 'Você fala francês?' em francês?", options: ["Tu parles anglais ?", "Tu parles espagnol ?", "Tu parles français ?", "Tu parles italien ?"], answer: 2 },
+    { question: "O que significa 'Je suis fatigué' em português?", options: ["Estou cansado", "Estou feliz", "Estou com fome", "Estou com sono"], answer: 0 },
+    { question: "Como dizer 'Eu estou com fome' em francês?", options: ["J'ai soif", "J'ai faim", "Je suis fatigué", "Je suis content"], answer: 1 },
+    { question: "O que significa 'Je t'aime' em português?", options: ["Eu gosto de você", "Eu te amo", "Eu te odeio", "Eu te conheço"], answer: 1 },
+    { question: "Como se diz 'Até logo' em francês?", options: ["À bientôt", "Bonsoir", "Salut", "Merci"], answer: 0 },
+    { question: "O que significa 'Je suis perdu' em português?", options: ["Estou atrasado", "Estou perdido", "Estou com medo", "Estou com pressa"], answer: 1 },
+    { question: "Como perguntar 'Onde você mora?' em francês?", options: ["Où habites-tu ?", "Comment tu t'appelles ?", "Quel âge as-tu ?", "Comment ça va ?"], answer: 0 },
+    { question: "Como dizer 'Eu estou aprendendo francês' em francês?", options: ["J'apprends le français", "Je parle francês", "Je comprends le francês", "J'aime le francês"], answer: 0 },
+    { question: "O que significa 'Excusez-moi' em português?", options: ["Com licença", "Desculpe", "Por favor", "Obrigado"], answer: 0 }
   ];
   return [...all].sort(() => Math.random() - 0.5).slice(0, 15);
 }
@@ -847,75 +863,99 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Lista de perguntas fixa
 const allQuestions = [
-  // 15 com answer: 0
-  { question: "What does the idiom 'Break the ice' mean?", options: ["Start a conversation in a social setting", "Break something fragile", "Go outside in winter", "Make a mistake"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
-  { question: "Which is the correct Present Perfect sentence?", options: ["She has finished her work", "She finish her work", "She finishing her work", "She will finish her work"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
-  { question: "What is the translation of 'Renewable energy'?", options: ["Energia renovável", "Energia nuclear", "Energia solar", "Energia elétrica"], answer: 0, difficulty: "medium", libraryRef: "technical-vocabulary" },
-  { question: "What does 'Piece of cake' mean?", options: ["Something very easy", "A dessert", "A difficult task", "A celebration"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
-  { question: "Which is an example of Past Continuous?", options: ["I was reading a book", "I read a book", "I will read a book", "I have read a book"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What is the plural of 'analysis'?", options: ["Analyses", "Analysis", "Analysises", "Analys"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "What does 'Let the cat out of the bag' mean?", options: ["Reveal a secret", "Let a pet escape", "Buy a cat", "Make a mistake"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the meaning of 'Photosynthesis'?", options: ["Process by which plants make food", "A type of photography", "A disease", "A chemical reaction in animals"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
-  { question: "Which sentence uses the Future Continuous?", options: ["I will be working tomorrow", "I work tomorrow", "I worked tomorrow", "I am working tomorrow"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What does 'Under the weather' mean?", options: ["Feeling sick", "Being outside", "Weather forecast", "Feeling happy"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
-  { question: "What does 'To pull someone's leg' mean?", options: ["To joke with someone", "To hurt someone", "To help someone", "To run fast"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the meaning of 'Algorithm'?", options: ["A set of rules for solving a problem", "A type of music", "A dance move", "A kind of animal"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
-  { question: "What does 'Spill the beans' mean?", options: ["Reveal secret information", "Cook beans", "Make a mess", "Tell a joke"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the plural of 'criterion'?", options: ["Criteria", "Criterions", "Criterias", "Criterion"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "What does 'To hit the books' mean?", options: ["To study hard", "To throw books", "To write a book", "To read for fun"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  // Pedidos e Cortesia
+  { question: "Qual é a forma mais educada de pedir ajuda em inglês?", options: ["Help me!", "Can you help me, please?", "Give me help!", "You help me?"], answer: 1, difficulty: "easy", libraryRef: "politeness" },
+  { question: "Como você agradece alguém de forma formal em inglês?", options: ["You're welcome", "Excuse me", "Thank you very much", "Sorry"], answer: 2, difficulty: "easy", libraryRef: "politeness" },
+  { question: "Como pedir para usar o banheiro de maneira educada em inglês?", options: ["Excuse me, where is the bathroom?", "Sorry, where is the kitchen?", "Please, where is the bedroom?", "Hello, where is the office?"], answer: 0, difficulty: "easy", libraryRef: "politeness" },
 
-  // 15 com answer: 1
-  { question: "Which is the correct form of the verb 'to be' for 'they'?", options: ["is", "are", "am", "be"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
-  { question: "What is the synonym of 'happy'?", options: ["Sad", "Joyful", "Angry", "Tired"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What is the antonym of 'cold'?", options: ["Warm", "Hot", "Cool", "Freezing"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What does 'Break a leg' mean?", options: ["Run fast", "Good luck", "Fall down", "Be careful"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
-  { question: "Which is the correct Past Simple sentence?", options: ["She go to school", "She went to school", "She going to school", "She goes to school"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What is the plural of 'goose'?", options: ["Gooses", "Geese", "Goosies", "Goose"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "What does 'Call it a day' mean?", options: ["Start working", "Stop working", "Work at night", "Take a break"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the meaning of 'CPU'?", options: ["Central Power Unit", "Central Processing Unit", "Computer Personal Unit", "Central Program Unit"], answer: 1, difficulty: "hard", libraryRef: "technical-vocabulary" },
-  { question: "Which sentence uses the Present Continuous?", options: ["I eat breakfast", "I am eating breakfast", "I ate breakfast", "I will eat breakfast"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What does 'On cloud nine' mean?", options: ["Very sad", "Very happy", "Very tired", "Very angry"], answer: 1, difficulty: "easy", libraryRef: "idioms" },
-  { question: "What does 'To get cold feet' mean?", options: ["To feel cold", "To become nervous", "To run fast", "To get sick"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the meaning of 'RAM'?", options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Remote Access Memory"], answer: 1, difficulty: "hard", libraryRef: "technical-vocabulary" },
-  { question: "What is the plural of 'leaf'?", options: ["Leafs", "Leaves", "Leafes", "Leavs"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "What does 'To be in hot water' mean?", options: ["To take a bath", "To be in trouble", "To be happy", "To be rich"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
-  { question: "Which is the correct Future Simple sentence?", options: ["I go tomorrow", "I will go tomorrow", "I going tomorrow", "I gone tomorrow"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
+  // Rotina Diária
+  { question: "Como se diz 'Eu acordo às 7 da manhã' em inglês?", options: ["I go to bed at 7 a.m.", "I wake up at 7 a.m.", "I have lunch at 7 a.m.", "I go to work at 7 a.m."], answer: 1, difficulty: "easy", libraryRef: "daily-routine" },
+  { question: "Qual frase expressa corretamente 'Eu almoço ao meio-dia' em inglês?", options: ["I have dinner at noon.", "I eat breakfast at noon.", "I have lunch at noon.", "I go home at noon."], answer: 2, difficulty: "easy", libraryRef: "daily-routine" },
+  { question: "Como dizer que gosta de assistir TV à noite em inglês?", options: ["I like to watch TV in the evening.", "I watch TV in the morning.", "I like to read books at night.", "I go to bed in the evening."], answer: 0, difficulty: "easy", libraryRef: "daily-routine" },
 
-  // 15 com answer: 2
-  { question: "What is the correct form of the verb 'to be' in 'He ___ a doctor.'?", options: ["is", "am", "are", "be"], answer: 2, difficulty: "easy", libraryRef: "verb-tenses" },
-  { question: "What is the plural of 'child'?", options: ["Childs", "Childes", "Children", "Childern"], answer: 2, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "Which sentence is correct?", options: ["He don't like apples", "He likes apple", "He doesn't like apples", "He like apples"], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "How do you say 'obrigado' in English?", options: ["Hello", "Sorry", "Thanks", "Please"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What does 'How old are you?' mean?", options: ["Onde você mora?", "Qual é o seu nome?", "Quantos anos você tem?", "Como você está?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "How do you say 'Estou com fome' in English?", options: ["I'm cold", "I'm happy", "I'm hungry", "I'm tired"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What is the past tense of 'eat'?", options: ["Eated", "Eating", "Ate", "Eat"], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "Which one is a correct question?", options: ["What is time it?", "It is what time?", "What time is it?", "What it is time?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What does 'It's raining cats and dogs' mean?", options: ["Animais estão caindo", "Chuva de gatos", "Está chovendo muito", "Está chovendo pouco"], answer: 2, difficulty: "medium", libraryRef: "idioms" },
-  { question: "How do you say 'Estou cansado' in English?", options: ["I'm bored", "I'm sad", "I'm tired", "I'm sleepy"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What is the opposite of 'hot'?", options: ["Boiling", "Warm", "Cold", "Cool"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "Which sentence uses the present continuous?", options: ["I eat now", "I eats", "I am eating", "I will eat"], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What is the plural of 'mouse'?", options: ["Mices", "Mouse", "Mice", "Mouses"], answer: 2, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "How do you say 'Qual é o seu nome?' in English?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "Which one is a verb?", options: ["Fast", "Blue", "Run", "Happy"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  // Perguntas Pessoais
+  { question: "Como perguntar o nome de alguém em inglês?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "personal-questions" },
+  { question: "Qual frase corresponde a 'Onde você mora?' em inglês?", options: ["Where do you live?", "Where are you from?", "Where do you go?", "Where is your house?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
+  { question: "Como perguntar sobre atividades de lazer em inglês?", options: ["What do you do in your free time?", "How do you work?", "Where do you go after work?", "Do you like weekends?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
+  { question: "Como perguntar se alguém tem animais de estimação em inglês?", options: ["Do you have any pets?", "Do you like animals?", "Where is your pet?", "What is your pet's name?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
 
-  // 15 com answer: 3
-  { question: "Complete: She ___ going to school.", options: ["be", "is", "am", "are"], answer: 3, difficulty: "easy", libraryRef: "verb-tenses" },
-  { question: "What does 'A dime a dozen' mean?", options: ["Very expensive", "Very rare", "Very difficult", "Very common"], answer: 3, difficulty: "medium", libraryRef: "idioms" },
-  { question: "How do you say 'Eu não entendo' in English?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What is the plural of 'fish'?", options: ["Fish", "Fishes", "Fishs", "Fishies"], answer: 3, difficulty: "hard", libraryRef: "vocabulary" },
-  { question: "What is the past tense of 'see'?", options: ["Saw", "Seen", "Seeing", "See"], answer: 3, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What is the synonym of 'smart'?", options: ["Intelligent", "Dumb", "Slow", "Clever"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What is the opposite of 'day'?", options: ["Night", "Morning", "Evening", "Afternoon"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What is the meaning of 'dog'?", options: ["An animal", "A fruit", "A color", "A tool"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "Which sentence uses the Future Perfect tense?", options: ["I will graduate next year", "I am graduating next year", "I graduated last year", "By next year, I will have graduated"], answer: 3, difficulty: "hard", libraryRef: "verb-tenses" },
-  { question: "What does 'To bite off more than you can chew' mean?", options: ["To eat too much", "To make a mistake", "To give up", "To take on more than you can handle"], answer: 3, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is 'eu sou estudante' in English?", options: ["I am student", "A student I am", "I student am", "I am a student"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What does 'I am learning English' mean?", options: ["Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês", "Eu estou aprendendo inglês"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "How do you say 'Onde você mora?' in English?", options: ["Where is you live?", "Where you live?", "Where are you living?", "Where do you live?"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "What is the antonym of 'strong'?", options: ["Powerful", "Big", "Fast", "Weak"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What does 'To cut corners' mean?", options: ["To take a long route", "To do something perfectly", "To spend more money", "To do something cheaply or quickly"], answer: 3, difficulty: "medium", libraryRef: "idioms" },
+  // Saudações
+  { question: "Como se diz 'Bom dia' em inglês?", options: ["Good night", "Good morning", "Good afternoon", "Hello"], answer: 1, difficulty: "easy", libraryRef: "greetings" },
+  { question: "Qual expressão corresponde a 'Até mais' em inglês?", options: ["See you later", "Goodbye", "Good morning", "Good luck"], answer: 0, difficulty: "easy", libraryRef: "greetings" },
+
+  // Expressões Idiomáticas
+  { question: "O que significa a expressão 'Break the ice' em inglês?", options: ["Começar uma conversa em um ambiente social", "Quebrar algo frágil", "Sair no inverno", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'Piece of cake' em inglês?", options: ["Algo muito fácil", "Uma sobremesa", "Uma tarefa difícil", "Uma comemoração"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
+  { question: "O que significa 'Let the cat out of the bag'?", options: ["Revelar um segredo", "Deixar um animal escapar", "Comprar um gato", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'Under the weather' em inglês?", options: ["Sentindo-se mal", "Estar ao ar livre", "Previsão do tempo", "Sentindo-se feliz"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
+  { question: "O que significa 'To pull someone's leg'?", options: ["Brincar com alguém", "Machucar alguém", "Ajudar alguém", "Correr rápido"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'Spill the beans'?", options: ["Revelar uma informação secreta", "Cozinhar feijão", "Fazer bagunça", "Contar uma piada"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'To hit the books'?", options: ["Estudar bastante", "Jogar livros", "Escrever um livro", "Ler por diversão"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'Break a leg' em inglês?", options: ["Boa sorte", "Correr rápido", "Cair", "Ter cuidado"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'Call it a day'?", options: ["Encerrar o trabalho", "Começar a trabalhar", "Trabalhar à noite", "Fazer uma pausa"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'On cloud nine'?", options: ["Muito feliz", "Muito triste", "Muito cansado", "Muito bravo"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
+  { question: "O que significa 'To get cold feet'?", options: ["Ficar nervoso", "Sentir frio", "Correr rápido", "Ficar doente"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'To be in hot water'?", options: ["Estar em apuros", "Tomar banho", "Estar feliz", "Ser rico"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'To cut corners'?", options: ["Fazer algo de forma rápida ou barata", "Fazer algo perfeitamente", "Gastar mais dinheiro", "Pegar um caminho longo"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'A dime a dozen'?", options: ["Muito comum", "Muito caro", "Muito raro", "Muito difícil"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+  { question: "O que significa 'To bite off more than you can chew'?", options: ["Assumir mais do que pode lidar", "Comer demais", "Desistir", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
+
+  // Verb Tenses
+  { question: "Qual frase está no Present Perfect?", options: ["She has finished her work", "She finish her work", "She finishing her work", "She will finish her work"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Past Continuous?", options: ["I was reading a book", "I read a book", "I will read a book", "I have read a book"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Future Continuous?", options: ["I will be working tomorrow", "I work tomorrow", "I worked tomorrow", "I am working tomorrow"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Present Continuous?", options: ["I eat breakfast", "I am eating breakfast", "I ate breakfast", "I will eat breakfast"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Past Simple?", options: ["She go to school", "She went to school", "She going to school", "She goes to school"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Future Simple?", options: ["I go tomorrow", "I will go tomorrow", "I going tomorrow", "I gone tomorrow"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Qual frase está no Future Perfect?", options: ["I will graduate next year", "I am graduating next year", "I graduated last year", "By next year, I will have graduated"], answer: 3, difficulty: "hard", libraryRef: "verb-tenses" },
+  { question: "Complete: She ___ going to school.", options: ["be", "is", "am", "are"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
+  { question: "Qual é a forma correta do verbo 'to be' para 'they'?", options: ["is", "are", "am", "be"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
+  { question: "Qual é a forma correta do verbo 'to be' em 'He ___ a doctor.'?", options: ["is", "am", "are", "be"], answer: 0, difficulty: "easy", libraryRef: "verb-tenses" },
+
+  // Vocabulário
+  { question: "Qual é o plural de 'analysis'?", options: ["Analyses", "Analysis", "Analysises", "Analys"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'criterion'?", options: ["Criteria", "Criterions", "Criterias", "Criterion"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'goose'?", options: ["Gooses", "Geese", "Goosies", "Goose"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'child'?", options: ["Childs", "Childes", "Children", "Childern"], answer: 2, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'mouse'?", options: ["Mices", "Mouse", "Mice", "Mouses"], answer: 2, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'leaf'?", options: ["Leafs", "Leaves", "Leafes", "Leavs"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o plural de 'fish'?", options: ["Fish", "Fishes", "Fishs", "Fishies"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
+  { question: "Qual é o sinônimo de 'happy'?", options: ["Sad", "Joyful", "Angry", "Tired"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual é o sinônimo de 'smart'?", options: ["Intelligent", "Dumb", "Slow", "Clever"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual é o antônimo de 'cold'?", options: ["Warm", "Hot", "Cool", "Freezing"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual é o antônimo de 'day'?", options: ["Night", "Morning", "Evening", "Afternoon"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual é o antônimo de 'strong'?", options: ["Powerful", "Big", "Fast", "Weak"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual é o oposto de 'hot'?", options: ["Boiling", "Warm", "Cold", "Cool"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual destas palavras é um verbo?", options: ["Fast", "Blue", "Run", "Happy"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Qual destas palavras é um animal?", options: ["An animal", "A fruit", "A color", "A tool"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
+
+  // Frases Básicas
+  { question: "Como perguntar 'Quantos anos você tem?' em inglês?", options: ["Onde você mora?", "Qual é o seu nome?", "Quantos anos você tem?", "Como você está?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'Estou com fome' em inglês?", options: ["I'm cold", "I'm happy", "I'm hungry", "I'm tired"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'Estou cansado' em inglês?", options: ["I'm bored", "I'm sad", "I'm tired", "I'm sleepy"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como perguntar 'Qual é o seu nome?' em inglês?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'Eu sou estudante' em inglês?", options: ["I am student", "A student I am", "I student am", "I am a student"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'Eu estou aprendendo inglês'?", options: ["Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês", "Eu estou aprendendo inglês"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como perguntar 'Onde você mora?' em inglês?", options: ["Where is you live?", "Where you live?", "Where are you living?", "Where do you live?"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'Eu não entendo' em inglês?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Qual destas frases é uma pergunta correta em inglês?", options: ["What is time it?", "It is what time?", "What time is it?", "What it is time?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+
+  // Técnicos
+  { question: "O que significa 'Renewable energy'?", options: ["Energia renovável", "Energia nuclear", "Energia solar", "Energia elétrica"], answer: 0, difficulty: "medium", libraryRef: "technical-vocabulary" },
+  { question: "O que significa 'Photosynthesis'?", options: ["Processo pelo qual plantas produzem alimento", "Um tipo de fotografia", "Uma doença", "Uma reação química em animais"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
+  { question: "O que significa 'Algorithm'?", options: ["Um conjunto de regras para resolver um problema", "Um tipo de música", "Um passo de dança", "Um tipo de animal"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
+  { question: "O que significa 'CPU'?", options: ["Central Power Unit", "Central Processing Unit", "Computer Personal Unit", "Central Program Unit"], answer: 1, difficulty: "hard", libraryRef: "technical-vocabulary" },
+  { question: "O que significa 'RAM'?", options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Remote Access Memory"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
+
+  // Conversação
+  { question: "Como perguntar 'Como você está hoje?' em inglês?", options: ["Where are you from?", "How old are you?", "How are you today?", "What do you do?"], answer: 2, difficulty: "easy", libraryRef: "conversation" },
+  { question: "Como pedir ajuda de forma educada em inglês?", options: ["Help me now!", "Give me help!", "You help me?", "Can you help me, please?"], answer: 3, difficulty: "easy", libraryRef: "conversation" },
+  { question: "Se você não entendeu algo, o que pode dizer em inglês?", options: ["I didn't understand. Can you explain?", "Say again!", "I don't like it.", "Repeat after me."], answer: 0, difficulty: "easy", libraryRef: "conversation" },
+
+  // Mais perguntas relacionadas à biblioteca
+  { question: "Como perguntar sobre a frequência de prática em inglês?", options: ["How often do you practice speaking?", "When do you practice?", "Why do you practice?", "Who do you practice with?"], answer: 0, difficulty: "easy", libraryRef: "more-questions" },
+  { question: "Como perguntar sobre comida favorita em inglês?", options: ["Where do you eat?", "How do you cook?", "Do you like pizza?", "What is your favorite food?"], answer: 3, difficulty: "easy", libraryRef: "more-questions" },
 ];
 
 // Adicionando funcionalidade de redefinição de senha
