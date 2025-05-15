@@ -1181,26 +1181,26 @@ backButtonExercises.addEventListener("click", () => {
 // Array de perguntas, respostas e explicações
 const exerciseQuestions = [
   {
-    question: "Qual é a capital da França?",
-    answer: "Paris",
-    explanation: "Paris é a capital da França e é conhecida como a Cidade Luz.",
+    question: "Qual é a capital do Brasil?",
+    answer: "Brasília",
+    explanation: "Brasília é a capital do Brasil e foi planejada para ser o centro político do país.",
   },
   
   // Perguntas em inglês
   {
     question: "What is the synonym of 'happy'?",
-    answer: "Joyful",
-    explanation: "A synonym for 'happy' is 'joyful', which means feeling or showing great pleasure.",
+    answer: "Glad",
+    explanation: "A synonym for 'happy' is 'glad', which means feeling pleased or content.",
   },
   {
-    question: "What is the antonym of 'big'?",
+    question: "What is the opposite of 'big'?",
     answer: "Small",
-    explanation: "The antonym of 'big' is 'small', which means of a size that is less than normal.",
+    explanation: "The opposite of 'big' is 'small', which means not large in size.",
   },
   {
-    question: "What is the plural of 'child'?",
-    answer: "Children",
-    explanation: "The plural of 'child' is 'children', which refers to more than one child.",
+    question: "What is the plural of 'cat'?",
+    answer: "Cats",
+    explanation: "The plural of 'cat' is 'cats', which refers to more than one cat.",
   },
   {
     question: "What is the past tense of 'go'?",
@@ -1215,52 +1215,52 @@ const exerciseQuestions = [
   {
     question: "What is the meaning of 'apple'?",
     answer: "A fruit",
-    explanation: "An apple is a fruit that is typically round, red, green, or yellow, and sweet or tart in taste.",
+    explanation: "An apple is a fruit that is sweet and comes in colors like red, green, or yellow.",
   },
   {
     question: "What is the capital of the United States?",
-    answer: "Washington, D.C.",
-    explanation: "Washington, D.C. is the capital of the United States and the seat of its federal government.",
+    answer: "Washington",
+    explanation: "Washington is the capital of the United States and the seat of its federal government.",
   },
   {
     question: "What is the opposite of 'fast'?",
     answer: "Slow",
-    explanation: "The opposite of 'fast' is 'slow', which means moving or operating at a low speed.",
+    explanation: "The opposite of 'fast' is 'slow', which means moving at a low speed.",
   },
   {
     question: "What is the meaning of 'blue'?",
     answer: "A color",
-    explanation: "Blue is a primary color that is often associated with the sky and the ocean.",
+    explanation: "Blue is a color often seen in the sky and the ocean.",
   },
   {
-    question: "What is the plural of 'mouse'?",
-    answer: "Mice",
-    explanation: "The plural of 'mouse' is 'mice', which refers to more than one mouse.",
+    question: "What is the plural of 'dog'?",
+    answer: "Dogs",
+    explanation: "The plural of 'dog' is 'dogs', which refers to more than one dog.",
   },
   {
     question: "What is the past tense of 'eat'?",
     answer: "Ate",
-    explanation: "The past tense of 'eat' is 'ate', used to describe the act of consuming food in the past.",
+    explanation: "The past tense of 'eat' is 'ate', used to describe eating in the past.",
   },
   {
-    question: "What is the synonym of 'beautiful'?",
-    answer: "Pretty",
-    explanation: "A synonym for 'beautiful' is 'pretty', which means pleasing to the eye or attractive.",
+    question: "What is the synonym of 'pretty'?",
+    answer: "Beautiful",
+    explanation: "A synonym for 'pretty' is 'beautiful', which means attractive or nice to look at.",
   },
   {
     question: "What is the opposite of 'day'?",
     answer: "Night",
-    explanation: "The opposite of 'day' is 'night', which refers to the period of darkness between sunset and sunrise.",
+    explanation: "The opposite of 'day' is 'night', which is the time when it is dark.",
   },
   {
-    question: "What is the meaning of 'dog'?",
+    question: "What is the meaning of 'cat'?",
     answer: "An animal",
-    explanation: "A dog is a domesticated animal often kept as a pet or used for work.",
+    explanation: "A cat is a small animal often kept as a pet.",
   },
   {
     question: "What is the capital of England?",
     answer: "London",
-    explanation: "London is the capital of England and one of the most famous cities in the world.",
+    explanation: "London is the capital of England and a famous city worldwide.",
   },
 ];
 
