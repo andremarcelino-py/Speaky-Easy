@@ -1225,8 +1225,61 @@ const exerciseQuestions = [
     answer: "Animal",
     explanation: "A dog is a domesticated animal often kept as a pet or used for work.",
   },
-
-
+  {
+    question: "What is the capital of Japan?",
+    answer: "Tokyo",
+    explanation: "Tokyo is the capital of Japan and one of the most populous cities in the world.",
+  },
+  {
+    question: "What is the synonym of 'smart'?",
+    answer: "Intelligent",
+    explanation: "A synonym for 'smart' is 'intelligent', which means having or showing a high level of intelligence.",
+  },
+  {
+    question: "What is the opposite of 'strong'?",
+    answer: "Weak",
+    explanation: "The antonym of 'strong' is 'weak', which means lacking strength or power.",
+  },
+  {
+    question: "What is the opposite of 'early'?",
+    answer: "Late",
+    explanation: "The opposite of 'early' is 'late', which means happening or arriving after the expected time.",
+  },
+  {
+    question: "What is the meaning of 'car'?",
+    answer: "Vehicle",
+    explanation: "A car is a vehicle with four wheels, typically powered by an internal combustion engine or electric motor.",
+  },
+  {
+    question: "What is the opposite of 'happy'?",
+    answer: "Sad",
+    explanation: "The opposite of 'happy' is 'sad', which means feeling or showing sorrow or unhappiness.",
+  },
+  {
+    question: "What is the meaning of 'water'?",
+    answer: "Liquid",
+    explanation: "Water is a transparent, tasteless, odorless, and nearly colorless liquid essential for life.",
+  },
+  {
+    question: "What is the opposite of 'light'?",
+    answer: "Dark",
+    explanation: "The opposite of 'light' is 'dark', which refers to the absence of light.",
+  },
+  {
+    question: "What is the meaning of 'cat'?",
+    answer: "Animal",
+    explanation: "A cat is a small domesticated carnivorous mammal often kept as a pet.",
+  },
+  {
+    question: "What is the opposite of 'up'?",
+    answer: "Down",
+    explanation: "The opposite of 'up' is 'down', which refers to a lower position or direction.",
+  },
+  {
+    question: "What is the capital of Brazil?",
+    answer: "Brasília",
+    explanation: "Brasília is the capital of Brazil, known for its modernist architecture and urban planning.",
+  },
 ];
 
 let currentExerciseQuestionIndex = 0; // Índice da pergunta atual
