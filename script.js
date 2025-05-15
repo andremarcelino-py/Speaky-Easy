@@ -849,8 +849,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Lista de perguntas fixa
 const allQuestions = [
-  // 15 com answer: 0
+  { question: "What is the main goal of Agile methodologies?", options: ["Deliver value to the customer quickly and iteratively", "Create detailed documentation before starting", "Follow a strict plan without changes", "Work in isolation"], answer: 0, difficulty: "medium", libraryRef: "agile" },
+  { question: "Which of the following is NOT an Agile framework?", options: ["Scrum", "Kanban", "Waterfall", "XP (Extreme Programming)"], answer: 2, difficulty: "medium", libraryRef: "agile" },
+  { question: "In Scrum, who is responsible for maximizing the value of the product?", options: ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"], answer: 1, difficulty: "medium", libraryRef: "agile" },
+  { question: "What is a 'sprint' in Scrum?", options: ["A long-term project plan", "A fixed period to deliver a set of features", "A meeting to discuss progress", "A document describing requirements"], answer: 1, difficulty: "medium", libraryRef: "agile" },
+  { question: "Which Agile ceremony is used to reflect and improve the process?", options: ["Sprint Planning", "Daily Standup", "Sprint Review", "Retrospective"], answer: 3, difficulty: "medium", libraryRef: "agile" },
+  { question: "What is the main artifact that lists all desired work on a product in Scrum?", options: ["Product Backlog", "Sprint Backlog", "Burndown Chart", "Definition of Done"], answer: 0, difficulty: "medium", libraryRef: "agile" },
+  { question: "What is the purpose of a Kanban board?", options: ["Visualize workflow and limit work in progress", "Assign tasks to individuals", "Track time spent on each task", "Document project requirements"], answer: 0, difficulty: "medium", libraryRef: "agile" },
+  { question: "Which role facilitates Scrum events and removes impediments?", options: ["Product Owner", "Scrum Master", "Developer", "Stakeholder"], answer: 1, difficulty: "medium", libraryRef: "agile" },
+  { question: "What is the maximum recommended duration of a Scrum sprint?", options: ["1 week", "2 weeks", "4 weeks", "8 weeks"], answer: 2, difficulty: "medium", libraryRef: "agile" },
+  { question: "What is a user story in Agile?", options: ["A detailed technical specification", "A short description of a feature from the user's perspective", "A bug report", "A project plan"], answer: 1, difficulty: "medium", libraryRef: "agile" },
 
+  { question: "Which of the following is a key principle of Agile?", options: ["Embrace change even late in development", "Follow a strict plan", "Deliver all features at once", "Avoid customer collaboration"], answer: 0, difficulty: "medium", libraryRef: "agile" },
   { question: "Which of the following is NOT a color?", options: ["Blue", "Green", "Table", "Red"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "What is the correct plural form of 'box'?", options: ["Boxs", "Boxies", "Boxes", "Boxen"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "Choose the correct sentence:", options: ["She go to school every day.", "She goes to school every day.", "She going to school every day.", "She gone to school every day."], answer: 1, difficulty: "easy", libraryRef: "grammar" },
@@ -1011,7 +1021,7 @@ const allQuestions = [
   { question: "How do you say 'Eu não entendo' in English?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "What is the plural of 'fish'?", options: ["Fish", "Fishes", "Fishs", "Fishies"], answer: 3, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "What is the past tense of 'see'?", options: ["Saw", "Seen", "Seeing", "See"], answer: 3, difficulty: "medium", libraryRef: "verb-tenses" },
-  { question: "What is the synonym of 'smart'?", options: ["Intelligent", "Dumb", "Slow", "Clever"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "What is the synonym of 'smart'?", options: ["Intelligente", "Dumb", "Slow", "Clever"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "What is the opposite of 'day'?", options: ["Night", "Morning", "Evening", "Afternoon"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "What is the meaning of 'dog'?", options: ["An animal", "A fruit", "A color", "A tool"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "Which sentence uses the Future Perfect tense?", options: ["I will graduate next year", "I am graduating next year", "I graduated last year", "By next year, I will have graduated"], answer: 3, difficulty: "hard", libraryRef: "verb-tenses" },
@@ -1020,7 +1030,7 @@ const allQuestions = [
   { question: "What does 'I am learning English' mean?", options: ["Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês", "Eu estou aprendendo inglês"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "How do you say 'Onde você mora?' in English?", options: ["Where is you live?", "Where you live?", "Where are you living?", "Where do you live?"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "What is the antonym of 'strong'?", options: ["Powerful", "Big", "Fast", "Weak"], answer: 3, difficulty: "easy", libraryRef: "vocabulary" },
-  { question: "What does 'To cut corners' mean?", options: ["To take a long route", "To do something perfectly", "To spend more money", "To do something cheaply or quickly"], answer: 3, difficulty: "medium", libraryRef: "idioms" },
+  { question: "What does 'To cut corners' mean?", options: ["To take a long route", "To do something perfectly", "To spend more money", "To do something cheaply or quickly"], answer: 3, difficulty: "medium", libraryRef: "idioms" }
 ];
 
 // Adicionando funcionalidade de redefinição de senha
