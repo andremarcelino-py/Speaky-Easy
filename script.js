@@ -389,7 +389,7 @@ function getMotivationalMessage(score, totalQuestions) {
   } else if (percent >= 0.1) {
     motivationalMessage = 'Começou, já é metade do caminho! Speak Easy é pra quem não desiste! 🚀';
   } else {
-    motivationalMessage = 'Zero barra zero, mas relaxa: até o dicionário começou do A! Bora tentar de novo no Speak Easy! 📖😅';
+    motivationalMessage = 'Zero barra todos, mas relaxa: até o dicionário começou do A! Bora tentar de novo no Speak Easy! 📖😅';
   }
 
   return {
