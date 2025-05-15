@@ -864,6 +864,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const allQuestions = [
+  { question: "Which of the following is NOT a color?", options: ["Blue", "Green", "Table", "Red"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "What is the correct plural form of 'box'?", options: ["Boxs", "Boxies", "Boxes", "Boxen"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "Choose the correct sentence:", options: ["She go to school every day.", "She goes to school every day.", "She going to school every day.", "She gone to school every day."], answer: 1, difficulty: "easy", libraryRef: "grammar" },
+  { question: "Which word is an adjective?", options: ["Quickly", "Happiness", "Beautiful", "Run"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "What is the past tense of 'buy'?", options: ["Buyed", "Bought", "Buys", "Buying"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Which sentence is in the future tense?", options: ["I eat breakfast.", "I am eating breakfast.", "I will eat breakfast.", "I have eaten breakfast."], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
+  { question: "Which of these is a question?", options: ["He is a teacher.", "Is he a teacher?", "He a teacher.", "He teacher is."], answer: 1, difficulty: "easy", libraryRef: "grammar" },
+  { question: "Which word means the opposite of 'always'?", options: ["Never", "Often", "Sometimes", "Usually"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
+  { question: "What is the correct comparative form of 'good'?", options: ["Gooder", "More good", "Better", "Best"], answer: 2, difficulty: "medium", libraryRef: "grammar" },
+  { question: "Which sentence uses the Present Continuous tense?", options: ["They play soccer.", "They played soccer.", "They are playing soccer.", "They will play soccer."], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
   // Pedidos e Cortesia
   { question: "Qual é a forma mais educada de pedir ajuda em inglês?", options: ["Help me!", "Can you help me, please?", "Give me help!", "You help me?"], answer: 1, difficulty: "easy", libraryRef: "politeness" },
   { question: "Como você agradece alguém de forma formal em inglês?", options: ["You're welcome", "Excuse me", "Thank you very much", "Sorry"], answer: 2, difficulty: "easy", libraryRef: "politeness" },
@@ -1367,3 +1377,51 @@ if (backToMenuButton) {
     menuContainer.style.display = "block";
   });
 };
+
+
+// Sorteia uma pergunta aleatória do array de exercícios
+function getRandomExerciseQuestion() {
+  const idx = Math.floor(Math.random() * exerciseQuestions.length);
+  return exerciseQuestions[idx];
+}
+
+// Exibe uma nova pergunta aleatória
+function showRandomExerciseQuestion() {
+  const questionObj = getRandomExerciseQuestion();
+  window.currentExerciseQuestion = questionObj; // Salva para checagem
+  exerciseQuestionElement.textContent = questionObj.question;
+  exerciseInputElement.value = "";
+  exerciseFeedbackElement.textContent = "";
+}
+
+// Ao clicar no botão de exercícios, mostra uma pergunta aleatória
+btnExercises.addEventListener("click", () => {
+  hideAllSections();
+  exercisesContainer.style.display = "block";
+  showRandomExerciseQuestion();
+  exerciseInputElement.disabled = false;
+  exerciseSubmitButton.disabled = false;
+});
+
+// Ao enviar a resposta, verifica e mostra outra aleatória
+exerciseSubmitButton.addEventListener("click", () => {
+  const userAnswer = exerciseInputElement.value.trim();
+  const currentQuestion = window.currentExerciseQuestion;
+
+  if (
+    calculateSimilarity(userAnswer, currentQuestion.answer) >= similarityThreshold
+  ) {
+    exerciseFeedbackElement.textContent = "Resposta correta!";
+    addCorrectAnswer(
+      currentQuestion.question,
+      userAnswer,
+      currentQuestion.answer,
+      currentQuestion.explanation
+    );
+  } else {
+    exerciseFeedbackElement.textContent = "Resposta incorreta!";
+  }
+
+  exerciseInputElement.value = "";
+  setTimeout(showRandomExerciseQuestion, 1200); // Mostra outra aleatória após 1,2s
+});
