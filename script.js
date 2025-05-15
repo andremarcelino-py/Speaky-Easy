@@ -1473,4 +1473,9 @@ skipExerciseButton.addEventListener("click", () => {
   document.getElementById("exercise-input").value = "";
 });
 
+
+
+// ...existing code...
+
+if (btnRanking) btnRanking.disabled = true;
 // ...existing code...
