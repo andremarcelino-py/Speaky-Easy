@@ -1537,3 +1537,21 @@ body {
   background: #e65100;
   transform: scale(1.05);
 }
+
+
+#skip-exercise-button {
+  background-color: #ff9800;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#skip-exercise-button:hover {
+  background-color: #fb8c00;
+}
