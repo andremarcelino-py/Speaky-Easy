@@ -30,7 +30,7 @@ body {
   align-items: center;
   text-align: center;
   height: 100vh;
-  background: #1f1a3a; /* Cor de fundo consistente com o restante do site */
+  background: #1f1a3a00; /* Cor de fundo consistente com o restante do site */
   color: #fff; /* Texto branco para contraste */
   padding: 20px;
 }
