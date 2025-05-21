@@ -937,12 +937,12 @@ const allQuestions = [
   { question: "Qual destas palavras é um animal?", options: ["An animal", "A fruit", "A color", "A tool"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
   
     // Frases Básicas
-  { question: "Como perguntar 'Quantos anos você tem?' em inglês?", options: ["Onde você mora?", "Qual é o seu nome?", "Quantos anos você tem?", "Como você está?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como perguntar 'Quantos anos você tem?' em inglês?", options: ["Where do you live?", "What is your name?", "How old are you?", "How are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Estou com fome' em inglês?", options: ["I'm cold", "I'm happy", "I'm hungry", "I'm tired"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Estou cansado' em inglês?", options: ["I'm bored", "I'm sad", "I'm tired", "I'm sleepy"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como perguntar 'Qual é o seu nome?' em inglês?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Eu sou estudante' em inglês?", options: ["I am student", "A student I am", "I student am", "I am a student"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
-  { question: "Como dizer 'Eu estou aprendendo inglês'?", options: ["Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês", "Eu estou aprendendo inglês"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
+  { question: "Como dizer 'I am learning english'?", options: ["Eu aprendi inglês", "Eu ensino inglês", "Eu amo inglês", "Eu estou aprendendo inglês"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como perguntar 'Onde você mora?' em inglês?", options: ["Where is you live?", "Where you live?", "Where are you living?", "Where do you live?"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Eu não entendo' em inglês?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Qual destas frases é uma pergunta correta em inglês?", options: ["What is time it?", "It is what time?", "What time is it?", "What it is time?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
