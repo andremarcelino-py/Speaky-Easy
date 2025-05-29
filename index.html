@@ -11,12 +11,10 @@
 </head>
 <body>
 
-
-  <!-- Tela de Boas-Vindas -->
 <div id="welcome-container" class="welcome-container">
   <header class="welcome-header">
     <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
-    <h1 class="logo-text">Speak Easy</h1> <!-- Adicionando o nome ao lado ou abaixo da logo -->
+    <h1 class="logo-text">Speak Easy</h1>
   </header>
   <main class="welcome-content">
     <h1 class="welcome-slogan">O jeito <span>fácil</span> de falar outra língua!</h1>
@@ -30,8 +28,6 @@
   </main>
 </div>
 
-
-<!-- Tela de Parabenização -->
 <div id="congratulations-container" style="display: none; text-align: center; padding: 20px;">
   <h1 id="congratulations-title"></h1>
   <p id="congratulations-message"></p>
@@ -43,14 +39,11 @@
   <button id="congratulations-back-button">Voltar ao Menu</button>
 </div>
 
-<!-- Tela de finalização do Quiz Inglês -->
 <div id="congratulations-container" style="display:none">
-  <!-- ...outros elementos... -->
   <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
   <button id="backToMenuButton">Voltar ao Menu</button>
 </div>
 
-  <!-- Tela de Cadastro -->
 <div id="register-container" class="register-container animate-in" style="display:none;">
   <header class="welcome-header">
     <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
@@ -63,7 +56,6 @@
   <p>Já tem uma conta? <a href="#" id="go-login">Login</a></p>
 </div>
 
-  <!-- Tela de Login -->
 <div id="login-container" class="login-container" style="display:none;">
   <header class="welcome-header">
     <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
@@ -76,7 +68,6 @@
   <p>Não tem uma conta? <a href="#" id="go-register">Cadastre-se</a></p>
 </div>
 
-  <!-- Menu Principal -->
 <div id="menu-container" class="menu-container" style="display:none;">
   <header class="welcome-header">
     <img src="images/logo.png" alt="Logo Speak Easy" class="logo" />
@@ -96,65 +87,58 @@
     <button id="btnExercises" class="tab-button animate-in"><i class="fas fa-dumbbell"></i> Exercícios</button>
     <button id="btnRanking" class="tab-button animate-in"><i class="fas fa-trophy"></i> Ranking</button>
   </div>
-  <!-- Botão de logout no menu principal -->
   <button id="logout-button" class="restart-button">Sair</button>
 </div>
 
-  <!-- Menu Español: Selección de Contenido en Español -->
-  <div id="spanish-menu-container" class="menu-container" style="display:none;">
-    <h2>Contenido en Español</h2>
-    <div class="tabs">
-      <button id="btnSpanishQuiz" class="tab-button animate-in spanish">
-         <i class="fas fa-question-circle"></i> Preguntas
-      </button>
-      <button id="btnSpanishLibrary" class="tab-button animate-in spanish">
-         <i class="fas fa-book-open"></i> Biblioteca
-      </button>
-    </div>
-    <button class="back-button" id="backButtonSpanishMenu">
-      <i class="fas fa-arrow-left"></i> Volver al Menú Principal
+<div id="spanish-menu-container" class="menu-container" style="display:none;">
+  <h2>Contenido en Español</h2>
+  <div class="tabs">
+    <button id="btnSpanishQuiz" class="tab-button animate-in spanish">
+       <i class="fas fa-question-circle"></i> Preguntas
+    </button>
+    <button id="btnSpanishLibrary" class="tab-button animate-in spanish">
+       <i class="fas fa-book-open"></i> Biblioteca
     </button>
   </div>
+  <button class="back-button" id="backButtonSpanishMenu">
+    <i class="fas fa-arrow-left"></i> Volver al Menú Principal
+  </button>
+</div>
 
-  <!-- Quiz en Español -->
-  <div id="spanish-container" class="quiz-container" style="display:none;">
-    <button class="back-button" id="backButtonSpanish">
-      <i class="fas fa-arrow-left"></i> Volver al Menú
-    </button>
-    <div id="spanish-quiz">
-      <p id="spanish-question"></p>
-      <ul id="spanish-options"></ul>
-    </div>
-    <div class="score-container">
-      <p>Puntuación: <span id="spanish-score">0</span>/15</p>
-      <p>Tiempo: <span id="spanish-timer">0</span> s</p>
-    </div>
+<div id="spanish-container" class="quiz-container" style="display:none;">
+  <button class="back-button" id="backButtonSpanish">
+    <i class="fas fa-arrow-left"></i> Volver al Menú
+  </button>
+  <div id="spanish-quiz">
+    <p id="spanish-question"></p>
+    <ul id="spanish-options"></ul>
   </div>
-
-  <!-- Tela Final do Quiz en Español -->
-  <div id="spanish-end-screen" class="end-screen" style="display:none;">
-    <button class="back-button" id="backButtonSpanishEndScreen">
-      <i class="fas fa-arrow-left"></i> Volver al Menú
-    </button>
-    <p id="spanish-final-message"></p>
-    <ul id="spanish-error-list"></ul>
-    <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
-    <button id="spanish-restart-button" class="restart-button">
-      <i class="fas fa-sync-alt"></i> Reiniciar Quiz
-    </button>
-    <button id="spanish-menu-button" class="restart-button">
-      <i class="fas fa-home"></i> Menú Principal
-    </button>
+  <div class="score-container">
+    <p>Puntuación: <span id="spanish-score">0</span>/15</p>
+    <p>Tiempo: <span id="spanish-timer">0</span> s</p>
   </div>
+</div>
 
-  <!-- Biblioteca en Español -->
-  <div id="spanish-library-container" class="library-container" style="display:none;">
+<div id="spanish-end-screen" class="end-screen" style="display:none;">
+  <button class="back-button" id="backButtonSpanishEndScreen">
+    <i class="fas fa-arrow-left"></i> Volver al Menú
+  </button>
+  <p id="spanish-final-message"></p>
+  <ul id="spanish-error-list"></ul>
+  <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
+  <button id="spanish-restart-button" class="restart-button">
+    <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+  </button>
+  <button id="spanish-menu-button" class="restart-button">
+    <i class="fas fa-home"></i> Menú Principal
+  </button>
+</div>
+
+<div id="spanish-library-container" class="library-container" style="display:none;">
   <button class="back-button" id="backButtonSpanishLibrary">
     <i class="fas fa-arrow-left"></i> Volver al Menú
   </button>
   <h2><i class="fas fa-book-open"></i> Biblioteca de Textos en Español</h2>
-
-  <!-- Seção: Frases Básicas -->
   <div id="frases-basicas-es" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -168,8 +152,6 @@
       <p class="spanish">¿Cómo estás? - Como você está?</p>
     </div>
   </div>
-
-  <!-- Seção: Verbos Importantes -->
   <div id="verbos-importantes-es" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -182,8 +164,6 @@
       <p class="spanish">Nosotros vivimos en México - Nós moramos no México</p>
     </div>
   </div>
-
-  <!-- Seção: Preguntas Comunes -->
   <div id="preguntas-comunes-es" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -197,8 +177,6 @@
       <p class="spanish">¿Cómo te llamas? - Qual é o seu nome?</p>
     </div>
   </div>
-
-  <!-- Seção: Expresiones Idiomáticas -->
   <div id="expresiones-idiomaticas-es" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -211,92 +189,82 @@
       <p class="spanish">Llover a cántaros - Chover muito</p>
     </div>
   </div>
-
-  <!-- Seção: Preguntas Avanzadas -->
-<div id="preguntas-avanzadas-es" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Preguntas Avanzadas</h3>
+  <div id="preguntas-avanzadas-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Preguntas Avanzadas</h3>
+    </div>
+    <div class="text-content">
+      <p class="spanish">¿Qué opinas sobre el cambio climático? - O que você acha sobre a mudança climática?</p>
+      <p class="spanish">¿Cuál es tu libro favorito y por qué? - Qual é o seu livro favorito e por quê?</p>
+      <p class="spanish">¿Qué harías si ganaras la lotería? - O que você faria se ganhasse na loteria?</p>
+      <p class="spanish">¿Cómo describirías tu ciudad natal? - Como você descreveria sua cidade natal?</p>
+      <p class="spanish">¿Qué te motiva a aprender español? - O que te motiva a aprender espanhol?</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p class="spanish">¿Qué opinas sobre el cambio climático? - O que você acha sobre a mudança climática?</p>
-    <p class="spanish">¿Cuál es tu libro favorito y por qué? - Qual é o seu livro favorito e por quê?</p>
-    <p class="spanish">¿Qué harías si ganaras la lotería? - O que você faria se ganhasse na loteria?</p>
-    <p class="spanish">¿Cómo describirías tu ciudad natal? - Como você descreveria sua cidade natal?</p>
-    <p class="spanish">¿Qué te motiva a aprender español? - O que te motiva a aprender espanhol?</p>
+  <div id="cultura-es" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Cultura Española</h3>
+    </div>
+    <div class="text-content">
+      <p class="spanish">La paella es un plato típico de España, originario de Valencia.</p>
+      <p class="spanish">El flamenco es un estilo de música y danza tradicional de Andalucía.</p>
+      <p class="spanish">La Sagrada Familia es una famosa basílica en Barcelona diseñada por Antoni Gaudí.</p>
+      <p class="spanish">El idioma español tiene más de 500 millones de hablantes en el mundo.</p>
+    </div>
   </div>
 </div>
 
-<!-- Seção: Cultura Española -->
-<div id="cultura-es" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Cultura Española</h3>
+<div id="french-menu-container" class="menu-container" style="display:none;">
+  <h2>Contenu en Français</h2>
+  <div class="tabs">
+    <button id="btnFrenchQuiz" class="tab-button animate-in french">
+       <i class="fas fa-question-circle"></i> Questions
+    </button>
+    <button id="btnFrenchLibrary" class="tab-button animate-in french">
+       <i class="fas fa-book-open"></i> Bibliothèque
+    </button>
   </div>
-  <div class="text-content">
-    <p class="spanish">La paella es un plato típico de España, originario de Valencia.</p>
-    <p class="spanish">El flamenco es un estilo de música y danza tradicional de Andalucía.</p>
-    <p class="spanish">La Sagrada Familia es una famosa basílica en Barcelona diseñada por Antoni Gaudí.</p>
-    <p class="spanish">El idioma español tiene más de 500 millones de hablantes en el mundo.</p>
+  <button class="back-button" id="backButtonFrenchMenu">
+    <i class="fas fa-arrow-left"></i> Retour au Menu Principal
+  </button>
+</div>
+
+<div id="french-container" class="quiz-container" style="display:none;">
+  <button class="back-button" id="backButtonFrench">
+    <i class="fas fa-arrow-left"></i> Retour au Menu
+  </button>
+  <div id="french-quiz">
+    <p id="french-question"></p>
+    <ul id="french-options"></ul>
+  </div>
+  <div class="score-container">
+    <p>Score : <span id="french-score">0</span>/15</p>
+    <p>Temps : <span id="french-timer">0</span> s</p>
   </div>
 </div>
+
+<div id="french-end-screen" class="end-screen" style="display:none;">
+  <button class="back-button" id="backButtonFrenchEndScreen">
+    <i class="fas fa-arrow-left"></i> Retour au Menu
+  </button>
+  <p id="french-final-message"></p>
+  <ul id="french-error-list"></ul>
+  <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
+  <button id="french-restart-button" class="restart-button">
+    <i class="fas fa-sync-alt"></i> Réessayer
+  </button>
+  <button id="french-menu-button" class="restart-button">
+    <i class="fas fa-home"></i> Menu Principal
+  </button>
 </div>
 
-  <!-- Menu Français: Sélection de Contenu en Français -->
-  <div id="french-menu-container" class="menu-container" style="display:none;">
-    <h2>Contenu en Français</h2>
-    <div class="tabs">
-      <button id="btnFrenchQuiz" class="tab-button animate-in french">
-         <i class="fas fa-question-circle"></i> Questions
-      </button>
-      <button id="btnFrenchLibrary" class="tab-button animate-in french">
-         <i class="fas fa-book-open"></i> Bibliothèque
-      </button>
-    </div>
-    <button class="back-button" id="backButtonFrenchMenu">
-      <i class="fas fa-arrow-left"></i> Retour au Menu Principal
-    </button>
-  </div>
-
-  <!-- Quiz en Français -->
-  <div id="french-container" class="quiz-container" style="display:none;">
-    <button class="back-button" id="backButtonFrench">
-      <i class="fas fa-arrow-left"></i> Retour au Menu
-    </button>
-    <div id="french-quiz">
-      <p id="french-question"></p>
-      <ul id="french-options"></ul>
-    </div>
-    <div class="score-container">
-      <p>Score : <span id="french-score">0</span>/15</p>
-      <p>Temps : <span id="french-timer">0</span> s</p>
-    </div>
-  </div>
-
-  <!-- Écran Final du Quiz en Français -->
-  <div id="french-end-screen" class="end-screen" style="display:none;">
-    <button class="back-button" id="backButtonFrenchEndScreen">
-      <i class="fas fa-arrow-left"></i> Retour au Menu
-    </button>
-    <p id="french-final-message"></p>
-    <ul id="french-error-list"></ul>
-    <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
-    <button id="french-restart-button" class="restart-button">
-      <i class="fas fa-sync-alt"></i> Réessayer
-    </button>
-    <button id="french-menu-button" class="restart-button">
-      <i class="fas fa-home"></i> Menu Principal
-    </button>
-  </div>
-
-  <!-- Bibliothèque en Français -->
-  <div id="french-library-container" class="library-container" style="display:none;">
+<div id="french-library-container" class="library-container" style="display:none;">
   <button class="back-button" id="backButtonFrenchLibrary">
     <i class="fas fa-arrow-left"></i> Retour au Menu
   </button>
   <h2><i class="fas fa-book-open"></i> Bibliothèque en Français</h2>
-
-  <!-- Section: Phrases de Base -->
   <div id="phrases-de-base-fr" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -310,8 +278,6 @@
       <p class="french">Comment ça va ? - Como vai você?</p>
     </div>
   </div>
-
-  <!-- Section: Verbes Importants -->
   <div id="verbes-importants-fr" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -326,8 +292,6 @@
       <p class="french">Travailler - Trabalhar</p>
     </div>
   </div>
-
-  <!-- Section: Questions Courantes -->
   <div id="questions-courantes-fr" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -341,8 +305,6 @@
       <p class="french">Comment t'appelles-tu ? - Qual é o seu nome?</p>
     </div>
   </div>
-
-  <!-- Section: Expressions Idiomatiques -->
   <div id="expressions-idiomatiques-fr" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -356,8 +318,6 @@
       <p class="french">Faire la grasse matinée 🛌 - Dormir até tarde</p>
     </div>
   </div>
-
-  <!-- Section: Culture Française -->
   <div id="culture-fr" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -373,260 +333,228 @@
   </div>
 </div>
 
-  <!-- Quiz Principal (em inglês) -->
-  <div id="quiz-container" class="quiz-container" style="display:none;">
-    <div id="quiz">
-      <p id="question"></p>
-      <ul id="options"></ul>
+<div id="quiz-container" class="quiz-container" style="display:none;">
+  <div id="quiz">
+    <p id="question"></p>
+    <ul id="options"></ul>
+  </div>
+  <div class="score-container">
+    <p>Pontuação: <span id="score">0</span>/15</p>
+    <p>Tempo: <span id="timer">0</span> s</p>
+  <div id="quiz-progress-bar-container" style="width: 100%; margin-bottom: 16px;">
+    <div id="quiz-progress-bar" style="height: 16px; background: #4caf50; width: 0%; border-radius: 8px; transition: width 0.3s;"></div>
+  </div>
+  </div>
+</div>
+
+<div id="perguntas-container" class="perguntas-container" style="display:none;">
+  <button class="back-button" id="backButtonPerguntas">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <h2><i class="fas fa-edit"></i> Escolha o Nível</h2>
+  <div class="level-buttons">
+    <button id="btnFacil" class="level-button">Fácil</button>
+    <button id="btnMedio" class="level-button">Médio</button>
+    <button id="btnDificil" class="level-button">Difícil</button>
+  </div>
+</div>
+
+<div id="perguntas-quiz-container" class="quiz-container" style="display:none;">
+  <button class="back-button" id="backButtonPerguntasQuiz">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <div id="perguntas-quiz">
+    <p id="perguntas-question"></p>
+    <ul id="perguntas-options"></ul>
+  </div>
+  <div class="score-container">
+    <p>Pontuação: <span id="perguntas-score">0</span>/10</p>
+    <p>Tempo: <span id="perguntas-timer">0</span> s</p>
+  </div>
+</div>
+
+<div id="library-container" class="library-container" style="display:none;">
+  <button class="back-button" id="backButtonLibrary">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
+  <div id="frases-basicas" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Frases Básicas 🌟</h3>
     </div>
-    <div class="score-container">
-      <p>Pontuação: <span id="score">0</span>/15</p>
-      <p>Tempo: <span id="timer">0</span> s</p>
-    <div id="quiz-progress-bar-container" style="width: 100%; margin-bottom: 16px;">
-      <div id="quiz-progress-bar" style="height: 16px; background: #4caf50; width: 0%; border-radius: 8px; transition: width 0.3s;"></div>
-    </div>
-    </div>
-  </div>
-
-  <!-- Seleção de Nível para Perguntas -->
-  <div id="perguntas-container" class="perguntas-container" style="display:none;">
-    <button class="back-button" id="backButtonPerguntas">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <h2><i class="fas fa-edit"></i> Escolha o Nível</h2>
-    <div class="level-buttons">
-      <button id="btnFacil" class="level-button">Fácil</button>
-      <button id="btnMedio" class="level-button">Médio</button>
-      <button id="btnDificil" class="level-button">Difícil</button>
+    <div class="text-content">
+      <p class="english">I like to study English 📚</p>
+      <p class="portuguese">Eu gosto de estudar inglês 📚</p>
+      <p class="english">I am a student 🎓</p>
+      <p class="portuguese">Eu sou estudante 🎓</p>
     </div>
   </div>
-
-  <!-- Quiz de Perguntas -->
-  <div id="perguntas-quiz-container" class="quiz-container" style="display:none;">
-    <button class="back-button" id="backButtonPerguntasQuiz">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <div id="perguntas-quiz">
-      <p id="perguntas-question"></p>
-      <ul id="perguntas-options"></ul>
+  <div id="verbos" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Verbos de Ação 🏃‍♂️</h3>
     </div>
-    <div class="score-container">
-      <p>Pontuação: <span id="perguntas-score">0</span>/10</p>
-      <p>Tempo: <span id="perguntas-timer">0</span> s</p>
+    <div class="text-content">
+      <p>Verbos são palavras de ação. Por exemplo, ler "read" 📖, escrever "write" ✍️, e falar "speak" 🗣️ ajudam a descrever as atividades.</p>
+      <p>Exemplos:</p>
+      <p class="english">I like to read books 📖</p>
+      <p class="portuguese">Eu gosto de ler livros 📖</p>
+      <p class="english">She doesn't like coffee ☕</p>
+      <p class="portuguese">Ela não gosta de café ☕</p>
     </div>
   </div>
-
-  <!-- Biblioteca (em inglês) -->
-  <div id="library-container" class="library-container" style="display:none;">
-    <button class="back-button" id="backButtonLibrary">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <h2><i class="fas fa-book-open"></i> Biblioteca de Textos</h2>
-    <!-- Seção: Frases Básicas -->
-    <div id="frases-basicas" class="text-card animate-in">
-      <div class="text-header">
-        <i class="fas fa-star"></i>
-        <h3>Frases Básicas 🌟</h3>
-      </div>
-      <div class="text-content">
-        <p class="english">I like to study English 📚</p>
-        <p class="portuguese">Eu gosto de estudar inglês 📚</p>
-        <p class="english">I am a student 🎓</p>
-        <p class="portuguese">Eu sou estudante 🎓</p>
-      </div>
+  <div id="idioms" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Idioms 💡</h3>
     </div>
-
-    <!-- Seção: Verbos -->
-    <div id="verbos" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Verbos de Ação 🏃‍♂️</h3>
+    <div class="text-content">
+      <p>"Idioms" também chamada de expressões idiomáticas, são expressões cujo significado não pode ser deduzido literalmente pelas palavras. Por exemplo, "break a leg" significa "boa sorte", não quebrar a perna.</p>
+      <p>Exemplos:</p>
+      <p class="english">A piece of cake 🍰</p>
+      <p class="portuguese">Algo muito fácil 🍰</p>
+      <p class="english">Help yourself 🤲</p>
+      <p class="portuguese">Sirva-se 🤲</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p>Verbos são palavras de ação. Por exemplo, ler "read" 📖, escrever "write" ✍️, e falar "speak" 🗣️ ajudam a descrever as atividades.</p>
-    <p>Exemplos:</p>
-    <p class="english">I like to read books 📖</p>
-    <p class="portuguese">Eu gosto de ler livros 📖</p>
-    <p class="english">She doesn't like coffee ☕</p>
-    <p class="portuguese">Ela não gosta de café ☕</p>
+  <div id="grammar" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Lição de Gramática 📖</h3>
+    </div>
+    <div class="text-content">
+      <p>Uma boa compreensão da gramática inglesa é essencial para formar frases corretas.</p>
+      <p>Dicas importantes: preste atenção aos tempos verbais, concordância entre sujeito e verbo e à estrutura da frase.</p>
+      <p>Exemplo: use "doesn't" com sujeitos singulares (He doesn't like apples 🍎).</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Idioms -->
-<div id="idioms" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Idioms 💡</h3>
+  <div id="greetings" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Cumprimentos e Apresentações 👋</h3>
+    </div>
+    <div class="text-content">
+      <p>Aprenda expressões comuns para saudações e apresentações, como "Good morning", "How are you?" e "Nice to meet you".</p>
+      <p>Exemplos:</p>
+      <p class="english">It's good to see you 😊</p>
+      <p class="portuguese">Que bom ver você 😊</p>
+      <p class="english">How are you doing? 🤔</p>
+      <p class="portuguese">Como vai você? 🤔</p>
+      <p class="english">Have a good night 🌙</p>
+      <p class="portuguese">Tenha uma boa noite 🌙</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p>"Idioms" também chamada de expressões idiomáticas, são expressões cujo significado não pode ser deduzido literalmente pelas palavras. Por exemplo, "break a leg" significa "boa sorte", não quebrar a perna.</p>
-    <p>Exemplos:</p>
-    <p class="english">A piece of cake 🍰</p>
-    <p class="portuguese">Algo muito fácil 🍰</p>
-    <p class="english">Help yourself 🤲</p>
-    <p class="portuguese">Sirva-se 🤲</p>
+  <div id="idioms-advanced" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Expressões Idiomáticas Avançadas 💡</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">Burn the midnight oil 🕯️ - Trabalhar até tarde da noite</p>
+      <p class="english">Bite the bullet 💪 - Enfrentar algo difícil</p>
+      <p class="english">Hit the nail on the head 🔨 - Acertar em cheio</p>
+      <p class="english">Let the cat out of the bag 🐱 - Revelar um segredo</p>
+      <p class="english">Throw in the towel 🏳️ - Desistir</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Gramática -->
-<div id="grammar" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Lição de Gramática 📖</h3>
+  <div id="verb-tenses" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Tempos Verbais ⏳</h3>
+    </div>
+    <div class="text-content">
+      <p><strong>Present Perfect:</strong> I have been to London 🏙️ - Eu estive em Londres</p>
+      <p><strong>Past Perfect:</strong> She had finished her homework before dinner 🍽️ - Ela tinha terminado a lição de casa antes do jantar</p>
+      <p><strong>Future Perfect:</strong> By next year, I will have graduated 🎓 - No próximo ano, eu terei me formado</p>
+      <p><strong>Present Continuous:</strong> They are studying for the exam 📚 - Eles estão estudando para o exame</p>
+      <p><strong>Past Continuous:</strong> I was reading when the phone rang ☎️ - Eu estava lendo quando o telefone tocou</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p>Uma boa compreensão da gramática inglesa é essencial para formar frases corretas.</p>
-    <p>Dicas importantes: preste atenção aos tempos verbais, concordância entre sujeito e verbo e à estrutura da frase.</p>
-    <p>Exemplo: use "doesn't" com sujeitos singulares (He doesn't like apples 🍎).</p>
+  <div id="technical-vocabulary" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Vocabulário Técnico 💻</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">Algorithm 🤖 - Algoritmo</p>
+      <p class="english">Database 🗄️ - Banco de dados</p>
+      <p class="english">Cloud Computing ☁️ - Computação em nuvem</p>
+      <p class="english">Artificial Intelligence 🧠 - Inteligência artificial</p>
+      <p class="english">Machine Learning 📈 - Aprendizado de máquina</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Cumprimentos -->
-<div id="greetings" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Cumprimentos e Apresentações 👋</h3>
+  <div id="interrogative-words" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Palavras Interrogativas ❓</h3>
+    </div>
+    <div class="text-content">
+      <p>Essas palavras são essenciais para formular perguntas:</p>
+      <ul>
+        <li class="english">Who 👤 - Quem</li>
+        <li class="english">What 🧐 - O que</li>
+        <li class="english">When ⏰ - Quando</li>
+        <li class="english">Where 📍 - Onde</li>
+        <li class="english">Why 🤔 - Por que</li>
+        <li class="english">How 🛠️ - Como</li>
+      </ul>
+      <p>Observe que cada uma tem sua função para determinar o tipo de resposta que esperamos.</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p>Aprenda expressões comuns para saudações e apresentações, como "Good morning", "How are you?" e "Nice to meet you".</p>
-    <p>Exemplos:</p>
-    <p class="english">It's good to see you 😊</p>
-    <p class="portuguese">Que bom ver você 😊</p>
-    <p class="english">How are you doing? 🤔</p>
-    <p class="portuguese">Como vai você? 🤔</p>
-    <p class="english">Have a good night 🌙</p>
-    <p class="portuguese">Tenha uma boa noite 🌙</p>
+  <div id="personal-questions" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-user"></i>
+      <h3>Perguntas Pessoais 🗣️</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">What is your name?</p>
+      <p class="portuguese">Qual é o seu nome?</p>
+      <p class="english">Where do you live?</p>
+      <p class="portuguese">Onde você mora?</p>
+      <p class="english">How old are you?</p>
+      <p class="portuguese">Quantos anos você tem?</p>
+      <p class="english">What do you do in your free time?</p>
+      <p class="portuguese">O que você faz no seu tempo livre?</p>
+      <p class="english">Do you have any pets?</p>
+      <p class="portuguese">Você tem algum animal de estimação?</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Expressões Idiomáticas Avançadas -->
-<div id="idioms-advanced" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Expressões Idiomáticas Avançadas 💡</h3>
+  <div id="irregular-verbs" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-star"></i>
+      <h3>Verbos Irregulares 🚀</h3>
+    </div>
+    <div class="text-content">
+      <p>Os verbos irregulares não seguem as regras comuns de conjugação. Exemplos incluem "go" (went), "have" (had) e "be" (was/were).</p>
+      <p>Exemplos:</p>
+      <p class="english">I went to the store yesterday 🏬</p>
+      <p class="portuguese">Eu fui à loja ontem 🏬</p>
+      <p class="english">She had a great time at the party 🎉</p>
+      <p class="portuguese">Ela se divertiu muito na festa 🎉</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p class="english">Burn the midnight oil 🕯️ - Trabalhar até tarde da noite</p>
-    <p class="english">Bite the bullet 💪 - Enfrentar algo difícil</p>
-    <p class="english">Hit the nail on the head 🔨 - Acertar em cheio</p>
-    <p class="english">Let the cat out of the bag 🐱 - Revelar um segredo</p>
-    <p class="english">Throw in the towel 🏳️ - Desistir</p>
+  <div id="agile-methods" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-project-diagram"></i>
+      <h3>Métodos Ágeis 🚀</h3>
+    </div>
+    <div class="text-content">
+      <p>Métodos ágeis são abordagens para gestão e desenvolvimento de projetos que valorizam colaboração, flexibilidade e entregas rápidas.</p>
+      <p class="english"><strong>Scrum</strong> 🏉 - An agile framework that divides work into cycles called <em>sprints</em>.</p>
+      <p class="portuguese"><strong>Scrum</strong> 🏉 - Um framework ágil que divide o trabalho em ciclos chamados <em>sprints</em>.</p>
+      <p class="english"><strong>Kanban</strong> 🗂️ - A visual method for managing tasks using boards and cards.</p>
+      <p class="portuguese"><strong>Kanban</strong> 🗂️ - Um método visual para gerenciar tarefas usando quadros e cartões.</p>
+      <p class="english"><strong>Daily Stand-up</strong> ⏰ - A quick daily meeting to align the team.</p>
+      <p class="portuguese"><strong>Daily Stand-up</strong> ⏰ - Reunião diária rápida para alinhar o time.</p>
+      <p class="english"><strong>Product Backlog</strong> 📋 - Prioritized list of everything that needs to be done in the project.</p>
+      <p class="portuguese"><strong>Product Backlog</strong> 📋 - Lista priorizada de tudo que deve ser feito no projeto.</p>
+      <p class="english"><strong>Sprint Retrospective</strong> 🔄 - Meeting to reflect and improve the process after each sprint.</p>
+      <p class="portuguese"><strong>Sprint Retrospective</strong> 🔄 - Reunião para refletir e melhorar o processo após cada sprint.</p>
+      <p class="english"><strong>Agile Manifesto</strong> 📜 - Values and principles for agile software development.</p>
+      <p class="portuguese"><strong>Manifesto Ágil</strong> 📜 - Valores e princípios para desenvolvimento ágil de software.</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Tempos Verbais -->
-<div id="verb-tenses" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Tempos Verbais ⏳</h3>
-  </div>
-  <div class="text-content">
-    <p><strong>Present Perfect:</strong> I have been to London 🏙️ - Eu estive em Londres</p>
-    <p><strong>Past Perfect:</strong> She had finished her homework before dinner 🍽️ - Ela tinha terminado a lição de casa antes do jantar</p>
-    <p><strong>Future Perfect:</strong> By next year, I will have graduated 🎓 - No próximo ano, eu terei me formado</p>
-    <p><strong>Present Continuous:</strong> They are studying for the exam 📚 - Eles estão estudando para o exame</p>
-    <p><strong>Past Continuous:</strong> I was reading when the phone rang ☎️ - Eu estava lendo quando o telefone tocou</p>
-  </div>
-</div>
-
-<!-- Seção: Vocabulário Técnico -->
-<div id="technical-vocabulary" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Vocabulário Técnico 💻</h3>
-  </div>
-  <div class="text-content">
-    <p class="english">Algorithm 🤖 - Algoritmo</p>
-    <p class="english">Database 🗄️ - Banco de dados</p>
-    <p class="english">Cloud Computing ☁️ - Computação em nuvem</p>
-    <p class="english">Artificial Intelligence 🧠 - Inteligência artificial</p>
-    <p class="english">Machine Learning 📈 - Aprendizado de máquina</p>
-  </div>
-</div>
-
-<!-- Seção: Palavras Interrogativas -->
-<div id="interrogative-words" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Palavras Interrogativas ❓</h3>
-  </div>
-  <div class="text-content">
-    <p>Essas palavras são essenciais para formular perguntas:</p>
-    <ul>
-      <li class="english">Who 👤 - Quem</li>
-      <li class="english">What 🧐 - O que</li>
-      <li class="english">When ⏰ - Quando</li>
-      <li class="english">Where 📍 - Onde</li>
-      <li class="english">Why 🤔 - Por que</li>
-      <li class="english">How 🛠️ - Como</li>
-    </ul>
-    <p>Observe que cada uma tem sua função para determinar o tipo de resposta que esperamos.</p>
-  </div>
-</div>
-
-<!-- Seção: Perguntas Pessoais -->
-<div id="personal-questions" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-user"></i>
-    <h3>Perguntas Pessoais 🗣️</h3>
-  </div>
-  <div class="text-content">
-    <p class="english">What is your name?</p>
-    <p class="portuguese">Qual é o seu nome?</p>
-    <p class="english">Where do you live?</p>
-    <p class="portuguese">Onde você mora?</p>
-    <p class="english">How old are you?</p>
-    <p class="portuguese">Quantos anos você tem?</p>
-    <p class="english">What do you do in your free time?</p>
-    <p class="portuguese">O que você faz no seu tempo livre?</p>
-    <p class="english">Do you have any pets?</p>
-    <p class="portuguese">Você tem algum animal de estimação?</p>
-  </div>
-</div>
-
-
-<!-- Seção: Verbos Irregulares -->
-<div id="irregular-verbs" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-star"></i>
-    <h3>Verbos Irregulares 🚀</h3>
-  </div>
-  <div class="text-content">
-    <p>Os verbos irregulares não seguem as regras comuns de conjugação. Exemplos incluem "go" (went), "have" (had) e "be" (was/were).</p>
-    <p>Exemplos:</p>
-    <p class="english">I went to the store yesterday 🏬</p>
-    <p class="portuguese">Eu fui à loja ontem 🏬</p>
-    <p class="english">She had a great time at the party 🎉</p>
-    <p class="portuguese">Ela se divertiu muito na festa 🎉</p>
-  </div>
-</div>
-  <!-- Seção: Expressões de Tempo -->
-
-  
-<!-- Seção: Métodos Ágeis -->
-<div id="agile-methods" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-project-diagram"></i>
-    <h3>Métodos Ágeis 🚀</h3>
-  </div>
-  <div class="text-content">
-    <p>Métodos ágeis são abordagens para gestão e desenvolvimento de projetos que valorizam colaboração, flexibilidade e entregas rápidas.</p>
-    <p class="english"><strong>Scrum</strong> 🏉 - An agile framework that divides work into cycles called <em>sprints</em>.</p>
-    <p class="portuguese"><strong>Scrum</strong> 🏉 - Um framework ágil que divide o trabalho em ciclos chamados <em>sprints</em>.</p>
-    <p class="english"><strong>Kanban</strong> 🗂️ - A visual method for managing tasks using boards and cards.</p>
-    <p class="portuguese"><strong>Kanban</strong> 🗂️ - Um método visual para gerenciar tarefas usando quadros e cartões.</p>
-    <p class="english"><strong>Daily Stand-up</strong> ⏰ - A quick daily meeting to align the team.</p>
-    <p class="portuguese"><strong>Daily Stand-up</strong> ⏰ - Reunião diária rápida para alinhar o time.</p>
-    <p class="english"><strong>Product Backlog</strong> 📋 - Prioritized list of everything that needs to be done in the project.</p>
-    <p class="portuguese"><strong>Product Backlog</strong> 📋 - Lista priorizada de tudo que deve ser feito no projeto.</p>
-    <p class="english"><strong>Sprint Retrospective</strong> 🔄 - Meeting to reflect and improve the process after each sprint.</p>
-    <p class="portuguese"><strong>Sprint Retrospective</strong> 🔄 - Reunião para refletir e melhorar o processo após cada sprint.</p>
-    <p class="english"><strong>Agile Manifesto</strong> 📜 - Values and principles for agile software development.</p>
-    <p class="portuguese"><strong>Manifesto Ágil</strong> 📜 - Valores e princípios para desenvolvimento ágil de software.</p>
-  </div>
-</div>
-
-<!-- Seção: Conversação -->
   <div id="conversation" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-comments"></i>
@@ -645,48 +573,38 @@
       <p class="portuguese">Eu não entendi. Você pode explicar?</p>
     </div>
   </div>
-
-
-<!-- Seção: Saudações -->
-<div id="greetings" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-handshake"></i>
-    <h3>Saudações 👋</h3>
+  <div id="greetings" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-handshake"></i>
+      <h3>Saudações 👋</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">Hello! How are you?</p>
+      <p class="portuguese">Olá! Como você está?</p>
+      <p class="english">Good morning!</p>
+      <p class="portuguese">Bom dia!</p>
+      <p class="english">Good night!</p>
+      <p class="portuguese">Boa noite!</p>
+      <p class="english">See you later!</p>
+      <p class="portuguese">Até mais!</p>
+    </div>
   </div>
-  <div class="text-content">
-    <p class="english">Hello! How are you?</p>
-    <p class="portuguese">Olá! Como você está?</p>
-    <p class="english">Good morning!</p>
-    <p class="portuguese">Bom dia!</p>
-    <p class="english">Good night!</p>
-    <p class="portuguese">Boa noite!</p>
-    <p class="english">See you later!</p>
-    <p class="portuguese">Até mais!</p>
+  <div id="politeness" class="text-card animate-in">
+    <div class="text-header">
+      <i class="fas fa-smile"></i>
+      <h3>Pedidos e Cortesia 🙏</h3>
+    </div>
+    <div class="text-content">
+      <p class="english">Can you help me, please?</p>
+      <p class="portuguese">Você pode me ajudar, por favor?</p>
+      <p class="english">Thank you very much!</p>
+      <p class="portuguese">Muito obrigado!</p>
+      <p class="english">You're welcome!</p>
+      <p class="portuguese">De nada!</p>
+      <p class="english">Excuse me, where is the bathroom?</p>
+      <p class="portuguese">Com licença, onde fica o banheiro?</p>
+    </div>
   </div>
-</div>
-
-<!-- Seção: Pedidos e Cortesia -->
-<div id="politeness" class="text-card animate-in">
-  <div class="text-header">
-    <i class="fas fa-smile"></i>
-    <h3>Pedidos e Cortesia 🙏</h3>
-  </div>
-  <div class="text-content">
-    <p class="english">Can you help me, please?</p>
-    <p class="portuguese">Você pode me ajudar, por favor?</p>
-    <p class="english">Thank you very much!</p>
-    <p class="portuguese">Muito obrigado!</p>
-    <p class="english">You're welcome!</p>
-    <p class="portuguese">De nada!</p>
-    <p class="english">Excuse me, where is the bathroom?</p>
-    <p class="portuguese">Com licença, onde fica o banheiro?</p>
-  </div>
-</div>
-
-
-
-
-  <!-- Seção: Dia a Dia -->
   <div id="daily-routine" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-calendar-day"></i>
@@ -705,8 +623,6 @@
       <p class="portuguese">Eu vou dormir às 22h.</p>
     </div>
   </div>
-
-  <!-- Seção: Mais Perguntas (expandida) -->
   <div id="more-questions" class="text-card animate-in">
     <div class="text-header">
       <i class="fas fa-star"></i>
@@ -740,16 +656,14 @@
       <p class="portuguese">Você já viajou para o exterior? ✈️</p>
     </div>
   </div>
-  </div>
+</div>
 
-  <!-- Ranking -->
-  <div id="ranking-container" class="ranking-container" style="display:none;">
+<div id="ranking-container" class="ranking-container" style="display:none;">
   <button class="back-button" id="backButtonRanking">
     <i class="fas fa-arrow-left"></i> Voltar ao Menu
   </button>
   <h2 class="ranking-title"><i class="fas fa-trophy"></i> Ranking</h2>
   <div class="podium">
-  <!-- Primeiro Lugar -->
   <div class="podium-item first-place">
     <div class="podium-rank">🥇</div>
     <div class="podium-photo shine">
@@ -761,8 +675,6 @@
       <span id="top-1-time" class="podium-time">0s</span>
     </div>
   </div>
-
-  <!-- Segundo Lugar -->
   <div class="podium-item second-place">
     <div class="podium-rank">🥈</div>
     <div class="podium-photo">
@@ -774,8 +686,6 @@
       <span id="top-2-time" class="podium-time">0s</span>
     </div>
   </div>
-
-  <!-- Terceiro Lugar -->
   <div class="podium-item third-place">
     <div class="podium-rank">🥉</div>
     <div class="podium-photo">
@@ -789,7 +699,6 @@
   </div>
 </div>
   <ul id="ranking-list" class="ranking-list">
-    <!-- Exemplo de item do ranking a partir do 4º lugar -->
     <li class="ranking-item">
       <div class="ranking-photo">
         <img src="images/default.png" alt="Avatar" />
@@ -802,36 +711,33 @@
   </ul>
 </div>
 
-  <!-- Tela Final do Quiz Principal -->
-  <div id="end-screen" class="end-screen" style="display:none;">
-    <button class="back-button" id="backButtonEndScreen">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <p id="final-message"></p>
-    <ul id="error-list"></ul>
-    <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
-    <button id="restart-button" class="restart-button">
-      <i class="fas fa-sync-alt"></i> Reiniciar Quiz
-    </button>
-  </div>
+<div id="end-screen" class="end-screen" style="display:none;">
+  <button class="back-button" id="backButtonEndScreen">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <p id="final-message"></p>
+  <ul id="error-list"></ul>
+  <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
+  <button id="restart-button" class="restart-button">
+    <i class="fas fa-sync-alt"></i> Reiniciar Quiz
+  </button>
+</div>
 
-  <!-- Tela Final do Quiz de Perguntas -->
-  <div id="perguntas-end-screen" class="end-screen" style="display:none;">
-    <button class="back-button" id="backButtonPerguntasEndScreen">
-      <i class="fas fa-arrow-left"></i> Voltar ao Menu
-    </button>
-    <p id="perguntas-final-message"></p>
-    <ul id="perguntas-error-list"></ul>
-    <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
-    <button id="perguntas-restart-button" class="restart-button">
-      <i class="fas fa-sync-alt"></i> Tentar Novamente
-    </button>
-    <button id="perguntas-menu-button" class="restart-button">
-      <i class="fas fa-home"></i> Menu Principal
-    </button>
-  </div>
+<div id="perguntas-end-screen" class="end-screen" style="display:none;">
+  <button class="back-button" id="backButtonPerguntasEndScreen">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+  </button>
+  <p id="perguntas-final-message"></p>
+  <ul id="perguntas-error-list"></ul>
+  <p id="motivational-message" style="display:none; font-weight:bold; margin-top:16px;"></p>
+  <button id="perguntas-restart-button" class="restart-button">
+    <i class="fas fa-sync-alt"></i> Tentar Novamente
+  </button>
+  <button id="perguntas-menu-button" class="restart-button">
+    <i class="fas fa-home"></i> Menu Principal
+  </button>
+</div>
 
-  <!-- Tela de Perfil -->
 <div id="profile-container" class="profile-container" style="display:none;">
   <button class="back-button" id="backButtonProfile">
     <i class="fas fa-arrow-left"></i> Voltar ao Menu
@@ -964,7 +870,6 @@
 </div>
 </div>
 
-  <!-- Aba de aviso do quiz -->
 <div id="quiz-warning-container" style="display: none;">
   <p id="quiz-warning-message">Você já realizou este quiz. Você só pode fazê-lo uma vez.</p>
   <button id="quiz-warning-back-button">Voltar ao Menu</button>
@@ -976,13 +881,10 @@
   <input type="text" id="exercise-input" placeholder="Digite sua resposta aqui" />
   <button id="exercise-submit">Enviar</button>
   <p id="exercise-feedback"></p>
-  
-  <!-- Bloco para exibir os exercícios acertados -->
   <div id="correct-answers-container" style="margin-top: 20px;">
     <h3>Exercícios Acertados</h3>
     <div id="correct-answers-list"></div>
   </div>
-
   <button id="backButtonExercises">Voltar ao Menu</button>
 </div>
 
@@ -995,6 +897,6 @@
   </div>
 </div>
 
-  <script type="module" src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>
