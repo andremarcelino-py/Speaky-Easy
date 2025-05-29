@@ -1,7 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+import { initializeApp } from "https: 
+import { getFirestore, collection, addDoc, getDocs, updateDoc } from "https: 
 
-// Configuração Firebase
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyBCVGQk1Ctp1IZJrHQdM6YUSItaD3pypjg",
   authDomain: "testspeakeasy.firebaseapp.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Containers principais
+ 
 const registerContainer      = document.getElementById("register-container");
 const loginContainer         = document.getElementById("login-container");
 const menuContainer          = document.getElementById("menu-container");
@@ -34,13 +34,13 @@ const frenchQuizContainer    = document.getElementById("french-container");
 const frenchEndScreen        = document.getElementById("french-end-screen");
 const frenchLibraryContainer = document.getElementById("french-library-container");
 
-// Elementos de cadastro/login
+ 
 const startButton        = document.getElementById("start-button");
 const loginButton        = document.getElementById("login-button");
 const goLoginLink        = document.getElementById("go-login");
 const goRegisterLink     = document.getElementById("go-register");
 
-// Outros botões (menu, quiz, etc.)
+ 
 const btnQuiz            = document.getElementById("btnQuiz");
 const btnPerguntas       = document.getElementById("btnPerguntas");
 const btnLibrary         = document.getElementById("btnLibrary");
@@ -64,7 +64,7 @@ const backButtonFrenchMenu = document.getElementById("backButtonFrenchMenu");
 const frenchRestartButton  = document.getElementById("french-restart-button");
 const frenchMenuButton     = document.getElementById("french-menu-button");
 
-// Elementos do Quiz (inglês, perguntas, español, francês)
+ 
 const questionElement       = document.getElementById("question");
 const optionsElement        = document.getElementById("options");
 const scoreElement          = document.getElementById("score");
@@ -93,7 +93,7 @@ const frenchTimerElement    = document.getElementById("french-timer");
 const frenchFinalMessageEl  = document.getElementById("french-final-message");
 const frenchErrorListEl     = document.getElementById("french-error-list");
 
-// Função genérica para esconder todas as seções
+ 
 function hideAllSections() {
   [
     registerContainer, loginContainer, menuContainer,
@@ -101,18 +101,18 @@ function hideAllSections() {
     libraryContainer, rankingContainer, endScreen, perguntasEndScreen,
     spanishMenuContainer, spanishQuizContainer, spanishEndScreen, spanishLibraryContainer,
     frenchMenuContainer, frenchQuizContainer, frenchEndScreen, frenchLibraryContainer,
-    profileContainer, exercisesContainer // Inclua o contêiner de exercícios aqui
+    profileContainer, exercisesContainer  
   ].forEach(sec => sec && (sec.style.display = "none"));
 }
 
-// Função para voltar ao menu
+ 
 function backToMenu() {
   stopTimer(); stopPerguntasTimer(); stopSpanishTimer(); stopFrenchTimer();
   hideAllSections();
   menuContainer.style.display = "block";
 }
 
-// Conecta botões de voltar
+ 
 [
   "backButtonQuiz", "backButtonPerguntas", "backButtonPerguntasQuiz",
   "backButtonLibrary", "backButtonRanking", "backButtonEndScreen", "backButtonPerguntasEndScreen",
@@ -123,7 +123,7 @@ function backToMenu() {
   if (btn) btn.addEventListener("click", backToMenu);
 });
 
-// --- CADASTRO ---
+ 
 startButton.addEventListener("click", async () => {
   const nameInput = document.getElementById("name").value.trim();
   const passwordInput = document.getElementById("register-password").value.trim();
@@ -146,10 +146,10 @@ startButton.addEventListener("click", async () => {
   }
 });
 
-// --- LOGIN ---
-let currentUserName = ""; // Variável para armazenar o nome do usuário logado
+ 
+let currentUserName = "";  
 
-// Atualiza o nome do usuário no menu
+ 
 function updateUserName(name, photoURL = "images/default.png") {
   currentUserName = name;
   const userNameElement = document.getElementById("user-name");
@@ -163,37 +163,37 @@ function updateUserName(name, photoURL = "images/default.png") {
   }
 }
 
-// Verifica se é a primeira vez que o usuário faz login
+ 
 function checkFirstTimeLogin() {
   const isFirstTime = localStorage.getItem("firstTimeLogin") === null;
 
   if (isFirstTime) {
-    // Exibe o popup
+     
     const popup = document.getElementById("first-time-popup");
     popup.style.display = "flex";
 
-    // Botão "Ir para o Perfil"
+     
     document.getElementById("go-to-profile").addEventListener("click", () => {
       popup.style.display = "none";
       hideAllSections();
-      profileContainer.style.display = "block"; // Redireciona para o perfil
+      profileContainer.style.display = "block";  
     });
 
-    // Botão "Depois"
+     
     document.getElementById("skip-profile").addEventListener("click", () => {
       popup.style.display = "none";
-      menuContainer.style.display = "block"; // Redireciona para o menu principal
+      menuContainer.style.display = "block";  
     });
 
-    // Marca que o usuário já fez login pela primeira vez
+     
     localStorage.setItem("firstTimeLogin", "false");
   } else {
-    // Redireciona diretamente para o menu principal
+     
     menuContainer.style.display = "block";
   }
 }
 
-// Modifique o login para atualizar o nome do usuário
+ 
 loginButton.addEventListener("click", async () => {
   const loginName = document.getElementById("login-name").value.trim();
   const loginPassword = document.getElementById("login-password").value.trim();
@@ -211,9 +211,9 @@ loginButton.addEventListener("click", async () => {
       const userData = doc.data();
       if (userData.name === loginName && userData.password === loginPassword) {
         userFound = true;
-        updateUserName(loginName, userData.photoURL); // Atualiza o nome e a foto do usuário
+        updateUserName(loginName, userData.photoURL);  
         hideAllSections();
-        checkFirstTimeLogin(); // Verifica se é a primeira vez que o usuário faz login
+        checkFirstTimeLogin();  
       }
     });
 
@@ -226,31 +226,31 @@ loginButton.addEventListener("click", async () => {
   }
 });
 
-// Exibir a tela de cadastro ao clicar em "Comece Agora"
+ 
 document.getElementById("start-now").addEventListener("click", () => {
   document.getElementById("welcome-container").style.display = "none";
   document.getElementById("register-container").style.display = "block";
 });
 
-// Exibir a tela de login ao clicar em "Já Tenho uma Conta"
+ 
 document.getElementById("login").addEventListener("click", () => {
   document.getElementById("welcome-container").style.display = "none";
   document.getElementById("login-container").style.display = "block";
 });
 
-// Alternar para a tela de login a partir da tela de cadastro
+ 
 document.getElementById("go-login").addEventListener("click", () => {
   document.getElementById("register-container").style.display = "none";
   document.getElementById("login-container").style.display = "block";
 });
 
-// Alternar para a tela de cadastro a partir da tela de login
+ 
 document.getElementById("go-register").addEventListener("click", () => {
   document.getElementById("login-container").style.display = "none";
   document.getElementById("register-container").style.display = "block";
 });
 
-// Navegação entre telas de cadastro e login
+ 
 goLoginLink.addEventListener("click", () => {
   registerContainer.style.display = "none";
   loginContainer.style.display = "block";
@@ -260,7 +260,7 @@ goRegisterLink.addEventListener("click", () => {
   registerContainer.style.display = "block";
 });
 
-// --- QUIZ INGLÊS ---
+ 
 let questions = [], score = 0, currentQuestion = 0, errors = [], quizTimer = 0, timerInterval;
 function getRandomQuestions() {
   return [...allQuestions].sort(() => Math.random() - 0.5).slice(0,15);
@@ -303,7 +303,7 @@ function checkAnswer(sel) {
     errors.push({
       question: q.question,
       correct: q.options[q.answer],
-      libraryRef: q.libraryRef, // Adiciona a referência da biblioteca
+      libraryRef: q.libraryRef,  
     });
   }
 
@@ -316,12 +316,12 @@ function endQuiz() {
   stopTimer();
   quizContainer.style.display = "none";
 
-  // Obter mensagem motivacional
+   
   const motivationalMessage = getMotivationalMessage(score, questions.length);
   congratulationsTitle.textContent = motivationalMessage.title;
   congratulationsMessage.textContent = motivationalMessage.message;
 
-  // Preencher a lista de erros
+   
   errorListElement.innerHTML = errors.map((error) => `
     <li class="error-item" style="margin-bottom: 10px;">
       <p><strong>Pergunta:</strong> ${error.question}</p>
@@ -332,30 +332,30 @@ function endQuiz() {
     </li>
   `).join("");
 
-  // Exibir a tela de parabenização
+   
   congratulationsContainer.style.display = "block";
 
-  // Salvar pontuação final
+   
   saveScore(document.getElementById("name").value.trim(), score, quizTimer);
 
-  // SALVAR PROGRESSO PARA BLOQUEAR NOVO QUIZ
-  saveProgress(currentUserName, { finished: true }); // <-- Adicione esta linha
+   
+  saveProgress(currentUserName, { finished: true });  
 }
 
-// Função para redirecionar para a biblioteca correspondente
+ 
 function showLibrarySection(libraryRef) {
   hideAllSections();
   libraryContainer.style.display = "block";
   document.getElementById(libraryRef)?.scrollIntoView({ behavior: "smooth" });
 }
 
-// Referências aos elementos da tela de parabenização
+ 
 const congratulationsContainer = document.getElementById("congratulations-container");
 const congratulationsTitle = document.getElementById("congratulations-title");
 const congratulationsMessage = document.getElementById("congratulations-message");
 const congratulationsBackButton = document.getElementById("congratulations-back-button");
 
-// Mensagens motivacionais baseadas na pontuação
+ 
 function getMotivationalMessage(score, totalQuestions) {
   const percent = score / totalQuestions;
   let motivationalMessage;
@@ -398,28 +398,28 @@ function getMotivationalMessage(score, totalQuestions) {
   };
 }
 
-// Evento para o botão "Voltar ao Menu" na tela de parabenização
+ 
 congratulationsBackButton.addEventListener("click", () => {
-  congratulationsContainer.style.display = "none"; // Ocultar a tela de parabenização
-  menuContainer.style.display = "block"; // Voltar ao menu principal
+  congratulationsContainer.style.display = "none";  
+  menuContainer.style.display = "block";  
 });
 
-// Adicione um novo contêiner para a aba de aviso no HTML
+ 
 const quizWarningContainer = document.getElementById("quiz-warning-container");
 const quizWarningMessage = document.getElementById("quiz-warning-message");
 const quizWarningBackButton = document.getElementById("quiz-warning-back-button");
 
-// Modifique o evento do botão do quiz principal
+ 
 btnQuiz.addEventListener("click", async () => {
   hideAllSections();
 
   const savedProgress = await loadProgress(currentUserName);
   if (savedProgress) {
-    // Exibir a aba de aviso
+     
     quizWarningMessage.textContent = "Você já realizou este quiz. Você só pode fazê-lo uma vez.";
     quizWarningContainer.style.display = "block";
   } else {
-    // Iniciar o quiz normalmente
+     
     quizContainer.style.display = "block";
     questions = getRandomQuestions();
     score = 0;
@@ -432,17 +432,17 @@ btnQuiz.addEventListener("click", async () => {
   }
 });
 
-// Evento para o botão de voltar ao menu na aba de aviso
+ 
 quizWarningBackButton.addEventListener("click", () => {
-  quizWarningContainer.style.display = "none"; // Oculta a mensagem
-  menuContainer.style.display = "block"; // Retorna ao menu principal
+  quizWarningContainer.style.display = "none";  
+  menuContainer.style.display = "block";  
 });
 
 restartButton.addEventListener("click", ()=>{
   btnQuiz.click();
 });
 
-// --- QUIZ PERGUNTAS ---
+ 
 let perguntasQuestions = [], perguntasScore = 0, currentPerguntaQuestion = 0, perguntasErrors = [], perguntasTimer = 0, perguntasTimerInterval;
 function startPerguntasTimer() {
   perguntasTimer = 0; perguntasTimerElement.textContent = perguntasTimer;
@@ -509,7 +509,7 @@ btnDificil.addEventListener("click", ()=> startPerguntasQuiz("hard"));
 perguntasRestartButton.addEventListener("click", ()=> startPerguntasQuiz(perguntasQuestions[0]?.difficulty || "easy"));
 perguntasMenuButton.addEventListener("click", backToMenu);
 
-// --- BIBLIOTECA ---
+ 
 btnLibrary.addEventListener("click", ()=>{ hideAllSections(); libraryContainer.style.display = "block"; });
 window.showLibrarySection = function(sectionId){
   hideAllSections();
@@ -517,47 +517,47 @@ window.showLibrarySection = function(sectionId){
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
 };
 
-// Função para abrir a biblioteca e esconder o botão de voltar ao menu
+ 
 function openLibraryFromLearnMore() {
   hideAllSections();
   document.getElementById('library-container').style.display = 'block';
-  // Esconde o botão de voltar ao menu na biblioteca
+   
   document.getElementById('backButtonLibrary').style.display = 'none';
 }
 
-// Função para mostrar o botão de voltar ao menu quando sair da biblioteca
+ 
 function closeLibraryAndShowMenu() {
   document.getElementById('library-container').style.display = 'none';
   document.getElementById('menu-container').style.display = 'block';
-  // Mostra o botão de voltar ao menu novamente
+   
   document.getElementById('backButtonLibrary').style.display = '';
 }
 
-// Exemplo de uso: supondo que o botão "Aprenda Mais" tenha id="learn-more-btn"
+ 
 const learnMoreBtn = document.getElementById('learn-more-btn');
 if (learnMoreBtn) {
   learnMoreBtn.addEventListener('click', openLibraryFromLearnMore);
 }
 
-// No botão de fechar/voltar da biblioteca, use closeLibraryAndShowMenu
+ 
 const backButtonLibrary = document.getElementById('backButtonLibrary');
 if (backButtonLibrary) {
   backButtonLibrary.addEventListener('click', () => {
-    // Esconde a biblioteca
+     
     libraryContainer.style.display = "none";
-    // Esconde a lista de erros e respostas corretas (tela de parabenização)
+     
     if (congratulationsContainer) {
       congratulationsContainer.style.display = "none";
     }
-    // Volta ao menu principal
+     
     menuContainer.style.display = "block";
   });
 };
 
-// --- RANKING ---
+ 
 async function loadRanking() {
   const rankingList = document.getElementById("ranking-list");
-  rankingList.innerHTML = ""; // Limpa o ranking atual
+  rankingList.innerHTML = "";  
 
   try {
     const snap = await getDocs(collection(db, "users"));
@@ -570,15 +570,15 @@ async function loadRanking() {
       }
     });
 
-    // Ordena os usuários pela pontuação e tempo
+     
     users.sort((a, b) => {
       if (b.score === a.score) {
-        return a.time - b.time; // Menor tempo primeiro
+        return a.time - b.time;  
       }
-      return b.score - a.score; // Maior pontuação primeiro
+      return b.score - a.score;  
     });
 
-    // Preenche o pódio
+     
     if (users[0]) {
       document.getElementById("top-1-photo").src = users[0].photoURL || "images/default.png";
       document.getElementById("top-1-name").textContent = users[0].name;
@@ -598,11 +598,11 @@ async function loadRanking() {
       document.getElementById("top-3-time").textContent = `${users[2].time}s`;
     }
 
-    // Preenche o restante do ranking
+     
     users.slice(3).forEach((user, index) => {
       const listItem = document.createElement("li");
       listItem.classList.add("ranking-item");
-      // Destaca o bloco do usuário logado
+       
       if (user.name === currentUserName) {
         listItem.classList.add("meu-destaque");
       }
@@ -620,14 +620,14 @@ async function loadRanking() {
   }
 }
 
-// Evento para exibir o ranking ao clicar no botão
+ 
 btnRanking.addEventListener("click", () => {
   hideAllSections();
   loadRanking();
   document.getElementById("ranking-container").style.display = "block";
 });
 
-// --- QUIZ ESPAÑOL ---
+ 
 let spanishQuestions = [], spanishScore = 0, currentSpanishQuestion = 0, spanishErrors = [], spanishTimer = 0, spanishTimerInterval;
 function getRandomSpanishQuestions() {
   const all = [
@@ -733,7 +733,7 @@ spanishRestartButton.addEventListener("click", ()=>{
 });
 spanishMenuButton.addEventListener("click", backToMenu);
 
-// --- QUIZ FRANÇAIS ---
+ 
 let frenchQuestions = [], frenchScore = 0, currentFrenchQuestion = 0, frenchErrors = [], frenchTimer = 0, frenchTimerInterval;
 function getRandomFrenchQuestions() {
   const all = [
@@ -824,7 +824,7 @@ frenchMenuButton.addEventListener("click", backToMenu);
 saveScore(currentUserName, score, quizTimer);
 
 
-// --- SALVAR PONTUAÇÃO ---
+ 
 async function saveScore(userName, score, time) {
   const snap = await getDocs(collection(db, "users"));
   let userDoc = null;
@@ -836,7 +836,7 @@ async function saveScore(userName, score, time) {
   }
 }
 
-// Alterna a visualização do conteúdo da Biblioteca (expansível)
+ 
 document.addEventListener("DOMContentLoaded", () => {
   const headers = document.querySelectorAll(".text-card .text-header");
   headers.forEach(header => {
@@ -847,7 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Lista de perguntas fixa
+ 
 const allQuestions = [
   { question: "What is the main goal of Agile methodologies?", options: ["Deliver value to the customer quickly and iteratively", "Create detailed documentation before starting", "Follow a strict plan without changes", "Work in isolation"], answer: 0, difficulty: "medium", libraryRef: "agile" },
   { question: "Which of the following is NOT an Agile framework?", options: ["Scrum", "Kanban", "Waterfall", "XP (Extreme Programming)"], answer: 2, difficulty: "medium", libraryRef: "agile" },
@@ -871,27 +871,27 @@ const allQuestions = [
   { question: "Which word means the opposite of 'always'?", options: ["Never", "Often", "Sometimes", "Usually"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "What is the correct comparative form of 'good'?", options: ["Gooder", "More good", "Better", "Best"], answer: 2, difficulty: "medium", libraryRef: "grammar" },
   { question: "Which sentence uses the Present Continuous tense?", options: ["They play soccer.", "They played soccer.", "They are playing soccer.", "They will play soccer."], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
-    // Pedidos e Cortesia
+     
   { question: "Qual é a forma mais educada de pedir ajuda em inglês?", options: ["Help me!", "Can you help me, please?", "Give me help!", "You help me?"], answer: 1, difficulty: "easy", libraryRef: "politeness" },
   { question: "Como você agradece alguém de forma formal em inglês?", options: ["You're welcome", "Excuse me", "Thank you very much", "Sorry"], answer: 2, difficulty: "easy", libraryRef: "politeness" },
   { question: "Como pedir para usar o banheiro de maneira educada em inglês?", options: ["Excuse me, where is the bathroom?", "Sorry, where is the kitchen?", "Please, where is the bedroom?", "Hello, where is the office?"], answer: 0, difficulty: "easy", libraryRef: "politeness" },
   
-    // Rotina Diária
+     
   { question: "Como se diz 'Eu acordo às 7 da manhã' em inglês?", options: ["I go to bed at 7 a.m.", "I wake up at 7 a.m.", "I have lunch at 7 a.m.", "I go to work at 7 a.m."], answer: 1, difficulty: "easy", libraryRef: "daily-routine" },
   { question: "Qual frase expressa corretamente 'Eu almoço ao meio-dia' em inglês?", options: ["I have dinner at noon.", "I eat breakfast at noon.", "I have lunch at noon.", "I go home at noon."], answer: 2, difficulty: "easy", libraryRef: "daily-routine" },
   { question: "Como dizer que gosta de assistir TV à noite em inglês?", options: ["I like to watch TV in the evening.", "I watch TV in the morning.", "I like to read books at night.", "I go to bed in the evening."], answer: 0, difficulty: "easy", libraryRef: "daily-routine" },
   
-    // Perguntas Pessoais
+     
   { question: "Como perguntar o nome de alguém em inglês?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "personal-questions" },
   { question: "Qual frase corresponde a 'Onde você mora?' em inglês?", options: ["Where do you live?", "Where are you from?", "Where do you go?", "Where is your house?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
   { question: "Como perguntar sobre atividades de lazer em inglês?", options: ["What do you do in your free time?", "How do you work?", "Where do you go after work?", "Do you like weekends?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
   { question: "Como perguntar se alguém tem animais de estimação em inglês?", options: ["Do you have any pets?", "Do you like animals?", "Where is your pet?", "What is your pet's name?"], answer: 0, difficulty: "easy", libraryRef: "personal-questions" },
   
-    // Saudações
+     
   { question: "Como se diz 'Bom dia' em inglês?", options: ["Good night", "Good morning", "Good afternoon", "Hello"], answer: 1, difficulty: "easy", libraryRef: "greetings" },
   { question: "Qual expressão corresponde a 'Até mais' em inglês?", options: ["See you later", "Goodbye", "Good morning", "Good luck"], answer: 0, difficulty: "easy", libraryRef: "greetings" },
   
-    // Expressões Idiomáticas
+     
   { question: "O que significa a expressão 'Break the ice' em inglês?", options: ["Começar uma conversa em um ambiente social", "Quebrar algo frágil", "Sair no inverno", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
   { question: "O que significa 'Piece of cake' em inglês?", options: ["Algo muito fácil", "Uma sobremesa", "Uma tarefa difícil", "Uma comemoração"], answer: 0, difficulty: "easy", libraryRef: "idioms" },
   { question: "O que significa 'Let the cat out of the bag'?", options: ["Revelar um segredo", "Deixar um animal escapar", "Comprar um gato", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
@@ -908,7 +908,7 @@ const allQuestions = [
   { question: "O que significa 'A dime a dozen'?", options: ["Muito comum", "Muito caro", "Muito raro", "Muito difícil"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
   { question: "O que significa 'To bite off more than you can chew'?", options: ["Assumir mais do que pode lidar", "Comer demais", "Desistir", "Cometer um erro"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
   
-    // Verb Tenses
+     
   { question: "Qual frase está no Present Perfect?", options: ["She has finished her work", "She finish her work", "She finishing her work", "She will finish her work"], answer: 0, difficulty: "hard", libraryRef: "verb-tenses" },
   { question: "Qual frase está no Past Continuous?", options: ["I was reading a book", "I read a book", "I will read a book", "I have read a book"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
   { question: "Qual frase está no Future Continuous?", options: ["I will be working tomorrow", "I work tomorrow", "I worked tomorrow", "I am working tomorrow"], answer: 0, difficulty: "medium", libraryRef: "verb-tenses" },
@@ -919,7 +919,7 @@ const allQuestions = [
   { question: "Complete: She ___ going to school.", options: ["be", "is", "am", "are"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
   { question: "Qual é a forma correta do verbo 'to be' para 'they'?", options: ["is", "are", "am", "be"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
   { question: "Qual é a forma correta do verbo 'to be' em 'He ___ a doctor.'?", options: ["is", "am", "are", "be"], answer: 0, difficulty: "easy", libraryRef: "verb-tenses" },
-   // Vocabulário
+    
   { question: "Qual é o plural de 'analysis'?", options: ["Analyses", "Analysis", "Analysises", "Analys"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "Qual é o plural de 'criterion'?", options: ["Criteria", "Criterions", "Criterias", "Criterion"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "Qual é o plural de 'goose'?", options: ["Gooses", "Geese", "Goosies", "Goose"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
@@ -936,7 +936,7 @@ const allQuestions = [
   { question: "Qual destas palavras é um verbo?", options: ["Fast", "Blue", "Run", "Happy"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "Qual destas palavras é um animal?", options: ["An animal", "A fruit", "A color", "A tool"], answer: 0, difficulty: "easy", libraryRef: "vocabulary" },
   
-    // Frases Básicas
+     
   { question: "Como perguntar 'Quantos anos você tem?' em inglês?", options: ["Where do you live?", "What is your name?", "How old are you?", "How are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Estou com fome' em inglês?", options: ["I'm cold", "I'm happy", "I'm hungry", "I'm tired"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Como dizer 'Estou cansado' em inglês?", options: ["I'm bored", "I'm sad", "I'm tired", "I'm sleepy"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
@@ -947,7 +947,7 @@ const allQuestions = [
   { question: "Como dizer 'Eu não entendo' em inglês?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Qual destas frases é uma pergunta correta em inglês?", options: ["What is time it?", "It is what time?", "What time is it?", "What it is time?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   
-    // Técnicos
+     
   { question: "O que significa 'Renewable energy'?", options: ["Energia renovável", "Energia nuclear", "Energia solar", "Energia elétrica"], answer: 0, difficulty: "medium", libraryRef: "technical-vocabulary" },
   { question: "O que significa 'Photosynthesis'?", options: ["Processo pelo qual plantas produzem alimento", "Um tipo de fotografia", "Uma doença", "Uma reação química em animais"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
   { question: "O que significa 'Algorithm'?", options: ["Um conjunto de regras para resolver um problema", "Um tipo de música", "Um passo de dança", "Um tipo de animal"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
@@ -955,12 +955,12 @@ const allQuestions = [
     
   { question: "O que significa 'RAM'?", options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Remote Access Memory"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
   
-    // Conversação
+     
   { question: "Como perguntar 'Como você está hoje?' em inglês?", options: ["Where are you from?", "How old are you?", "How are you today?", "What do you do?"], answer: 2, difficulty: "easy", libraryRef: "conversation" },
   { question: "Como pedir ajuda de forma educada em inglês?", options: ["Help me now!", "Give me help!", "You help me?", "Can you help me, please?"], answer: 3, difficulty: "easy", libraryRef: "conversation" },
   { question: "Se você não entendeu algo, o que pode dizer em inglês?", options: ["I didn't understand. Can you explain?", "Say again!", "I don't like it.", "Repeat after me."], answer: 0, difficulty: "easy", libraryRef: "conversation" },
   
-    // Mais perguntas relacionadas à biblioteca
+     
   { question: "Como perguntar sobre a frequência de prática em inglês?", options: ["How often do you practice speaking?", "When do you practice?", "Why do you practice?", "Who do you practice with?"], answer: 0, difficulty: "easy", libraryRef: "more-questions" },
   { question: "Como perguntar sobre comida favorita em inglês?", options: ["Where do you eat?", "How do you cook?", "Do you like pizza?", "What is your favorite food?"], answer: 3, difficulty: "easy", libraryRef: "more-questions" },
   
@@ -981,7 +981,7 @@ const allQuestions = [
   { question: "What is the plural of 'criterion'?", options: ["Criteria", "Criterions", "Criterias", "Criterion"], answer: 0, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "What does 'To hit the books' mean?", options: ["To study hard", "To throw books", "To write a book", "To read for fun"], answer: 0, difficulty: "medium", libraryRef: "idioms" },
 
-  // 15 com answer: 1
+   
   { question: "Which is the correct form of the verb 'to be' for 'they'?", options: ["is", "are", "am", "be"], answer: 1, difficulty: "easy", libraryRef: "verb-tenses" },
   { question: "What is the synonym of 'happy'?", options: ["Sad", "Joyful", "Angry", "Tired"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
   { question: "What is the antonym of 'cold'?", options: ["Warm", "Hot", "Cool", "Freezing"], answer: 1, difficulty: "easy", libraryRef: "vocabulary" },
@@ -998,7 +998,7 @@ const allQuestions = [
   { question: "What does 'To be in hot water' mean?", options: ["To take a bath", "To be in trouble", "To be happy", "To be rich"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
   { question: "Which is the correct Future Simple sentence?", options: ["I go tomorrow", "I will go tomorrow", "I going tomorrow", "I gone tomorrow"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
 
-  // 15 com answer: 2
+   
   { question: "What is the correct form of the verb 'to be' in 'He ___ a doctor.'?", options: ["is", "am", "are", "be"], answer: 2, difficulty: "easy", libraryRef: "verb-tenses" },
   { question: "What is the plural of 'child'?", options: ["Childs", "Childes", "Children", "Childern"], answer: 2, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "Which sentence is correct?", options: ["He don't like apples", "He likes apple", "He doesn't like apples", "He like apples"], answer: 2, difficulty: "medium", libraryRef: "verb-tenses" },
@@ -1015,7 +1015,7 @@ const allQuestions = [
   { question: "How do you say 'Qual é o seu nome?' in English?", options: ["How are you?", "Where are you from?", "What is your name?", "Who are you?"], answer: 2, difficulty: "easy", libraryRef: "frases-basicas" },
   { question: "Which one is a verb?", options: ["Fast", "Blue", "Run", "Happy"], answer: 2, difficulty: "easy", libraryRef: "vocabulary" },
 
-  // 15 com answer: 3
+   
   { question: "Complete: She ___ going to school.", options: ["be", "is", "am", "are"], answer: 3, difficulty: "easy", libraryRef: "verb-tenses" },
   { question: "What does 'A dime a dozen' mean?", options: ["Very expensive", "Very rare", "Very difficult", "Very common"], answer: 3, difficulty: "medium", libraryRef: "idioms" },
   { question: "How do you say 'Eu não entendo' in English?", options: ["Not I understand", "I understand not", "I no understand", "I don't understand"], answer: 3, difficulty: "easy", libraryRef: "frases-basicas" },
@@ -1033,7 +1033,7 @@ const allQuestions = [
   { question: "What does 'To cut corners' mean?", options: ["To take a long route", "To do something perfectly", "To spend more money", "To do something cheaply or quickly"], answer: 3, difficulty: "medium", libraryRef: "idioms" }
 ];
 
-// Adicionando funcionalidade de redefinição de senha
+ 
 const resetPasswordButton = document.getElementById("reset-password-button");
 if (resetPasswordButton) {
   resetPasswordButton.addEventListener("click", async () => {
@@ -1063,7 +1063,7 @@ if (resetPasswordButton) {
   });
 }
 
-// Adicionando funcionalidade de logout
+ 
 const logoutButton = document.getElementById("logout-button");
 if (logoutButton) {
   logoutButton.addEventListener("click", () => {
@@ -1073,7 +1073,7 @@ if (logoutButton) {
   });
 }
 
-// Função para salvar progresso do usuário
+ 
 async function saveProgress(userName, progress) {
   try {
     const snap = await getDocs(collection(db, "users"));
@@ -1087,7 +1087,7 @@ async function saveProgress(userName, progress) {
   }
 }
 
-// Função para carregar progresso do usuário
+ 
 async function loadProgress(userName) {
   try {
     const snap = await getDocs(collection(db, "users"));
@@ -1104,7 +1104,7 @@ async function loadProgress(userName) {
   }
 }
 
-// Elementos da tela de perfil
+ 
 const profileContainer = document.getElementById("profile-container");
 const profileNameElement = document.getElementById("profile-name");
 const profileScoreElement = document.getElementById("profile-score");
@@ -1112,7 +1112,7 @@ const profilePhotoElement = document.getElementById("profile-photo");
 const avatarOptions = document.querySelectorAll(".avatar-option");
 const backButtonProfile = document.getElementById("backButtonProfile");
 
-// Exibir a tela de perfil ao clicar no nome do usuário
+ 
 const userNameElement = document.getElementById("user-name");
 if (userNameElement) {
   userNameElement.style.cursor = "pointer";
@@ -1123,10 +1123,10 @@ if (userNameElement) {
   });
 }
 
-// Voltar ao menu principal
+ 
 backButtonProfile.addEventListener("click", backToMenu);
 
-// Carregar dados do perfil do usuário
+ 
 async function loadProfileData() {
   const snap = await getDocs(collection(db, "users"));
   snap.forEach(doc => {
@@ -1143,20 +1143,20 @@ async function loadProfileData() {
   });
 }
 
-// Elementos do menu principal
+ 
 const userPhotoElement = document.getElementById("user-photo");
 
-// Atualizar foto de perfil ao selecionar um avatar
+ 
 avatarOptions.forEach(img => {
   img.addEventListener("click", async () => {
     avatarOptions.forEach(i => i.classList.remove("selected"));
     img.classList.add("selected");
     profilePhotoElement.src = img.dataset.avatar;
 
-    // Atualizar avatar no menu principal
+     
     userPhotoElement.src = img.dataset.avatar;
 
-    // Atualizar no Firebase
+     
     try {
       const snap = await getDocs(collection(db, "users"));
       snap.forEach(doc => {
@@ -1172,7 +1172,7 @@ avatarOptions.forEach(img => {
   });
 });
 
-// --- ABA DE EXERCÍCIOS ---
+ 
 const btnExercises = document.getElementById("btnExercises");
 const exercisesContainer = document.getElementById("exercises-container");
 const exerciseQuestionElement = document.getElementById("exercise-question");
@@ -1182,13 +1182,13 @@ const exerciseFeedbackElement = document.getElementById("exercise-feedback");
 const backButtonExercises = document.getElementById("backButtonExercises");
 
 
-// Adiciona o evento de clique para voltar ao menu principal
+ 
 backButtonExercises.addEventListener("click", () => {
-  hideAllSections(); // Esconde todas as seções
-  menuContainer.style.display = "block"; // Mostra o menu principal
+  hideAllSections();  
+  menuContainer.style.display = "block";  
 });
 
-// Array de perguntas, respostas e explicações
+ 
 const exerciseQuestions = [
   {
     question: "Qual é a capital da França?",
@@ -1292,11 +1292,11 @@ const exerciseQuestions = [
   },
 ];
 
-let currentExerciseQuestionIndex = 0; // Índice da pergunta atual
+let currentExerciseQuestionIndex = 0;  
 const correctExerciseAnswers = [];
-const similarityThreshold = 0.8; // Limite de similaridade (80%)
+const similarityThreshold = 0.8;  
 
-// Função para calcular similaridade entre duas strings
+ 
 function calculateSimilarity(str1, str2) {
   const normalize = (str) => str.toLowerCase().trim();
   const [a, b] = [normalize(str1), normalize(str2)];
@@ -1309,7 +1309,7 @@ function calculateSimilarity(str1, str2) {
   return matches / Math.max(a.length, b.length);
 }
 
-// Função para exibir a próxima pergunta
+ 
 function showNextQuestion() {
   if (currentExerciseQuestionIndex < exerciseQuestions.length) {
       const questionElement = document.getElementById("exercise-question");
@@ -1322,11 +1322,11 @@ function showNextQuestion() {
     }
 }
 
-// Função para adicionar um exercício acertado ao bloco
+ 
 function addCorrectAnswer(question, userAnswer, correctAnswer, explanation) {
   const correctAnswersList = document.getElementById("correct-answers-list");
 
-  // Cria um novo bloco para o exercício acertado
+   
   const answerBlock = document.createElement("div");
   answerBlock.className = "correct-answer-item";
   answerBlock.style.border = "2px solid #4caf50";
@@ -1343,16 +1343,16 @@ function addCorrectAnswer(question, userAnswer, correctAnswer, explanation) {
     <p><strong>Explicação:</strong> ${explanation}</p>
   `;
 
-  // Adiciona o bloco ao contêiner
+   
   correctAnswersList.appendChild(answerBlock);
 }
 
-// Manipular envio de resposta
+ 
 document.getElementById("exercise-submit").addEventListener("click", () => {
   const userAnswer = document.getElementById("exercise-input").value.trim();
   const currentQuestion = exerciseQuestions[currentExerciseQuestionIndex];
 
-  // Verifica se a resposta é semelhante o suficiente
+   
   if (
     calculateSimilarity(userAnswer, currentQuestion.answer) >=
     similarityThreshold
@@ -1368,73 +1368,73 @@ document.getElementById("exercise-submit").addEventListener("click", () => {
       userAnswer,
       currentQuestion.answer,
       currentQuestion.explanation
-    ); // Adiciona ao bloco de acertos
-    currentExerciseQuestionIndex++; // Avança para a próxima pergunta
-    showNextQuestion(); // Exibe a próxima pergunta
+    );  
+    currentExerciseQuestionIndex++;  
+    showNextQuestion();  
   } else {
     document.getElementById("exercise-feedback").textContent =
       "Resposta incorreta!";
   }
 
-  document.getElementById("exercise-input").value = ""; // Limpar entrada
+  document.getElementById("exercise-input").value = "";  
 });
 
-// Mostra a aba de exercícios ao clicar no botão
+ 
 btnExercises.addEventListener("click", () => {
-  hideAllSections(); // Esconde todas as outras seções
-  exercisesContainer.style.display = "block"; // Mostra o contêiner de exercícios
-  currentExerciseIndex = 0; // Reinicia o índice dos exercícios
-  randomExercises = getRandomExercises(); // Gera uma nova lista de exercícios aleatórios
-  loadExercise(); // Carrega o primeiro exercício
+  hideAllSections();  
+  exercisesContainer.style.display = "block";  
+  currentExerciseIndex = 0;  
+  randomExercises = getRandomExercises();  
+  loadExercise();  
 });
 
-// Inicializa a primeira pergunta
+ 
 showNextQuestion();
 
 document.addEventListener('keydown', (event) => {
   const key = event.key;
 
-  // Ação para a tecla Enter
+   
   if (key === 'Enter') {
-    // Verifica se está na tela de Cadastro
+     
     if (document.getElementById('register-container').style.display === 'block') {
       document.getElementById('start-button').click();
     }
 
-    // Verifica se está na tela de Login
+     
     if (document.getElementById('login-container').style.display === 'block') {
       document.getElementById('login-button').click();
     }
 
-    // Verifica se está na tela de Exercícios
+     
     if (document.getElementById('exercises-container').style.display === 'block') {
       document.getElementById('exercise-submit').click();
     }
   }
 
-  // Ação para a tecla Esc
+   
   if (key === 'Escape') {
-    // Verifica se está na tela de Cadastro
+     
     if (document.getElementById('register-container').style.display === 'block') {
       document.getElementById('go-login').click();
     }
 
-    // Verifica se está na tela de Login
+     
     if (document.getElementById('login-container').style.display === 'block') {
       document.getElementById('go-register').click();
     }
 
-    // Verifica se está na tela de Exercícios
+     
     if (document.getElementById('exercises-container').style.display === 'block') {
       document.getElementById('backButtonExercises').click();
     }
 
-    // Verifica se está na tela de Aviso do Quiz
+     
     if (document.getElementById('quiz-warning-container').style.display === 'block') {
       document.getElementById('quiz-warning-back-button').click();
     }
 
-    // Verifica se está em qualquer outra aba (exceto Quiz)
+     
     const quizContainers = [
       document.getElementById('quiz-container')
       
@@ -1442,40 +1442,40 @@ document.addEventListener('keydown', (event) => {
 
     const isInQuiz = quizContainers.some(container => container && container.style.display === 'block');
     if (!isInQuiz) {
-      backToMenu(); // Volta ao menu principal
+      backToMenu();  
     }
   }
 });
 
-// Unifica o botão "Voltar ao Menu" após qualquer quiz
+ 
 const backToMenuButton = document.getElementById("backToMenuButton");
 if (backToMenuButton) {
   backToMenuButton.addEventListener("click", () => {
-    // Oculta todas as telas de finalização de quiz
+     
     congratulationsContainer.style.display = "none";
     perguntasEndScreen.style.display = "none";
     spanishEndScreen.style.display = "none";
     frenchEndScreen.style.display = "none";
-    // Volta ao menu principal
+     
     menuContainer.style.display = "block";
   });
 };
 
 
 
-// Adicione o botão "Pular Exercício"
+ 
 const skipExerciseButton = document.createElement("button");
 skipExerciseButton.id = "skip-exercise-button";
 skipExerciseButton.textContent = "Pular Exercício";
 skipExerciseButton.style.marginLeft = "10px";
 
-// Adiciona o botão ao lado do botão de enviar resposta
+ 
 const exerciseSubmitBtn = document.getElementById("exercise-submit");
 if (exerciseSubmitBtn && exerciseSubmitBtn.parentNode) {
   exerciseSubmitBtn.parentNode.insertBefore(skipExerciseButton, exerciseSubmitBtn.nextSibling);
 }
 
-// Evento para pular o exercício atual
+ 
 skipExerciseButton.addEventListener("click", () => {
   currentExerciseQuestionIndex++;
   document.getElementById("exercise-feedback").textContent = "Exercício pulado!";
@@ -1485,7 +1485,7 @@ skipExerciseButton.addEventListener("click", () => {
 
 
 
-// ...existing code...
+ 
 
 if (btnRanking) btnRanking.disabled = true;
-// ...existing code...
+ 
