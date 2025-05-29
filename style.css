@@ -22,7 +22,7 @@ body {
   padding: 20px;
 }
 
-/* Tela de Boas-Vindas */
+ 
 .welcome-container {
   display: flex;
   flex-direction: column;
@@ -30,8 +30,8 @@ body {
   align-items: center;
   text-align: center;
   height: 100vh;
-  background: #1f1a3a; /* Cor de fundo consistente com o restante do site */
-  color: #fff; /* Texto branco para contraste */
+  background: #1f1a3a00;  
+  color: #fff;  
   padding: 20px;
 }
 
@@ -43,15 +43,15 @@ body {
 }
 
 .welcome-header .logo {
-  width: 120px; /* Ajuste o tamanho da logo */
-  height: auto; /* Mantém a proporção da imagem */
-  margin-bottom: 10px; /* Espaçamento entre a logo e o texto */
+  width: 120px;  
+  height: auto;  
+  margin-bottom: 10px;  
 }
 
 .welcome-header .logo-text {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #f472b6; /* Cor consistente com o restante do site */
+  color: #f472b6;  
   text-align: center;
 }
 
@@ -63,21 +63,21 @@ body {
 }
 
 .welcome-slogan span {
-  color: #f472b6; /* Destaque com a cor principal */
+  color: #f472b6;  
 }
 
 .welcome-description {
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: #d1d5db; /* Texto com tom mais claro */
+  color: #d1d5db;  
 }
 
 .welcome-buttons {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  gap: 15px; /* Espaçamento entre os botões */
-  margin-top: 20px; /* Adiciona um espaço acima dos botões */
+  justify-content: center;  
+  align-items: center;  
+  gap: 15px;  
+  margin-top: 20px;  
 }
 
 .btn-primary,
@@ -92,32 +92,32 @@ body {
 }
 
 .btn-primary {
-  background: #f472b6; /* Cor principal */
+  background: #f472b6;  
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: #d6619d; /* Cor de hover */
+  background: #d6619d;  
 }
 
 .btn-secondary {
   background: transparent;
   color: #fff;
-  border: 2px solid #f472b6; /* Borda com a cor principal */
+  border: 2px solid #f472b6;  
 }
 
 .btn-secondary:hover {
-  background: rgba(244, 114, 182, 0.2); /* Fundo com transparência no hover */
+  background: rgba(244, 114, 182, 0.2);  
 }
 
-/* Ocultar outras telas inicialmente */
+ 
 #register-container,
 #login-container,
 #menu-container {
   display: none;
 }
 
-/* Telas de Cadastro e Login */
+ 
 .register-container, .login-container {
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
@@ -176,7 +176,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Seção de Personagem */
+ 
 #character-selection {
   margin: 1rem 0;
   text-align: center;
@@ -198,7 +198,7 @@ body {
   border: 2px solid var(--primary-color);
 }
 
-/* Containers Gerais */
+ 
 .menu-container,
 .container,
 .quiz-container,
@@ -215,7 +215,7 @@ body {
   padding-top: 60px;
 }
 
-/* Botão Voltar */
+ 
 .back-button {
   position: fixed;
   bottom: 20px;
@@ -238,7 +238,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Títulos e Tabs */
+ 
 .title {
   font-size: 3rem;
   background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
@@ -277,7 +277,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Quiz e Perguntas */
+ 
 .quiz-container {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -295,7 +295,7 @@ body {
   color: white;
 }
 
-/* Opções dos quizzes */
+ 
 #options li,
 #perguntas-options li,
 #spanish-options li,
@@ -337,7 +337,7 @@ body {
   border-color: #F56565;
 }
 
-/* Score e Timer */
+ 
 .score-container {
   margin: 1.5rem 0;
   font-size: 1.2rem;
@@ -345,7 +345,7 @@ body {
   color: var(--secondary-color);
 }
 
-/* Cards Biblioteca */
+ 
 .text-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
@@ -389,7 +389,7 @@ body {
   margin-right: 8px;
 }
 
-/* Ranking */
+ 
 #ranking-list {
   list-style: none;
   padding: 0;
@@ -443,7 +443,7 @@ body {
   color: #fff;
 }
 
-/* Título do Ranking */
+ 
 .ranking-title {
   font-size: 2.5rem;
   text-align: center;
@@ -452,7 +452,7 @@ body {
   text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo do pódio */
+ 
 .podium {
   display: flex;
   justify-content: center;
@@ -488,7 +488,7 @@ body {
 }
 
 .third-place {
-  background-color: #cd7f32; /* Bronze */
+  background-color: #cd7f32;  
 }
 
 .podium-photo img {
@@ -518,7 +518,7 @@ body {
   font-size: 1em;
 }
 
-/* Efeito de pulso para o primeiro lugar */
+ 
 @keyframes pulse {
   0% {
     box-shadow: 0 0 10px 2px rgba(255, 223, 0, 0.8);
@@ -535,13 +535,13 @@ body {
   animation: pulse 2s infinite;
 }
 
-/* Responsividade */
+ 
 @media (max-width: 768px) {
   .title {
     font-size: 2.2rem;
   }
   .podium-photo {
-    width: 100px; /* Reduz o tamanho para tablets */
+    width: 100px;  
     height: 100px;
   }
   .tab-button {
@@ -565,7 +565,7 @@ body {
     font-size: 1.8rem;
   }
   .podium-photo {
-    width: 80px; /* Reduz o tamanho para celulares */
+    width: 80px;  
     height: 80px;
   }
   .register-container,
@@ -587,7 +587,7 @@ body {
   }
 }
 
-/* Destaque para seções em Español e Français */
+ 
 #spanish-container,
 #spanish-library-container,
 #french-container,
@@ -633,7 +633,7 @@ body {
   margin-bottom: 5px;
 }
 
-/* Botões para aprender mais */
+ 
 .learn-more-button {
   background-color: var(--secondary-color);
   color: #fff;
@@ -652,7 +652,7 @@ body {
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
 }
 
-/* Botão "Resultados" */
+ 
 #results-button {
   background-color: var(--primary-color);
   color: #fff;
@@ -672,7 +672,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Botão "Aprenda Mais" */
+ 
 #learn-more-button {
   background-color: var(--accent-color);
   color: #fff;
@@ -687,7 +687,7 @@ body {
 }
 
 #learn-more-button:hover {
-  background-color: #d6619d; /* Tom mais escuro do accent-color */
+  background-color: #d6619d;  
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
 }
@@ -725,7 +725,7 @@ body {
   }
 }
 
-/* Estilos para a tela de perfil */
+ 
 .profile-container {
   text-align: center;
   padding: 20px;
@@ -742,7 +742,7 @@ body {
 }
 
 .profile-photo {
-  width: 100px; /* Reduzido de 120px para 100px */
+  width: 100px;  
   height: 100px;
   border-radius: 50%;
   border: 3px solid var(--primary-color);
@@ -783,7 +783,7 @@ body {
   border-radius: 50%;
 }
 
-/* Responsividade */
+ 
 @media (max-width: 768px) {
   .profile-container {
     padding: 15px;
@@ -826,15 +826,15 @@ body {
   }
 }
 .user-photo {
-  width: 32px; /* Reduzido de 40px para 32px */
+  width: 32px;  
   height: 32px;
   border-radius: 50%;
   border: 2px solid var(--primary-color);
-  margin-right: 8px; /* Ajustado para melhor alinhamento */
+  margin-right: 8px;  
   vertical-align: middle;
 }
 
-/* Estilo do Carrossel */
+ 
 .avatar-carousel {
   display: flex;
   align-items: center;
@@ -845,7 +845,7 @@ body {
 
 .carousel-track-container {
   overflow: hidden;
-  width: 300px; /* Ajuste conforme necessário */
+  width: 300px;  
 }
 
 .carousel-track {
@@ -892,13 +892,13 @@ body {
   right: -40px;
 }
 
-/* Estilo para o aviso do quiz */
+ 
 #quiz-warning-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(124, 58, 237, 0.1); /* Cor primária com transparência */
+  background-color: rgba(124, 58, 237, 0.1);  
   border: 2px solid var(--primary-color);
   border-radius: 10px;
   padding: 20px;
@@ -931,7 +931,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Estilo para o menu de níveis das perguntas */
+ 
 .level-buttons {
   display: flex;
   justify-content: center;
@@ -956,7 +956,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Estilo para o botão "Sair" no menu principal */
+ 
 #logout-button {
   background-color: var(--accent-color);
   color: #fff;
@@ -970,14 +970,14 @@ body {
 }
 
 #logout-button:hover {
-  background-color: #d6619d; /* Tom mais escuro do accent-color */
+  background-color: #d6619d;  
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
 }
 
-/* Estilo para a aba de exercícios */
+ 
 #exercises-container {
-  display: none; /* Esconde a aba inicialmente */
+  display: none;  
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -1046,7 +1046,7 @@ body {
 }
 
 #backButtonExercises:hover {
-  background-color: #d6619d; /* Tom mais escuro do accent-color */
+  background-color: #d6619d;  
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
 }
@@ -1122,12 +1122,12 @@ body {
   color: white;
 }
 .correct-answer-item {
-  border: 2px solid #4caf50; /* Verde para indicar acerto */
+  border: 2px solid #4caf50;  
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #e8f5e9; /* Fundo verde claro */
-  color: #2e7d32; /* Texto verde escuro */
+  background-color: #e8f5e9;  
+  color: #2e7d32;  
   font-family: 'Poppins', sans-serif;
 }
 
@@ -1160,7 +1160,7 @@ body {
   font-size: 16px;
 }
 
-/* Estilo para a tela final do quiz */
+ 
 .end-screen {
   text-align: center;
   padding: 30px;
@@ -1199,8 +1199,8 @@ body {
 }
 
 .end-screen ul li {
-  background: rgba(245, 101, 101, 0.1); /* Fundo vermelho claro */
-  border: 2px solid #F56565; /* Borda vermelha */
+  background: rgba(245, 101, 101, 0.1);  
+  border: 2px solid #F56565;  
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -1249,12 +1249,12 @@ body {
 }
 
 .end-screen .learn-more-button:hover {
-  background-color: #d6619d; /* Tom mais escuro do accent-color */
+  background-color: #d6619d;  
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
 }
 
-/* Botão Revisar */
+ 
 .review-button {
   background-color: var(--primary-color);
   color: white;
@@ -1273,7 +1273,7 @@ body {
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
 
-/* Rodapé */
+ 
 .footer {
   margin-top: auto;
   padding: 10px;
@@ -1283,7 +1283,7 @@ body {
   text-align: center;
 }
 
-/* Estilo para a lista de respostas erradas */
+ 
 .wrong-questions-list {
   list-style: none;
   padding: 0;
@@ -1291,8 +1291,8 @@ body {
 }
 
 .wrong-questions-list li {
-  background: rgba(245, 101, 101, 0.1); /* Fundo vermelho claro */
-  border: 2px solid #F56565; /* Borda vermelha */
+  background: rgba(245, 101, 101, 0.1);  
+  border: 2px solid #F56565;  
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -1308,12 +1308,12 @@ body {
   box-shadow: 0 4px 10px rgba(245, 101, 101, 0.4);
 }
 
-/* Estilo para a aba de vocabulário */
+ 
 .vocab-tab.completed { background: #4caf50; color: #fff; }
 .vocab-tab { margin: 4px; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
 .vocab-content { margin-top: 20px; }
 
-/* Estilo para a aba de vocabulário dinâmico */
+ 
 .vocab-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -1433,7 +1433,7 @@ body {
   font-weight: 600;
 }
 
-/* Responsivo */
+
 @media (max-width: 600px) {
   .vocab-content {
     padding: 1rem;
@@ -1447,7 +1447,6 @@ body {
   }
 }
 
-/* Destaca perguntas erradas */
 .error-item {
   border: 2px solid #e53935;
   background: #ffebee;
@@ -1458,7 +1457,6 @@ body {
   box-shadow: 0 2px 6px rgba(229,57,53,0.08);
 }
 
-/* Botão Aprenda Mais */
 .aprenda-mais-button {
   background: #1976d2;
   color: #fff;
@@ -1474,7 +1472,7 @@ body {
   background: #1565c0;
 }
 
-/* Botão Voltar ao Menu do Quiz */
+
 #quiz-back-menu-button {
   background-color: var(--primary-color);
   color: #fff;
@@ -1493,15 +1491,13 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 }
-/* Adicione ao seu styles.css */
+
+
 .meu-destaque {
   border: 3px solid #ff9800 !important;
   background: #ffe0fd28 !important;
   box-shadow: 0 0 10px #ff9800;
 }
-
-
-/* Destaque para o botão Voltar ao Menu nas telas de erros/respostas */
 .btn-voltar-menu-destaque {
   background: #ff9800;
   color: #fff;
@@ -1519,7 +1515,6 @@ body {
   background: #e65100;
 }
 
-/* Destaque para o botão Voltar ao Menu na tela de parabenização */
 #congratulations-back-button {
   background: #ff9800;
   color: #fff;
