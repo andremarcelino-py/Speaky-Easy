@@ -993,7 +993,7 @@ const allQuestions = [
   { question: "Which sentence uses the Present Continuous?", options: ["I eat breakfast", "I am eating breakfast", "I ate breakfast", "I will eat breakfast"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
   { question: "What does 'On cloud nine' mean?", options: ["Very sad", "Very happy", "Very tired", "Very angry"], answer: 1, difficulty: "easy", libraryRef: "idioms" },
   { question: "What does 'To get cold feet' mean?", options: ["To feel cold", "To become nervous", "To run fast", "To get sick"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
-  { question: "What is the meaning of 'RAM'?", options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Remote Access Memory"], answer: 1, difficulty: "hard", libraryRef: "technical-vocabulary" },
+  { question: "What is the meaning of 'RAM'?", options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Remote Access Memory"], answer: 0, difficulty: "hard", libraryRef: "technical-vocabulary" },
   { question: "What is the plural of 'leaf'?", options: ["Leafs", "Leaves", "Leafes", "Leavs"], answer: 1, difficulty: "hard", libraryRef: "vocabulary" },
   { question: "What does 'To be in hot water' mean?", options: ["To take a bath", "To be in trouble", "To be happy", "To be rich"], answer: 1, difficulty: "medium", libraryRef: "idioms" },
   { question: "Which is the correct Future Simple sentence?", options: ["I go tomorrow", "I will go tomorrow", "I going tomorrow", "I gone tomorrow"], answer: 1, difficulty: "medium", libraryRef: "verb-tenses" },
