@@ -1363,4 +1363,3 @@ skipExerciseButton.addEventListener("click", () => {
 
 
 
-if (btnRanking) btnRanking.disabled = true;
